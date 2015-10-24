@@ -17,5 +17,7 @@ public interface ICdHome {
 	 * @return
 	 */
 	Result GetCategoryList();
+	Result getProductList(String genre);
 
 }
+
