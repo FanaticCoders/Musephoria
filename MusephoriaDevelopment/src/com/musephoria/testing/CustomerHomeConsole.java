@@ -5,6 +5,7 @@ package com.musephoria.testing;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Iterator;
 
 import com.musephoria.dao.CustomerHome;
 import com.musephoria.dao.ICustomerHome;
@@ -21,21 +22,27 @@ public class CustomerHomeConsole {
 	/**
 	 * @param args
 	 */
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		try {
 
-			ICustomerHome name = new CustomerHome();
-			Customer name1 = new Customer();
-			name1.setUserName("123");
-			name1.setPassword("1232");
-			name1.setSex(Types.Sex.Male.toString());
-			name1.setDateOfBirth(Helper.FormatDate("1988/01/27"));
-			name1.setDefaultPaymentInfo(Types.PaymentInfo.Credit.toString());
-			name1.setIsCustomerActive(true);
+			ICustomerHome customerHome = new CustomerHome();
+			Customer customer = new Customer();
+			customer.setUserName("ajay");
+			customer.setPassword("1232");
+			customer.setSex(Types.Sex.Male.toString());
+			customer.setDateOfBirth(Helper.FormatDate("1988/01/27"));
+			customer.setDefaultPaymentInfo(Types.PaymentInfo.Credit.toString());
+			customer.setIsCustomerActive(true);
 			Date today = new Date();
-			name1.setTimeStamp(new Timestamp(today.getTime()));
+			customer.setTimeStamp(new Timestamp(today.getTime()));
 
-			name.CreateNewAccount(name1, null);
+			// boolean flag = name.checkIfAccountExists(name1.getUserName());
+			// System.out.println(flag);
+
+			Iterator<Customer> temp = (Iterator<Customer>) customerHome.getAccount(customer).getResultList().iterator();
+			Customer cust = temp.next();
+			System.out.println(cust.getCustomerId());
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

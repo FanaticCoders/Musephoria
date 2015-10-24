@@ -8,7 +8,6 @@ import javax.ejb.Stateless;
 
 import com.musephoria.dbmanager.DBManager;
 import com.musephoria.entity.Customer;
-import com.musephoria.entity.Customerdetail;
 import com.musephoria.entity.Result;
 import com.musephoria.util.Constants;
 
@@ -35,26 +34,28 @@ public class CustomerHome implements ICustomerHome {
 	 *
 	 * @see com.musephoria.dao.ICustomerHome#CheckIfUserExists(java.lang.String)
 	 */
-	public boolean CheckIfUserExists(String userName) {
+	@Override
+	public boolean checkIfAccountExists(String userName) {
 		boolean flag = false;
+		Result resObj = null;
 		try {
-			List<String> parameterList = new ArrayList<String>();
 
+			List<String> parameterList = new ArrayList<String>();
 			if (!userName.isEmpty()) {
 				parameterList.add(userName);
 			}
 
-			Result resObj = dbManager.ExecuteSQL(Constants.checkIfUserExists, parameterList);
+			resObj = dbManager.ExecuteSQL(Constants.checkIfUserExists, parameterList);
+
 			if (!resObj.equals(null)) {
-				int resultCount = resObj.getResultCount();
-				if (resultCount >= 1) {
+				if (resObj.getResultCount() >= 1) {
 					flag = true;
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		dbManager.CleanUpSession();
 		return flag;
 	}
 
@@ -65,21 +66,11 @@ public class CustomerHome implements ICustomerHome {
 	 * com.musephoria.dao.ICustomerHome#CreateNewAccount(com.musephoria.entity.
 	 * Customer, com.musephoria.entity.Customerdetail)
 	 */
-	public Result CreateNewAccount(Customer customer, Customerdetail customerDetail) {
-		boolean flag = false;
+	@Override
+	public Result createAccount(Customer customer) {
 		Result resObj = null;
-		List<Object> custDetailObj = new ArrayList<Object>();
-		custDetailObj.add(customer);
-		custDetailObj.add(customerDetail);
-
 		if (!customer.equals(null)) {
-			flag = CheckIfUserExists(customer.getUserName());
-			if (flag) {
-				resObj = dbManager.SetResultObject(null, 0, Constants.errorCode,
-						customer.getUserName() + Constants.userNameExists);
-			} else {
-				resObj = dbManager.SaveNewData(custDetailObj);
-			}
+			resObj = dbManager.SaveNewData(customer);
 		}
 		dbManager.CleanUpSession();
 		return resObj;
@@ -92,8 +83,15 @@ public class CustomerHome implements ICustomerHome {
 	 * com.musephoria.dao.ICustomerHome#GetAccountInfo(com.musephoria.entity.
 	 * Customer)
 	 */
-	public Result GetAccountInfo(Customer customer) {
-		Result resObj = dbManager.GetQueryResult(Constants.getAccountInfo, null);
+	@Override
+	public Result getAccount(Customer customer) {
+		List<String> accountInfo = new ArrayList<String>();
+		if (!customer.equals(null)) {
+			accountInfo.add(customer.getUserName());
+		}
+		Result resObj = dbManager.GetQueryResult(Constants.getAccountInfo, accountInfo);
+
+		dbManager.CleanUpSession();
 		return resObj;
 
 	}

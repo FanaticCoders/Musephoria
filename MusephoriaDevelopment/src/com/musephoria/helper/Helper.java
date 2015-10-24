@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -61,7 +62,7 @@ public class Helper {
 	 * @return
 	 */
 	public static String FetchPropertyAndProcessQuery(Properties propertyObj, String propertyKey,
-			List<String> parameterList) {
+			List<?> parameterList) {
 		String rawQuery = StringUtils.EMPTY;
 		String processedQuery = StringUtils.EMPTY;
 
@@ -86,14 +87,15 @@ public class Helper {
 	 * @param rawQuery
 	 * @return
 	 */
-	public static String ProcessQuery(List<String> parameterList, String rawQuery) {
+	public static String ProcessQuery(List<?> parameterList, String rawQuery) {
 		String processedString = StringUtils.EMPTY;
 		int i = 1;
-		if (!parameterList.isEmpty()) {
-			for (String item : parameterList) {
-				processedString = rawQuery.replace("@param" + i, item.toString());
-				i++;
-			}
+
+		Iterator<?> iterator = parameterList.iterator();
+		while(iterator.hasNext())
+		{
+			processedString = rawQuery.replace("@param" + i, iterator.next().toString());
+			i++;
 		}
 
 		return processedString;

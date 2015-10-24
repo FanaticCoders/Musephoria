@@ -109,7 +109,7 @@ public class DBManager {
 	 * @param parameterList
 	 * @return resObj
 	 */
-	public Result ExecuteSQL(String queryID, List<String> parameterList) {
+	public Result ExecuteSQL(String queryID, List<?> parameterList) {
 		Result resObj = null;
 		Query hQuery = null;
 		try {
@@ -134,7 +134,7 @@ public class DBManager {
 	 * @param parameterList
 	 * @return resObj
 	 */
-	public Result GetQueryResult(String queryID, List<String> parameterList) {
+	public Result GetQueryResult(String queryID, List<?> parameterList) {
 		Result resObj = null;
 		Query hQuery = null;
 		try {
@@ -159,19 +159,15 @@ public class DBManager {
 	 * @param objList
 	 * @return resObj
 	 */
-	public Result SaveNewData(List<?> objList) {
+	public Result SaveNewData(Object object) {
 		Result resObj = null;
 		try {
-			if (objList != null) {
-				for (Object item : objList) {
-					if (item != null) {
-						hSession.save(item);
-					}
-				}
+			if (object != null) {
+				hSession.save(object);
 			}
-			resObj = SetResultObject(null, 0, Constants.successCode, Constants.dataSaved);
+			resObj = SetResultObject(null, 1, Constants.successCode, Constants.dataSaved);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			resObj = SetResultObject(null, 0, Constants.successCode, Constants.dataNotSaved);
 			System.out.println(e.getMessage());
 		}
 

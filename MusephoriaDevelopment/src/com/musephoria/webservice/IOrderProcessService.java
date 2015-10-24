@@ -20,7 +20,7 @@ public interface IOrderProcessService {
 
 	public Result createAccount(String accountName, Customer loginInfo, Customerdetail addressInfo);
 
-	public Result getAccount(String accountName, String accountPassword, Customer accountInfo);
+	public Customer getAccount(String accountName, String accountPassword, Customer accountInfo);
 
 	public Result confirmOrder(Order orderInfo, Shipping shippingInfo, Payment paymentInfo);
 }

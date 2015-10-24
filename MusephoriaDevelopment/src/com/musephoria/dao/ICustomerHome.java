@@ -4,7 +4,6 @@
 package com.musephoria.dao;
 
 import com.musephoria.entity.Customer;
-import com.musephoria.entity.Customerdetail;
 import com.musephoria.entity.Result;
 
 /**
@@ -19,7 +18,7 @@ public interface ICustomerHome {
 	 * @param userName
 	 * @return
 	 */
-	boolean CheckIfUserExists(String userName);
+	boolean checkIfAccountExists(String userName);
 
 	/**
 	 * Creates a New Account
@@ -28,7 +27,7 @@ public interface ICustomerHome {
 	 * @param customerDetail
 	 * @return
 	 */
-	Result CreateNewAccount(Customer customer, Customerdetail customerDetail);
+	Result createAccount(Customer customer);
 
 	/**
 	 * Gets the account information.
@@ -36,6 +35,6 @@ public interface ICustomerHome {
 	 * @param customer
 	 * @return
 	 */
-	Result GetAccountInfo(Customer customer);
+	Result getAccount(Customer customer);
 
 }

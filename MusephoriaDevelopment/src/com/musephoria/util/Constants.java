@@ -23,10 +23,13 @@ public class Constants {
 
 	// Error Codes
 	public static final int errorCode = -1;
+	public static final int errorUserNameExists = 101;
+
 
 	// Success Messages
 	public static final String successMessage = "Success";
 	public static final String dataSaved = "Data Saved.";
+	public static final String dataNotSaved = "Failed to Save Data.";
 
 	// Success Codes
 	public static final int successCode = 1;
@@ -39,4 +42,5 @@ public class Constants {
 	public static final String getCategoryList = "GetCategoryList";
 	public static final String checkIfUserExists = "CheckIfUserExists";
 	public static final String getAccountInfo = "GetAccountInfo";
+	public static final String getCustomerDetails = "getCustomerDetails";
 }
