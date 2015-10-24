@@ -1,6 +1,9 @@
 package com.musephoria.dao;
 // Generated Oct 19, 2015 11:46:20 PM by Hibernate Tools 4.3.1.Final
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.Stateless;
 
 import com.musephoria.dbmanager.DBManager;
@@ -30,8 +33,30 @@ public class CdHome implements ICdHome {
 	 *
 	 * @see com.musephoria.dao.ICdHome#GetCategoryList()
 	 */
+	@Override
 	public Result GetCategoryList() {
 		Result resObj = dbManager.GetQueryResult(Constants.getCategoryList, null);
+		return resObj;
+	}
+
+	public Result getProductList(String genre) {
+		Result resObj = null;
+		try {
+			List<String> parameterList = new ArrayList<String>();
+			if (!genre.isEmpty()) {
+				parameterList.add(genre);
+			}
+			System.out.print(parameterList);
+			if (!parameterList.isEmpty()) {
+				resObj = dbManager.GetQueryResult(Constants.getProductListWithCategory, parameterList);
+			} else {
+				resObj = dbManager.GetQueryResult(Constants.getProductList, null);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		dbManager.CleanUpSession();
 		return resObj;
 	}
 }
