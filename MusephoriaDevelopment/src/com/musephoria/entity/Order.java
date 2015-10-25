@@ -1,5 +1,6 @@
 package com.musephoria.entity;
-// Generated Oct 19, 2015 11:46:19 PM by Hibernate Tools 4.3.1.Final
+// default package
+// Generated Oct 24, 2015 10:30:11 PM by Hibernate Tools 4.0.0.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -24,7 +25,6 @@ import javax.persistence.Version;
  */
 @Entity
 @Table(name = "order", catalog = "musephoria", uniqueConstraints = @UniqueConstraint(columnNames = "CustomerId") )
-@SuppressWarnings("serial")
 public class Order implements java.io.Serializable {
 
 	private Integer orderId;

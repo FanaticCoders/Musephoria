@@ -1,28 +1,31 @@
 package com.musephoria.dao;
-// Generated Oct 19, 2015 11:46:20 PM by Hibernate Tools 4.3.1.Final
+// default package
+// Generated Oct 24, 2015 10:30:11 PM by Hibernate Tools 4.0.0.Final
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.musephoria.entity.*;
+
+import com.musephoria.entity.Paymentinfo;
 
 /**
- * Home object for domain model class Payment.
- * @see com.musephoria.entity.Payment
+ * Home object for domain model class Paymentinfo.
+ * @see .Paymentinfo
  * @author Hibernate Tools
  */
 @Stateless
-public class PaymentHome {
+public class PaymentinfoHome {
 
-	private static final Log log = LogFactory.getLog(PaymentHome.class);
+	private static final Log log = LogFactory.getLog(PaymentinfoHome.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public void persist(Payment transientInstance) {
-		log.debug("persisting Payment instance");
+	public void persist(Paymentinfo transientInstance) {
+		log.debug("persisting Paymentinfo instance");
 		try {
 			entityManager.persist(transientInstance);
 			log.debug("persist successful");
@@ -32,8 +35,8 @@ public class PaymentHome {
 		}
 	}
 
-	public void remove(Payment persistentInstance) {
-		log.debug("removing Payment instance");
+	public void remove(Paymentinfo persistentInstance) {
+		log.debug("removing Paymentinfo instance");
 		try {
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
@@ -43,10 +46,10 @@ public class PaymentHome {
 		}
 	}
 
-	public Payment merge(Payment detachedInstance) {
-		log.debug("merging Payment instance");
+	public Paymentinfo merge(Paymentinfo detachedInstance) {
+		log.debug("merging Paymentinfo instance");
 		try {
-			Payment result = entityManager.merge(detachedInstance);
+			Paymentinfo result = entityManager.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -55,10 +58,10 @@ public class PaymentHome {
 		}
 	}
 
-	public Payment findById(Integer id) {
-		log.debug("getting Payment instance with id: " + id);
+	public Paymentinfo findById(Integer id) {
+		log.debug("getting Paymentinfo instance with id: " + id);
 		try {
-			Payment instance = entityManager.find(Payment.class, id);
+			Paymentinfo instance = entityManager.find(Paymentinfo.class, id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {

@@ -10,7 +10,7 @@ import com.musephoria.entity.Cartitem;
 import com.musephoria.entity.Customer;
 import com.musephoria.entity.Customerdetail;
 import com.musephoria.entity.Order;
-import com.musephoria.entity.Payment;
+import com.musephoria.entity.Paymentinfo;
 import com.musephoria.entity.Result;
 import com.musephoria.entity.Shipping;
 import com.musephoria.util.Constants;
@@ -63,7 +63,7 @@ public class OrderProcessService implements IOrderProcessService {
 	}
 
 	@Override
-	public Result confirmOrder(Order orderInfo, Shipping shippingInfo, Payment paymentInfo) {
+	public Result confirmOrder(Order orderInfo, Shipping shippingInfo, Paymentinfo paymentInfo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

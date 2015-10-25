@@ -7,7 +7,7 @@ import com.musephoria.entity.Cartitem;
 import com.musephoria.entity.Customer;
 import com.musephoria.entity.Customerdetail;
 import com.musephoria.entity.Order;
-import com.musephoria.entity.Payment;
+import com.musephoria.entity.Paymentinfo;
 import com.musephoria.entity.Result;
 import com.musephoria.entity.Shipping;
 
@@ -22,5 +22,5 @@ public interface IOrderProcessService {
 
 	public Customer getAccount(String accountName, String accountPassword, Customer accountInfo);
 
-	public Result confirmOrder(Order orderInfo, Shipping shippingInfo, Payment paymentInfo);
+	public Result confirmOrder(Order orderInfo, Shipping shippingInfo, Paymentinfo paymentInfo);
 }

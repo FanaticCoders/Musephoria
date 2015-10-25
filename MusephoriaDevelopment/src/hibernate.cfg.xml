@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
-"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-	<session-factory>
-		<!-- MySQL Configuration -->
+    <session-factory>
+       <!-- MySQL Configuration -->
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.password">root</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/musephoria</property>
@@ -32,5 +32,5 @@
 		<mapping class="com.musephoria.entity.Orderitem" />
 		<mapping class="com.musephoria.entity.Session" />
 		<mapping class="com.musephoria.entity.Track" />		
-	</session-factory>
+    </session-factory>
 </hibernate-configuration>

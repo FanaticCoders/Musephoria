@@ -1,5 +1,6 @@
 package com.musephoria.entity;
-// Generated Oct 19, 2015 11:46:19 PM by Hibernate Tools 4.3.1.Final
+// default package
+// Generated Oct 24, 2015 10:30:11 PM by Hibernate Tools 4.0.0.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -20,7 +21,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "cd", catalog = "musephoria")
-@SuppressWarnings("serial")
 public class Cd implements java.io.Serializable {
 
 	private Integer cdId;

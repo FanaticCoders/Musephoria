@@ -1,16 +1,19 @@
 package com.musephoria.dao;
-// Generated Oct 19, 2015 11:46:20 PM by Hibernate Tools 4.3.1.Final
+// default package
+// Generated Oct 24, 2015 10:30:11 PM by Hibernate Tools 4.0.0.Final
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.musephoria.entity.*;
+
+import com.musephoria.entity.Cartitem;
 
 /**
  * Home object for domain model class Cartitem.
- * @see com.musephoria.entity.Cartitem
+ * @see .Cartitem
  * @author Hibernate Tools
  */
 @Stateless

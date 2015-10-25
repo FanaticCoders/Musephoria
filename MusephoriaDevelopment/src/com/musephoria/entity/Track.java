@@ -1,5 +1,6 @@
 package com.musephoria.entity;
-// Generated Oct 19, 2015 11:46:19 PM by Hibernate Tools 4.3.1.Final
+// default package
+// Generated Oct 24, 2015 10:30:11 PM by Hibernate Tools 4.0.0.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +18,6 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "track", catalog = "musephoria", uniqueConstraints = @UniqueConstraint(columnNames = "CdId") )
-@SuppressWarnings("serial")
 public class Track implements java.io.Serializable {
 
 	private Integer trackId;

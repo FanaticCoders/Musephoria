@@ -1,5 +1,6 @@
 package com.musephoria.entity;
-// Generated Oct 19, 2015 11:46:19 PM by Hibernate Tools 4.3.1.Final
+// default package
+// Generated Oct 24, 2015 10:30:11 PM by Hibernate Tools 4.0.0.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,20 +17,21 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "orderitem", catalog = "musephoria")
-@SuppressWarnings("serial")
 public class Orderitem implements java.io.Serializable {
 
 	private Integer orderItemId;
-	private Cd cd;
 	private Order order;
+	private Cd cd;
+	private String orderItemName;
 	private int orderQuantity;
 
 	public Orderitem() {
 	}
 
-	public Orderitem(Cd cd, Order order, int orderQuantity) {
-		this.cd = cd;
+	public Orderitem(Order order, Cd cd, String orderItemName, int orderQuantity) {
 		this.order = order;
+		this.cd = cd;
+		this.orderItemName = orderItemName;
 		this.orderQuantity = orderQuantity;
 	}
 
@@ -46,6 +48,16 @@ public class Orderitem implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "OrderId", nullable = false)
+	public Order getOrder() {
+		return this.order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CdId", nullable = false)
 	public Cd getCd() {
 		return this.cd;
@@ -55,14 +67,13 @@ public class Orderitem implements java.io.Serializable {
 		this.cd = cd;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "OrderId", nullable = false)
-	public Order getOrder() {
-		return this.order;
+	@Column(name = "OrderItemName", nullable = false, length = 45)
+	public String getOrderItemName() {
+		return this.orderItemName;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setOrderItemName(String orderItemName) {
+		this.orderItemName = orderItemName;
 	}
 
 	@Column(name = "OrderQuantity", nullable = false)

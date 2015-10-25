@@ -1,5 +1,6 @@
 package com.musephoria.entity;
-// Generated Oct 19, 2015 11:46:19 PM by Hibernate Tools 4.3.1.Final
+// default package
+// Generated Oct 24, 2015 10:30:11 PM by Hibernate Tools 4.0.0.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -21,7 +22,6 @@ import javax.persistence.Version;
  */
 @Entity
 @Table(name = "customer", catalog = "musephoria")
-@SuppressWarnings("serial")
 public class Customer implements java.io.Serializable {
 
 	private Integer customerId;
@@ -34,9 +34,10 @@ public class Customer implements java.io.Serializable {
 	private boolean isCustomerActive;
 	private Set<Session> sessions = new HashSet<Session>(0);
 	private Set<Order> orders = new HashSet<Order>(0);
-	private Set<Payment> payments = new HashSet<Payment>(0);
+	private Set<Paymentinfo> paymentinfos = new HashSet<Paymentinfo>(0);
 	private Set<Cart> carts = new HashSet<Cart>(0);
 	private Set<Customerdetail> customerdetails = new HashSet<Customerdetail>(0);
+	private Set<Purchaseorder> purchaseorders = new HashSet<Purchaseorder>(0);
 
 	public Customer() {
 	}
@@ -52,8 +53,8 @@ public class Customer implements java.io.Serializable {
 	}
 
 	public Customer(String userName, String password, String sex, Date dateOfBirth, String defaultPaymentInfo,
-			boolean isCustomerActive, Set<Session> sessions, Set<Order> orders, Set<Payment> payments, Set<Cart> carts,
-			Set<Customerdetail> customerdetails) {
+			boolean isCustomerActive, Set<Session> sessions, Set<Order> orders, Set<Paymentinfo> paymentinfos,
+			Set<Cart> carts, Set<Customerdetail> customerdetails, Set<Purchaseorder> purchaseorders) {
 		this.userName = userName;
 		this.password = password;
 		this.sex = sex;
@@ -62,9 +63,10 @@ public class Customer implements java.io.Serializable {
 		this.isCustomerActive = isCustomerActive;
 		this.sessions = sessions;
 		this.orders = orders;
-		this.payments = payments;
+		this.paymentinfos = paymentinfos;
 		this.carts = carts;
 		this.customerdetails = customerdetails;
+		this.purchaseorders = purchaseorders;
 	}
 
 	@Id
@@ -164,12 +166,12 @@ public class Customer implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-	public Set<Payment> getPayments() {
-		return this.payments;
+	public Set<Paymentinfo> getPaymentinfos() {
+		return this.paymentinfos;
 	}
 
-	public void setPayments(Set<Payment> payments) {
-		this.payments = payments;
+	public void setPaymentinfos(Set<Paymentinfo> paymentinfos) {
+		this.paymentinfos = paymentinfos;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
@@ -188,6 +190,15 @@ public class Customer implements java.io.Serializable {
 
 	public void setCustomerdetails(Set<Customerdetail> customerdetails) {
 		this.customerdetails = customerdetails;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+	public Set<Purchaseorder> getPurchaseorders() {
+		return this.purchaseorders;
+	}
+
+	public void setPurchaseorders(Set<Purchaseorder> purchaseorders) {
+		this.purchaseorders = purchaseorders;
 	}
 
 }
