@@ -18,6 +18,6 @@ public interface ICdHome {
 	 */
 	Result GetCategoryList();
 	Result getProductList(String genre);
-
+	Result getProductInfo(int CdId);
 }
 
