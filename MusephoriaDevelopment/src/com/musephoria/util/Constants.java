@@ -7,7 +7,7 @@ package com.musephoria.util;
  * @author FanaticCoder
  *
  */
-public class Constants {
+public final class Constants {
 	public static final String sqlConfigName = "mySqlConfig.properties";
 	public static final String dbName = "dbName";
 	public static final String dbURL = "dbURL";
@@ -42,7 +42,7 @@ public class Constants {
 	public static final String getCategoryList = "GetCategoryList";
 	public static final String checkIfUserExists = "CheckIfUserExists";
 	public static final String getAccountInfo = "GetAccountInfo";
-	public static final String getCustomerDetails = "getCustomerDetails";	
+	public static final String getCustomerDetails = "getCustomerDetails";
 	public static final String getProductList = "getProductList";
 	public static final String getProductListWithCategory = "getProductListWithCategory";
 	public static final String getProductInfo="getProductInfo";
