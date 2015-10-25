@@ -1,7 +1,6 @@
 package com.musephoria.entity;
 // default package
-
-// Generated Oct 24, 2015 10:30:11 PM by Hibernate Tools 4.0.0.Final
+// Generated Oct 25, 2015 6:52:40 PM by Hibernate Tools 4.0.0.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -100,7 +99,7 @@ public class Cd implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "Description", length = 45)
+	@Column(name = "Description", length = 300)
 	public String getDescription() {
 		return this.description;
 	}
@@ -155,7 +154,7 @@ public class Cd implements java.io.Serializable {
 		this.year = year;
 	}
 
-	@Column(name = "Rating", length = 25)
+	@Column(name = "Rating", length = 9)
 	public String getRating() {
 		return this.rating;
 	}

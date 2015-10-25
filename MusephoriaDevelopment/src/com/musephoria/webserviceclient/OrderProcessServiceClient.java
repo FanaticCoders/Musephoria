@@ -29,7 +29,6 @@ public class OrderProcessServiceClient {
 			paramter.setAddressInfo(addressInfo);
 
 			try {
-				//Calling WebService.
 				CreateAccountResponse res = client.createAccount(paramter);
 				if (!res.equals(null)) {
 					statusMessage = res.get_return().getStatusMessage();
