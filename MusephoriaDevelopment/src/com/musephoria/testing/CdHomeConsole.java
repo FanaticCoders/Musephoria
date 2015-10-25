@@ -26,16 +26,15 @@ public class CdHomeConsole {
 		try {
 
 			ICdHome cdDaoObj = new CdHome();
-
-
-			Result resObj = cdDaoObj.getProductList("Rock");
+			Result resObj = cdDaoObj.getProductInfo(1001);
 
 			List<Cd> temp = (List<Cd>) resObj.getResultList();
-			ListIterator<Cd> temp1 = temp.listIterator();
-
-			while(temp1.hasNext()){
-				System.out.println(temp1.next().getCdId());
+			
+			for(Cd c: temp)			
+			{
+				System.out.println(c.getPrice());
 			}
+			
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -53,10 +53,34 @@ public class CdHome implements ICdHome {
 				resObj = dbManager.GetQueryResult(Constants.getProductList, null);
 			}
 
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 		dbManager.CleanUpSession();
 		return resObj;
 	}
+	
+
+public Result getProductInfo(int Cdid)
+	{
+		
+		Result resObj = null;
+		try 
+		{
+			List<Integer> parameterList = new ArrayList<Integer>();
+		    if(Cdid!=0)
+		       parameterList.add(Cdid);		 
+		    if(!parameterList.isEmpty())
+			   resObj= dbManager.GetQueryResult(Constants.getProductInfo, parameterList);
+	    }
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		 dbManager.CleanUpSession();
+		 return resObj;
+		
+	}
+	
+	
 }
