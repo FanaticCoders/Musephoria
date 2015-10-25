@@ -1,12 +1,21 @@
 package com.musephoria.dao;
 // Generated Oct 19, 2015 11:46:20 PM by Hibernate Tools 4.3.1.Final
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+//import com.ibm.wsdl.Constants;
+import com.musephoria.dbmanager.DBManager;
 import com.musephoria.entity.*;
+import com.musephoria.util.Constants;
+
 
 /**
  * Home object for domain model class Order.
@@ -14,56 +23,58 @@ import com.musephoria.entity.*;
  * @author Hibernate Tools
  */
 @Stateless
-public class OrderHome {
-
-	private static final Log log = LogFactory.getLog(OrderHome.class);
-
-	@PersistenceContext
-	private EntityManager entityManager;
-
-	public void persist(Order transientInstance) {
-		log.debug("persisting Order instance");
-		try {
-			entityManager.persist(transientInstance);
-			log.debug("persist successful");
-		} catch (RuntimeException re) {
-			log.error("persist failed", re);
-			throw re;
-		}
+public class OrderHome implements IOrderHome{
+	
+	DBManager dbManager;
+	
+	public OrderHome(){
+		dbManager = new DBManager();
 	}
 
-	public void remove(Order persistentInstance) {
-		log.debug("removing Order instance");
-		try {
-			entityManager.remove(persistentInstance);
-			log.debug("remove successful");
-		} catch (RuntimeException re) {
-			log.error("remove failed", re);
-			throw re;
+		
+	public boolean createOrder(Cart cartinfo, String shippinginfo){
+		Result resobj1, resobj2;
+		Purchaseorder po = new Purchaseorder();
+		boolean flag = false;
+		try{
+			List<Integer> parameterList = new ArrayList<Integer>();    
+			parameterList.add(cartinfo.getCartId());
+			
+			//Fetching the CartItems
+			resobj1 = dbManager.GetQueryResult(Constants.getCartItems, parameterList);
+			
+			if(resobj1!=null && !resobj1.getResultList().isEmpty()){
+				
+				@SuppressWarnings("unchecked")
+				Iterator<Cartitem> resitr = (Iterator<Cartitem>) resobj1.getResultList().iterator();
+				
+				// Populating the Purchase Order 
+				while(resitr.hasNext()){
+					po.setCustomer(cartinfo.getCustomer());
+					po.setPurchaseOrderItem(resitr.next().getCardItemName());
+					po.setQuantity(resitr.next().getQuantity());
+					po.setBaseAmount(resitr.next().getBaseAmount());
+					po.setShippingAddress(shippinginfo);
+					po.setPurchaseOrderStatus("Ordered");
+					po.setIsPurchaseOrderActive(true);
+				}
+				
+				List<Purchaseorder> PurchaseOrderList = new ArrayList<Purchaseorder>();
+				PurchaseOrderList.add(po);
+				
+				// Inserting Purchase Order into Database
+				resobj2 = dbManager.SaveNewData(PurchaseOrderList);
+				
+				//Setting flag if the Purchase Order is inserted
+				if(resobj2.getStatusCode() == 1){
+					flag = true;
+				}
+				
+		      }
 		}
-	}
-
-	public Order merge(Order detachedInstance) {
-		log.debug("merging Order instance");
-		try {
-			Order result = entityManager.merge(detachedInstance);
-			log.debug("merge successful");
-			return result;
-		} catch (RuntimeException re) {
-			log.error("merge failed", re);
-			throw re;
+		catch(Exception e){
+			e.printStackTrace();
 		}
-	}
-
-	public Order findById(Integer id) {
-		log.debug("getting Order instance with id: " + id);
-		try {
-			Order instance = entityManager.find(Order.class, id);
-			log.debug("get successful");
-			return instance;
-		} catch (RuntimeException re) {
-			log.error("get failed", re);
-			throw re;
+		return flag;
 		}
-	}
 }

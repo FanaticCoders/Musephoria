@@ -46,4 +46,5 @@ public final class Constants {
 	public static final String getProductList = "getProductList";
 	public static final String getProductListWithCategory = "getProductListWithCategory";
 	public static final String getProductInfo="getProductInfo";
+	public static final String getCartItems = "getCartItems";
 }
