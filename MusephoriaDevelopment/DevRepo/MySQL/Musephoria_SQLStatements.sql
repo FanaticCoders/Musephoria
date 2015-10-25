@@ -23,18 +23,18 @@ DROP TABLE IF EXISTS `musephoria`.`Cd` ;
 CREATE TABLE IF NOT EXISTS `musephoria`.`Cd` (
   `CdId` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
   `Name` NVARCHAR(25) NOT NULL COMMENT '',
-  `Description` NVARCHAR(45) NULL COMMENT '',
+  `Description` NVARCHAR(300) NULL COMMENT '',
   `Price` FLOAT NOT NULL COMMENT '',
-  `Quantity` INT NULL DEFAULT 0 COMMENT '',
+  `Quantity` INT NULL COMMENT '',
   `Genre` ENUM('Rock', 'Blues', 'Country', 'Pop', 'Electronic') NOT NULL COMMENT '',
   `Artist` NVARCHAR(25) NOT NULL COMMENT '',
   `Year` YEAR NOT NULL COMMENT '',
-  `Rating` NVARCHAR(25) NULL COMMENT '',
+  `Rating` ENUM('Poor', 'Average', 'Good', 'Very Good', 'Excellent') NULL COMMENT '',
   `Review` NVARCHAR(10000) NULL COMMENT '',
   `Language` NVARCHAR(25) NULL COMMENT '',
   `NumberOfTrack` INT NOT NULL COMMENT '',
   `AlbumArt` MEDIUMBLOB NULL COMMENT '',
-  `IsCdActive` TINYINT(1) NOT NULL DEFAULT 1 COMMENT '',
+  `IsCdActive` TINYINT(1) NOT NULL COMMENT '',
   PRIMARY KEY (`CdId`)  COMMENT '') AUTO_INCREMENT=1001,
 ENGINE = InnoDB;
 
@@ -47,12 +47,11 @@ DROP TABLE IF EXISTS `musephoria`.`Track` ;
 CREATE TABLE IF NOT EXISTS `musephoria`.`Track` (
   `TrackId` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
   `CdId` INT UNSIGNED NOT NULL COMMENT '',
-  `Description` NVARCHAR(25) NULL COMMENT '',
-  `Artist` NVARCHAR(25) NOT NULL COMMENT '',
+  `Description` NVARCHAR(300) NULL COMMENT '',
+  `Artist` NVARCHAR(45) NOT NULL COMMENT '',
   `Duration` NVARCHAR(25) NOT NULL COMMENT '',
   PRIMARY KEY (`TrackId`)  COMMENT '',
   INDEX `TrackCd_idx` (`CdId` ASC)  COMMENT '',
-  UNIQUE INDEX `CdId_UNIQUE` (`CdId` ASC)  COMMENT '',
   CONSTRAINT `TrackCd`
     FOREIGN KEY (`CdId`)
     REFERENCES `musephoria`.`Cd` (`CdId`)
@@ -73,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `musephoria`.`Customer` (
   `Sex` ENUM('Male', 'Female') NOT NULL COMMENT '',
   `DateOfBirth` DATE NOT NULL COMMENT '',
   `DefaultPaymentInfo` ENUM('Credit', 'Debit') NOT NULL COMMENT '',
-  `IsCustomerActive` TINYINT(1) NOT NULL DEFAULT 1 COMMENT '',
+  `IsCustomerActive` TINYINT(1) NOT NULL COMMENT '',
   `TimeStamp` DATETIME NOT NULL COMMENT '',
   PRIMARY KEY (`CustomerId`)  COMMENT '') AUTO_INCREMENT=3001,
 ENGINE = InnoDB;
@@ -91,10 +90,9 @@ CREATE TABLE IF NOT EXISTS `musephoria`.`Order` (
   `Tax` FLOAT NULL COMMENT '',
   `TotalAmount` FLOAT UNSIGNED NOT NULL COMMENT '',
   `TimeStamp` DATETIME NOT NULL COMMENT '',
-  `Indiacator` TINYINT(1) NULL COMMENT '',
+  `IsOrderActive` TINYINT(1) NULL COMMENT '',
   PRIMARY KEY (`OrderId`)  COMMENT '',
   INDEX `OrderCustomer_idx` (`CustomerId` ASC)  COMMENT '',
-  UNIQUE INDEX `CustomerId_UNIQUE` (`CustomerId` ASC)  COMMENT '',
   CONSTRAINT `OrderCustomer`
     FOREIGN KEY (`CustomerId`)
     REFERENCES `musephoria`.`Customer` (`CustomerId`)
@@ -122,7 +120,6 @@ CREATE TABLE IF NOT EXISTS `musephoria`.`CustomerDetail` (
   `Phone` NVARCHAR(10) NOT NULL COMMENT '',
   `IsShipppingAddress` TINYINT(1) NOT NULL COMMENT '',
   PRIMARY KEY (`CustomerDetailId`)  COMMENT '',
-  UNIQUE INDEX `CustomerId_UNIQUE` (`CustomerId` ASC)  COMMENT '',
   CONSTRAINT `CustomerDetailCustomer`
     FOREIGN KEY (`CustomerId`)
     REFERENCES `musephoria`.`Customer` (`CustomerId`)
@@ -167,8 +164,6 @@ CREATE TABLE IF NOT EXISTS `musephoria`.`CartItem` (
   `BaseAmount` FLOAT UNSIGNED NOT NULL COMMENT '',
   PRIMARY KEY (`CartItemId`)  COMMENT '',
   INDEX `CdId_idx` (`CdId` ASC)  COMMENT '',
-  UNIQUE INDEX `CartId_UNIQUE` (`CartId` ASC)  COMMENT '',
-  UNIQUE INDEX `CdId_UNIQUE` (`CdId` ASC)  COMMENT '',
   CONSTRAINT `CartItemCart`
     FOREIGN KEY (`CartId`)
     REFERENCES `musephoria`.`Cart` (`CartId`)
@@ -192,9 +187,8 @@ CREATE TABLE IF NOT EXISTS `musephoria`.`Shipping` (
   `OrderId` INT UNSIGNED NOT NULL COMMENT '',
   `Address` NVARCHAR(45) NOT NULL COMMENT '',
   `Status` ENUM('Ordered', 'Processed', 'InTransit', 'Delivered', 'Cancelled') NOT NULL COMMENT '',
-  `Indicator` TINYINT(1) NULL DEFAULT 0 COMMENT '',
+  `IsShippingActive` TINYINT(1) NULL COMMENT '',
   PRIMARY KEY (`ShippingId`)  COMMENT '',
-  UNIQUE INDEX `OrderId_UNIQUE` (`OrderId` ASC)  COMMENT '',
   CONSTRAINT `ShippingOrder`
     FOREIGN KEY (`OrderId`)
     REFERENCES `musephoria`.`Order` (`OrderId`)
@@ -218,7 +212,6 @@ CREATE TABLE IF NOT EXISTS `musephoria`.`Session` (
   `IsSessionActive` TINYINT(1) NOT NULL COMMENT '',
   PRIMARY KEY (`SessionId`)  COMMENT '',
   INDEX `CustomerId_idx` (`CustomerId` ASC)  COMMENT '',
-  UNIQUE INDEX `CustomerId_UNIQUE` (`CustomerId` ASC)  COMMENT '',
   CONSTRAINT `SessionCustomer`
     FOREIGN KEY (`CustomerId`)
     REFERENCES `musephoria`.`Customer` (`CustomerId`)
