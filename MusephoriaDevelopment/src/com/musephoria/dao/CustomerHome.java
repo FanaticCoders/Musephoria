@@ -70,7 +70,9 @@ public class CustomerHome implements ICustomerHome {
 	public Result createAccount(Customer customer) {
 		Result resObj = null;
 		if (!customer.equals(null)) {
-			resObj = dbManager.SaveNewData(customer);
+			List<Customer> customerList = new ArrayList<Customer>();
+			customerList.add(customer);
+			resObj = dbManager.SaveNewData(customerList);
 		}
 		dbManager.CleanUpSession();
 		return resObj;

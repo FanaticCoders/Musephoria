@@ -37,7 +37,9 @@ public class CustomerdetailHome implements ICustomerdetailHome {
 	public Result saveCustomerDetails(Customerdetail customerdetail) {
 		Result resObj = null;
 		if (!customerdetail.equals(null)) {
-			resObj = dbManager.SaveNewData(customerdetail);
+			List<Customerdetail> customerdetailList = new ArrayList<Customerdetail>();
+			customerdetailList.add(customerdetail);
+			resObj = dbManager.SaveNewData(customerdetailList);
 		}
 		dbManager.CleanUpSession();
 		return resObj;

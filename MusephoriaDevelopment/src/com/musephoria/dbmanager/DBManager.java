@@ -3,6 +3,7 @@
  */
 package com.musephoria.dbmanager;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -159,11 +160,17 @@ public class DBManager {
 	 * @param objList
 	 * @return resObj
 	 */
-	public Result SaveNewData(Object object) {
+	public Result SaveNewData(List<?> dataList) {
 		Result resObj = null;
 		try {
-			if (object != null) {
-				hSession.save(object);
+			if (!dataList.equals(null)) {
+				{
+					Iterator<?> iterator = dataList.iterator();
+					while(!iterator.hasNext())
+					{
+						hSession.save(iterator);
+					}
+				}
 			}
 			resObj = SetResultObject(null, 1, Constants.successCode, Constants.dataSaved);
 		} catch (Exception e) {
