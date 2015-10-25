@@ -1,13 +1,16 @@
 package com.musephoria.entity;
 // default package
+
 // Generated Oct 24, 2015 10:30:11 PM by Hibernate Tools 4.0.0.Final
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,6 +24,7 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "session", catalog = "musephoria", uniqueConstraints = @UniqueConstraint(columnNames = "CustomerId") )
+@SuppressWarnings("serial")
 public class Session implements java.io.Serializable {
 
 	private Integer sessionId;

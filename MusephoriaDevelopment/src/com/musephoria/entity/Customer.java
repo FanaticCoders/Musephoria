@@ -1,15 +1,18 @@
 package com.musephoria.entity;
 // default package
+
 // Generated Oct 24, 2015 10:30:11 PM by Hibernate Tools 4.0.0.Final
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,6 +25,7 @@ import javax.persistence.Version;
  */
 @Entity
 @Table(name = "customer", catalog = "musephoria")
+@SuppressWarnings("serial")
 public class Customer implements java.io.Serializable {
 
 	private Integer customerId;
