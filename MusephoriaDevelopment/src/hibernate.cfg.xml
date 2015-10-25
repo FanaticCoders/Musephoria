@@ -21,7 +21,7 @@
 		<property name="hibernate.c3p0.idle_test_period">3000</property>
 		
 		<!-- Enity Class Mapping -->
-		<mapping class="com.musephoria.entity.Payment" />
+		<mapping class="com.musephoria.entity.Paymentinfo" />
 		<mapping class="com.musephoria.entity.Shipping" />
 		<mapping class="com.musephoria.entity.Cartitem" />
 		<mapping class="com.musephoria.entity.Customerdetail" />
@@ -31,6 +31,7 @@
 		<mapping class="com.musephoria.entity.Cd" />
 		<mapping class="com.musephoria.entity.Orderitem" />
 		<mapping class="com.musephoria.entity.Session" />
-		<mapping class="com.musephoria.entity.Track" />		
+		<mapping class="com.musephoria.entity.Track" />
+		<mapping class="com.musephoria.entity.Purchaseorder" />			
     </session-factory>
 </hibernate-configuration>
