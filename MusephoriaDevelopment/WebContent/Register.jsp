@@ -12,21 +12,51 @@
 </div>
 <body>
 	<script language="javascript">
+	
+	
+	
     		 
-	 function checkPass()
-                {
-		                                                            
-                   if((document.form.pwd.value) != (document.form.repwd.value))
-                    {
-                        alert("Passwords do not match ");
-                        document.form.repwd.focus();
-                        return false;
-                    }
-                   return true;
-              
-                }
+	function checkPass()
+	{
+		if((document.form.pwd.value) != (document.form.repwd.value))
+			{
+			alert("Passwords do not match ");
+            document.form.repwd.focus();
+            return false;
+			
+			}
+		return true;
+	}
+	
 	</script>
-					 			
+	
+	<%
+	String msg=request.getAttribute("message").toString();
+	if(!msg.equals("")&& msg.equals("Username Exists, Please select another username"))
+	{
+	%>
+		alert("!Username Exists, Please select another username");
+	<%
+	} %>
+	<%
+	if(!msg.equals("")&& msg.equals("Username Exists, Please select another username"))
+	{
+	%>
+		alert("!Username Exists, Please select another username");
+	<%}
+	%>
+	<%
+	if(!msg.equals("")&& msg.equals("Account Creation Successful,please login with your credentials")) 
+	{
+	%>
+		alert("Account Creation Successful,please login with your credentials");
+	<%}
+	%>
+	
+	
+	
+	
+				 			
 		
 			<form class="form-container" action="RegisterServlet" method="post" onsubmit="return checkPass()">
 			<fieldset><legend> Customer Information Form </legend>
