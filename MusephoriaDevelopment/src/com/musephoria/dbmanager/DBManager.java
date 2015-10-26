@@ -174,12 +174,12 @@ public class DBManager {
 	}
 
 	/**
-	 * Saves new data & Updates existing data.
+	 * Saves new data.
 	 *
 	 * @param dataList
 	 * @return
 	 */
-	public Result saveOrUpdateData(List<?> dataList) {
+	public Result saveNewData(List<?> dataList) {
 		Result resObj = null;
 		try {
 			if (!dataList.equals(null)) {
@@ -187,10 +187,6 @@ public class DBManager {
 					// Iterating the items in the list.
 					Iterator<?> item = dataList.iterator();
 					while (item.hasNext()) {
-						/*
-						 * If the item is present in the DB, the data is
-						 * updated. else the item is saved.
-						 */
 						hSession.save(item.next());
 					}
 				}

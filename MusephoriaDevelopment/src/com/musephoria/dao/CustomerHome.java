@@ -81,7 +81,7 @@ public class CustomerHome implements ICustomerHome {
 				try {
 					List<Customer> customerList = new ArrayList<Customer>();
 					customerList.add(accountInfo);
-					dbManager.saveOrUpdateData(customerList);
+					dbManager.saveNewData(customerList);
 
 					// Populating the result object with success codes & messages.
 					resObj.setStatusCode(Constants.successCode);

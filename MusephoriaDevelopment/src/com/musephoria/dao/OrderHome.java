@@ -63,7 +63,7 @@ public class OrderHome implements IOrderHome{
 				PurchaseOrderList.add(po);
 
 				// Inserting Purchase Order into Database
-				resobj2 = dbManager.saveOrUpdateData(PurchaseOrderList);
+				resobj2 = dbManager.saveNewData(PurchaseOrderList);
 
 				//Setting flag if the Purchase Order is inserted
 				if(resobj2.getStatusCode() == 1){
