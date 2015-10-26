@@ -55,7 +55,7 @@ public class CustomerHome implements ICustomerHome {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		dbManager.cleanUpSession();
+
 		return flag;
 	}
 

@@ -67,7 +67,8 @@ public class DBManager {
 				hSession = hSessionFactory.openSession();
 			}
 		} catch (HibernateException e) {
-			log.error(e.getLocalizedMessage(), e);
+			// log.error(e.getLocalizedMessage(), e);
+			System.out.println(e.getMessage());
 		}
 		return hSession;
 	}
@@ -84,7 +85,8 @@ public class DBManager {
 				hTransaction = hSession.beginTransaction();
 			}
 		} catch (Exception e) {
-			log.error(e.getLocalizedMessage(), e);
+			// log.error(e.getLocalizedMessage(), e);
+			System.out.println(e.getMessage());
 		}
 		return hTransaction;
 	}
@@ -184,12 +186,12 @@ public class DBManager {
 				{
 					// Iterating the items in the list.
 					Iterator<?> item = dataList.iterator();
-					while (!item.hasNext()) {
+					while (item.hasNext()) {
 						/*
 						 * If the item is present in the DB, the data is
 						 * updated. else the item is saved.
 						 */
-						hSession.saveOrUpdate(item);
+						hSession.save(item.next());
 					}
 				}
 			}
@@ -199,6 +201,7 @@ public class DBManager {
 			// Setting the result object with failure information.
 			resObj = setResultObject(null, 0, Constants.errorCode, Constants.dataNotSaved);
 			log.error(e.getLocalizedMessage(), e);
+			System.out.println(e.getLocalizedMessage());
 		}
 
 		return resObj;

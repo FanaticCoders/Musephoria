@@ -28,8 +28,8 @@ public class CustomerHomeConsole {
 
 			ICustomerHome customerHome = new CustomerHome();
 			Customer accountInfo = new Customer();
-			accountInfo.setUserName("username");
-			accountInfo.setPassword("password");
+			accountInfo.setUserName("u1sername");
+			accountInfo.setPassword("pa1ssword");
 			accountInfo.setCustomerName("firstname");
 			accountInfo.setDateOfBirth(Helper.FormatDate("1989/01/25"));
 			accountInfo.setSex(Types.Sex.Male.toString());
