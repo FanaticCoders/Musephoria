@@ -30,6 +30,7 @@ public final class Constants {
 	public static final String successMessage = "Success";
 	public static final String dataSaved = "Data Saved.";
 	public static final String dataNotSaved = "Failed to Save Data.";
+	public static final String accountCreatedMessage = "Account Created";
 
 	// Success Codes
 	public static final int successCode = 1;
@@ -38,13 +39,14 @@ public final class Constants {
 	public static final String sqlQueryProperty = "com/musephoria/util/SqlQuery.properties";
 
 	// Property Keys
-	public static final String fetchAllCd = "FetchAllCd";
-	public static final String getCategoryList = "GetCategoryList";
-	public static final String checkIfUserExists = "CheckIfUserExists";
-	public static final String getAccountInfo = "GetAccountInfo";
+	public static final String fetchAllCd = "fetchAllCd";
+	public static final String getCategoryList = "fetCategoryList";
+	public static final String checkIfUserExists = "checkIfUserExists";
+	public static final String getAccountInfo = "getAccountInfo";
 	public static final String getCustomerDetails = "getCustomerDetails";
 	public static final String getProductList = "getProductList";
 	public static final String getProductListWithCategory = "getProductListWithCategory";
 	public static final String getProductInfo="getProductInfo";
 	public static final String getCartItems = "getCartItems";
+	public static final String getCustomerIdbyUsername="getCustomerIdbyUsername";
 }

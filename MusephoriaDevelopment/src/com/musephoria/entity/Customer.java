@@ -1,6 +1,6 @@
 package com.musephoria.entity;
 // default package
-// Generated Oct 25, 2015 6:52:40 PM by Hibernate Tools 4.0.0.Final
+// Generated Oct 25, 2015 10:59:42 PM by Hibernate Tools 4.0.0.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -31,44 +31,68 @@ public class Customer implements java.io.Serializable {
 	private Date timeStamp;
 	private String userName;
 	private String password;
-	private String sex;
+	private String customerName;
 	private Date dateOfBirth;
+	private String sex;
+	private String address;
+	private String city;
+	private String province;
+	private String country;
+	private String zipCode;
+	private String email;
+	private String phone;
 	private String defaultPaymentInfo;
 	private boolean isCustomerActive;
 	private Set<Session> sessions = new HashSet<Session>(0);
 	private Set<Order> orders = new HashSet<Order>(0);
 	private Set<Paymentinfo> paymentinfos = new HashSet<Paymentinfo>(0);
 	private Set<Cart> carts = new HashSet<Cart>(0);
-	private Set<Customerdetail> customerdetails = new HashSet<Customerdetail>(0);
 	private Set<Purchaseorder> purchaseorders = new HashSet<Purchaseorder>(0);
 
 	public Customer() {
 	}
 
-	public Customer(String userName, String password, String sex, Date dateOfBirth, String defaultPaymentInfo,
-			boolean isCustomerActive) {
+	public Customer(String userName, String password, String customerName, Date dateOfBirth, String sex, String address,
+			String city, String province, String country, String zipCode, String email, String phone,
+			String defaultPaymentInfo, boolean isCustomerActive) {
 		this.userName = userName;
 		this.password = password;
-		this.sex = sex;
+		this.customerName = customerName;
 		this.dateOfBirth = dateOfBirth;
+		this.sex = sex;
+		this.address = address;
+		this.city = city;
+		this.province = province;
+		this.country = country;
+		this.zipCode = zipCode;
+		this.email = email;
+		this.phone = phone;
 		this.defaultPaymentInfo = defaultPaymentInfo;
 		this.isCustomerActive = isCustomerActive;
 	}
 
-	public Customer(String userName, String password, String sex, Date dateOfBirth, String defaultPaymentInfo,
-			boolean isCustomerActive, Set<Session> sessions, Set<Order> orders, Set<Paymentinfo> paymentinfos,
-			Set<Cart> carts, Set<Customerdetail> customerdetails, Set<Purchaseorder> purchaseorders) {
+	public Customer(String userName, String password, String customerName, Date dateOfBirth, String sex, String address,
+			String city, String province, String country, String zipCode, String email, String phone,
+			String defaultPaymentInfo, boolean isCustomerActive, Set<Session> sessions, Set<Order> orders,
+			Set<Paymentinfo> paymentinfos, Set<Cart> carts, Set<Purchaseorder> purchaseorders) {
 		this.userName = userName;
 		this.password = password;
-		this.sex = sex;
+		this.customerName = customerName;
 		this.dateOfBirth = dateOfBirth;
+		this.sex = sex;
+		this.address = address;
+		this.city = city;
+		this.province = province;
+		this.country = country;
+		this.zipCode = zipCode;
+		this.email = email;
+		this.phone = phone;
 		this.defaultPaymentInfo = defaultPaymentInfo;
 		this.isCustomerActive = isCustomerActive;
 		this.sessions = sessions;
 		this.orders = orders;
 		this.paymentinfos = paymentinfos;
 		this.carts = carts;
-		this.customerdetails = customerdetails;
 		this.purchaseorders = purchaseorders;
 	}
 
@@ -113,13 +137,13 @@ public class Customer implements java.io.Serializable {
 		this.password = password;
 	}
 
-	@Column(name = "Sex", nullable = false, length = 6)
-	public String getSex() {
-		return this.sex;
+	@Column(name = "CustomerName", nullable = false, length = 45)
+	public String getCustomerName() {
+		return this.customerName;
 	}
 
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -130,6 +154,78 @@ public class Customer implements java.io.Serializable {
 
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
+	}
+
+	@Column(name = "Sex", nullable = false, length = 6)
+	public String getSex() {
+		return this.sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	@Column(name = "Address", nullable = false, length = 45)
+	public String getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	@Column(name = "City", nullable = false, length = 45)
+	public String getCity() {
+		return this.city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	@Column(name = "Province", nullable = false, length = 45)
+	public String getProvince() {
+		return this.province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	@Column(name = "Country", nullable = false, length = 45)
+	public String getCountry() {
+		return this.country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	@Column(name = "ZipCode", nullable = false, length = 7)
+	public String getZipCode() {
+		return this.zipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
+	@Column(name = "Email", nullable = false, length = 45)
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Column(name = "Phone", nullable = false, length = 45)
+	public String getPhone() {
+		return this.phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	@Column(name = "DefaultPaymentInfo", nullable = false, length = 7)
@@ -184,15 +280,6 @@ public class Customer implements java.io.Serializable {
 
 	public void setCarts(Set<Cart> carts) {
 		this.carts = carts;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-	public Set<Customerdetail> getCustomerdetails() {
-		return this.customerdetails;
-	}
-
-	public void setCustomerdetails(Set<Customerdetail> customerdetails) {
-		this.customerdetails = customerdetails;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")

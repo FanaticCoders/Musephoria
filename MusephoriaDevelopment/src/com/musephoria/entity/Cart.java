@@ -1,6 +1,6 @@
 package com.musephoria.entity;
 // default package
-// Generated Oct 25, 2015 6:52:40 PM by Hibernate Tools 4.0.0.Final
+// Generated Oct 25, 2015 10:59:42 PM by Hibernate Tools 4.0.0.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -27,7 +27,7 @@ public class Cart implements java.io.Serializable {
 
 	private Integer cartId;
 	private Customer customer;
-	private float baseAmount;
+	private float netAmount;
 	private float tax;
 	private float totalAmount;
 	private boolean isCartActive;
@@ -36,18 +36,18 @@ public class Cart implements java.io.Serializable {
 	public Cart() {
 	}
 
-	public Cart(Customer customer, float baseAmount, float tax, float totalAmount, boolean isCartActive) {
+	public Cart(Customer customer, float netAmount, float tax, float totalAmount, boolean isCartActive) {
 		this.customer = customer;
-		this.baseAmount = baseAmount;
+		this.netAmount = netAmount;
 		this.tax = tax;
 		this.totalAmount = totalAmount;
 		this.isCartActive = isCartActive;
 	}
 
-	public Cart(Customer customer, float baseAmount, float tax, float totalAmount, boolean isCartActive,
+	public Cart(Customer customer, float netAmount, float tax, float totalAmount, boolean isCartActive,
 			Set<Cartitem> cartitems) {
 		this.customer = customer;
-		this.baseAmount = baseAmount;
+		this.netAmount = netAmount;
 		this.tax = tax;
 		this.totalAmount = totalAmount;
 		this.isCartActive = isCartActive;
@@ -76,13 +76,13 @@ public class Cart implements java.io.Serializable {
 		this.customer = customer;
 	}
 
-	@Column(name = "BaseAmount", nullable = false, precision = 12, scale = 0)
-	public float getBaseAmount() {
-		return this.baseAmount;
+	@Column(name = "NetAmount", nullable = false, precision = 12, scale = 0)
+	public float getNetAmount() {
+		return this.netAmount;
 	}
 
-	public void setBaseAmount(float baseAmount) {
-		this.baseAmount = baseAmount;
+	public void setNetAmount(float netAmount) {
+		this.netAmount = netAmount;
 	}
 
 	@Column(name = "Tax", nullable = false, precision = 12, scale = 0)

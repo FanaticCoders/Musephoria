@@ -1,6 +1,6 @@
 package com.musephoria.entity;
 // default package
-// Generated Oct 25, 2015 6:52:40 PM by Hibernate Tools 4.0.0.Final
+// Generated Oct 25, 2015 10:59:42 PM by Hibernate Tools 4.0.0.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -26,15 +26,17 @@ public class Orderitem implements java.io.Serializable {
 	private Cd cd;
 	private String orderItemName;
 	private int orderQuantity;
+	private float baseAmount;
 
 	public Orderitem() {
 	}
 
-	public Orderitem(Order order, Cd cd, String orderItemName, int orderQuantity) {
+	public Orderitem(Order order, Cd cd, String orderItemName, int orderQuantity, float baseAmount) {
 		this.order = order;
 		this.cd = cd;
 		this.orderItemName = orderItemName;
 		this.orderQuantity = orderQuantity;
+		this.baseAmount = baseAmount;
 	}
 
 	@Id
@@ -85,6 +87,15 @@ public class Orderitem implements java.io.Serializable {
 
 	public void setOrderQuantity(int orderQuantity) {
 		this.orderQuantity = orderQuantity;
+	}
+
+	@Column(name = "BaseAmount", nullable = false, precision = 12, scale = 0)
+	public float getBaseAmount() {
+		return this.baseAmount;
+	}
+
+	public void setBaseAmount(float baseAmount) {
+		this.baseAmount = baseAmount;
 	}
 
 }

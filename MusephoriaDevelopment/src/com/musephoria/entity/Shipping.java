@@ -1,6 +1,6 @@
 package com.musephoria.entity;
 // default package
-// Generated Oct 25, 2015 6:52:40 PM by Hibernate Tools 4.0.0.Final
+// Generated Oct 25, 2015 10:59:42 PM by Hibernate Tools 4.0.0.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -23,23 +23,43 @@ public class Shipping implements java.io.Serializable {
 
 	private Integer shippingId;
 	private Order order;
-	private String address;
 	private String status;
+	private String address;
+	private String city;
+	private String province;
+	private String country;
+	private String zipCode;
+	private String email;
+	private String phone;
 	private Boolean isShippingActive;
 
 	public Shipping() {
 	}
 
-	public Shipping(Order order, String address, String status) {
+	public Shipping(Order order, String status, String address, String city, String province, String country,
+			String zipCode, String email, String phone) {
 		this.order = order;
-		this.address = address;
 		this.status = status;
+		this.address = address;
+		this.city = city;
+		this.province = province;
+		this.country = country;
+		this.zipCode = zipCode;
+		this.email = email;
+		this.phone = phone;
 	}
 
-	public Shipping(Order order, String address, String status, Boolean isShippingActive) {
+	public Shipping(Order order, String status, String address, String city, String province, String country,
+			String zipCode, String email, String phone, Boolean isShippingActive) {
 		this.order = order;
-		this.address = address;
 		this.status = status;
+		this.address = address;
+		this.city = city;
+		this.province = province;
+		this.country = country;
+		this.zipCode = zipCode;
+		this.email = email;
+		this.phone = phone;
 		this.isShippingActive = isShippingActive;
 	}
 
@@ -65,6 +85,15 @@ public class Shipping implements java.io.Serializable {
 		this.order = order;
 	}
 
+	@Column(name = "Status", nullable = false, length = 9)
+	public String getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Column(name = "Address", nullable = false, length = 45)
 	public String getAddress() {
 		return this.address;
@@ -74,13 +103,58 @@ public class Shipping implements java.io.Serializable {
 		this.address = address;
 	}
 
-	@Column(name = "Status", nullable = false, length = 9)
-	public String getStatus() {
-		return this.status;
+	@Column(name = "City", nullable = false, length = 45)
+	public String getCity() {
+		return this.city;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	@Column(name = "Province", nullable = false, length = 45)
+	public String getProvince() {
+		return this.province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	@Column(name = "Country", nullable = false, length = 45)
+	public String getCountry() {
+		return this.country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	@Column(name = "ZipCode", nullable = false, length = 7)
+	public String getZipCode() {
+		return this.zipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
+	@Column(name = "Email", nullable = false, length = 45)
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Column(name = "Phone", nullable = false, length = 45)
+	public String getPhone() {
+		return this.phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	@Column(name = "IsShippingActive")

@@ -21,20 +21,22 @@ public interface ICustomerHome {
 	boolean checkIfAccountExists(String userName);
 
 	/**
-	 * Creates a New Account
+	 * Creates a new Account.
 	 *
-	 * @param customer
-	 * @param customerDetail
+	 * @param accountName
+	 * @param accountInfo
 	 * @return
 	 */
-	Result createAccount(Customer customer);
+	Result createAccount(String accountName, Customer accountInfo);
 
 	/**
 	 * Gets the account information.
 	 *
-	 * @param customer
+	 * @param accountName
+	 * @param accountPassword
+	 * @param accountInfo
 	 * @return
 	 */
-	Result getAccount(Customer customer);
+	Customer getAccount(String accountName, String accountPassword, Customer accountInfo);
 
 }

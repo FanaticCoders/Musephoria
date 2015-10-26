@@ -35,10 +35,11 @@ public class CdHome implements ICdHome {
 	 */
 	@Override
 	public Result GetCategoryList() {
-		Result resObj = dbManager.GetQueryResult(Constants.getCategoryList, null);
+		Result resObj = dbManager.getQueryResult(Constants.getCategoryList, null);
 		return resObj;
 	}
 
+	@Override
 	public Result getProductList(String genre) {
 		Result resObj = null;
 		try {
@@ -48,39 +49,36 @@ public class CdHome implements ICdHome {
 			}
 			System.out.print(parameterList);
 			if (!parameterList.isEmpty()) {
-				resObj = dbManager.GetQueryResult(Constants.getProductListWithCategory, parameterList);
+				resObj = dbManager.getQueryResult(Constants.getProductListWithCategory, parameterList);
 			} else {
-				resObj = dbManager.GetQueryResult(Constants.getProductList, null);
+				resObj = dbManager.getQueryResult(Constants.getProductList, null);
 			}
 
-		} 
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		dbManager.CleanUpSession();
+		dbManager.cleanUpSession();
 		return resObj;
 	}
-	
 
-public Result getProductInfo(int Cdid)
-	{
-		
+	@Override
+	public Result getProductInfo(int Cdid) {
+
 		Result resObj = null;
-		try 
-		{
+		try {
 			List<Integer> parameterList = new ArrayList<Integer>();
-		    if(Cdid!=0)
-		       parameterList.add(Cdid);		 
-		    if(!parameterList.isEmpty())
-			   resObj= dbManager.GetQueryResult(Constants.getProductInfo, parameterList);
-	    }
-		catch (Exception e) {
+			if (Cdid != 0) {
+				parameterList.add(Cdid);
+			}
+			if (!parameterList.isEmpty()) {
+				resObj = dbManager.getQueryResult(Constants.getProductInfo, parameterList);
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		 dbManager.CleanUpSession();
-		 return resObj;
-		
+		dbManager.cleanUpSession();
+		return resObj;
+
 	}
-	
-	
+
 }

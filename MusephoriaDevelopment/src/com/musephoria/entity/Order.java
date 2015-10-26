@@ -1,6 +1,6 @@
 package com.musephoria.entity;
 // default package
-// Generated Oct 25, 2015 6:52:40 PM by Hibernate Tools 4.0.0.Final
+// Generated Oct 25, 2015 10:59:42 PM by Hibernate Tools 4.0.0.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -32,7 +32,7 @@ public class Order implements java.io.Serializable {
 	private Integer orderId;
 	private Date timeStamp;
 	private Customer customer;
-	private Float baseAmount;
+	private Float netAmount;
 	private Float tax;
 	private float totalAmount;
 	private Boolean isOrderActive;
@@ -47,10 +47,10 @@ public class Order implements java.io.Serializable {
 		this.totalAmount = totalAmount;
 	}
 
-	public Order(Customer customer, Float baseAmount, Float tax, float totalAmount, Boolean isOrderActive,
+	public Order(Customer customer, Float netAmount, Float tax, float totalAmount, Boolean isOrderActive,
 			Set<Orderitem> orderitems, Set<Shipping> shippings) {
 		this.customer = customer;
-		this.baseAmount = baseAmount;
+		this.netAmount = netAmount;
 		this.tax = tax;
 		this.totalAmount = totalAmount;
 		this.isOrderActive = isOrderActive;
@@ -91,13 +91,13 @@ public class Order implements java.io.Serializable {
 		this.customer = customer;
 	}
 
-	@Column(name = "BaseAmount", precision = 12, scale = 0)
-	public Float getBaseAmount() {
-		return this.baseAmount;
+	@Column(name = "NetAmount", precision = 12, scale = 0)
+	public Float getNetAmount() {
+		return this.netAmount;
 	}
 
-	public void setBaseAmount(Float baseAmount) {
-		this.baseAmount = baseAmount;
+	public void setNetAmount(Float netAmount) {
+		this.netAmount = netAmount;
 	}
 
 	@Column(name = "Tax", precision = 12, scale = 0)

@@ -6,8 +6,10 @@ package com.musephoria.dbmanager;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Level;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionException;
@@ -30,14 +32,15 @@ public class DBManager {
 	private Configuration hConfig;
 	private Session hSession;
 	private Transaction hTransaction;
+	private static final Log log = LogFactory.getLog(DBManager.class);
 
 	/**
 	 * Constructor of Native Class. Used to initialise the connection.
 	 */
 	public DBManager() {
-		LoadConfiguration();
-		LoadSession();
-		BeginTransaction();
+		loadConfiguration();
+		loadSession();
+		beginTransaction();
 	}
 
 	/**
@@ -46,7 +49,7 @@ public class DBManager {
 	 *
 	 * @return Hibernate configuration object.
 	 */
-	public Configuration LoadConfiguration() {
+	public Configuration loadConfiguration() {
 		hConfig = new Configuration();
 		return hConfig.configure("hibernate.cfg.xml");
 	}
@@ -57,10 +60,14 @@ public class DBManager {
 	 * @param config
 	 * @return Hibernate Session Object.
 	 */
-	public Session LoadSession() {
-		if (!hConfig.equals(null)) {
-			SessionFactory hSessionFactory = hConfig.buildSessionFactory();
-			hSession = hSessionFactory.openSession();
+	public Session loadSession() {
+		try {
+			if (!hConfig.equals(null)) {
+				SessionFactory hSessionFactory = hConfig.buildSessionFactory();
+				hSession = hSessionFactory.openSession();
+			}
+		} catch (HibernateException e) {
+			log.error(e.getLocalizedMessage(), e);
 		}
 		return hSession;
 	}
@@ -71,9 +78,13 @@ public class DBManager {
 	 * @param hSession
 	 * @return Hibernate Transaction Object.
 	 */
-	public Transaction BeginTransaction() {
-		if (!hSession.equals(null)) {
-			hTransaction = hSession.beginTransaction();
+	public Transaction beginTransaction() {
+		try {
+			if (!hSession.equals(null)) {
+				hTransaction = hSession.beginTransaction();
+			}
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage(), e);
 		}
 		return hTransaction;
 	}
@@ -84,21 +95,25 @@ public class DBManager {
 	 * @param hTransaction
 	 * @param hSession
 	 */
-	public void CleanUpSession() {
+	public void cleanUpSession() {
 		try {
 			if (!hTransaction.equals(null) && !hSession.equals(null)) {
-				hSession.flush();
-				hTransaction.commit();
-				hSession.close();
+				try {
+					hSession.flush();
+					hTransaction.commit();
+					hSession.close();
+				} catch (HibernateException e) {
+					log.error(e.getLocalizedMessage(), e);
+				}
 			}
 		}
 
-		catch (TransactionException ex) {
-			Helper.LogError(ex, Level.FINER);
+		catch (TransactionException e) {
+			log.error(e.getLocalizedMessage(), e);
 		}
 
-		catch (SessionException ex) {
-			Helper.LogError(ex, Level.FINER);
+		catch (SessionException e) {
+			log.error(e.getLocalizedMessage(), e);
 		}
 	}
 
@@ -110,7 +125,7 @@ public class DBManager {
 	 * @param parameterList
 	 * @return resObj
 	 */
-	public Result ExecuteSQL(String queryID, List<?> parameterList) {
+	public Result executeSQL(String queryID, List<?> parameterList) {
 		Result resObj = null;
 		Query hQuery = null;
 		try {
@@ -121,9 +136,10 @@ public class DBManager {
 
 			}
 
-			resObj = SetResultObject(null, hQuery.list().size(), Constants.successCode, Constants.successMessage);
+			resObj = setResultObject(null, hQuery.list().size(), Constants.successCode, Constants.successMessage);
 		} catch (Exception e) {
-			resObj = SetResultObject(null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
+			resObj = setResultObject(null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
+			log.error(e.getLocalizedMessage(), e);
 		}
 		return resObj;
 	}
@@ -135,7 +151,7 @@ public class DBManager {
 	 * @param parameterList
 	 * @return resObj
 	 */
-	public Result GetQueryResult(String queryID, List<?> parameterList) {
+	public Result getQueryResult(String queryID, List<?> parameterList) {
 		Result resObj = null;
 		Query hQuery = null;
 		try {
@@ -145,37 +161,44 @@ public class DBManager {
 				hQuery = hSession.createQuery(sqlQuery);
 			}
 
-			resObj = SetResultObject(hQuery.list(), hQuery.list().size(), Constants.successCode,
+			resObj = setResultObject(hQuery.list(), hQuery.list().size(), Constants.successCode,
 					Constants.successMessage);
 
 		} catch (Exception e) {
-			resObj = SetResultObject(null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
+			resObj = setResultObject(null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
+			log.error(e.getLocalizedMessage(), e);
 		}
 		return resObj;
 	}
 
 	/**
-	 * Save fresh/new data.
+	 * Saves new data & Updates existing data.
 	 *
-	 * @param objList
-	 * @return resObj
+	 * @param dataList
+	 * @return
 	 */
-	public Result SaveNewData(List<?> dataList) {
+	public Result saveOrUpdateData(List<?> dataList) {
 		Result resObj = null;
 		try {
 			if (!dataList.equals(null)) {
 				{
-					Iterator<?> iterator = dataList.iterator();
-					while(!iterator.hasNext())
-					{
-						hSession.save(iterator);
+					// Iterating the items in the list.
+					Iterator<?> item = dataList.iterator();
+					while (!item.hasNext()) {
+						/*
+						 * If the item is present in the DB, the data is
+						 * updated. else the item is saved.
+						 */
+						hSession.saveOrUpdate(item);
 					}
 				}
 			}
-			resObj = SetResultObject(null, 1, Constants.successCode, Constants.dataSaved);
+			// Setting the result object with success information.
+			resObj = setResultObject(null, 1, Constants.successCode, Constants.dataSaved);
 		} catch (Exception e) {
-			resObj = SetResultObject(null, 0, Constants.successCode, Constants.dataNotSaved);
-			System.out.println(e.getMessage());
+			// Setting the result object with failure information.
+			resObj = setResultObject(null, 0, Constants.errorCode, Constants.dataNotSaved);
+			log.error(e.getLocalizedMessage(), e);
 		}
 
 		return resObj;
@@ -190,17 +213,16 @@ public class DBManager {
 	 * @param statusMessage
 	 * @return resultObj
 	 */
-	public Result SetResultObject(Object resultList, int resultCount, int statusCode, String statusMessage) {
-		Result resultObj = null;
+	public Result setResultObject(Object resultList, int resultCount, int statusCode, String statusMessage) {
+		Result resultObj = new Result();
 		try {
-			resultObj = new Result();
+			// Setting the result object based on the parameters passed.
 			resultObj.setResultList((List<?>) resultList);
 			resultObj.setResultCount(resultCount);
 			resultObj.setStatusCode(statusCode);
 			resultObj.setStatusMessage(statusMessage);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.getLocalizedMessage(), e);
 		}
 		return resultObj;
 	}

@@ -5,7 +5,6 @@ package com.musephoria.testing;
 
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.Iterator;
 
 import com.musephoria.dao.CustomerHome;
 import com.musephoria.dao.ICustomerHome;
@@ -40,9 +39,9 @@ public class CustomerHomeConsole {
 			// boolean flag = name.checkIfAccountExists(name1.getUserName());
 			// System.out.println(flag);
 
-			Iterator<Customer> temp = (Iterator<Customer>) customerHome.getAccount(customer).getResultList().iterator();
+			/*Iterator<Customer> temp = (Iterator<Customer>) customerHome.getAccount(customer).getResultList().iterator();
 			Customer cust = temp.next();
-			System.out.println(cust.getCustomerId());
+			System.out.println(cust.getCustomerId());*/
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -45,7 +45,7 @@ public class CustomerHome implements ICustomerHome {
 				parameterList.add(userName);
 			}
 
-			resObj = dbManager.ExecuteSQL(Constants.checkIfUserExists, parameterList);
+			resObj = dbManager.executeSQL(Constants.checkIfUserExists, parameterList);
 
 			if (!resObj.equals(null)) {
 				if (resObj.getResultCount() >= 1) {
@@ -55,7 +55,7 @@ public class CustomerHome implements ICustomerHome {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		dbManager.CleanUpSession();
+		dbManager.cleanUpSession();
 		return flag;
 	}
 
@@ -67,15 +67,37 @@ public class CustomerHome implements ICustomerHome {
 	 * Customer, com.musephoria.entity.Customerdetail)
 	 */
 	@Override
-	public Result createAccount(Customer customer) {
-		Result resObj = null;
-		if (!customer.equals(null)) {
-			List<Customer> customerList = new ArrayList<Customer>();
-			customerList.add(customer);
-			resObj = dbManager.SaveNewData(customerList);
+	public Result createAccount(String accountName, Customer accountInfo) {
+		Result resObj = new Result();
+
+		// Checks if the userName exists in the database.
+		boolean flag = checkIfAccountExists(accountName);
+		if (flag) {
+			resObj.setStatusCode(Constants.errorCode);
+			resObj.setStatusMessage(Constants.userNameExists);
+		} else {
+			if (!accountInfo.equals(null)) {
+				// Adding the accountInfo object into a list to be sent to save.
+				try {
+					List<Customer> customerList = new ArrayList<Customer>();
+					customerList.add(accountInfo);
+					dbManager.saveOrUpdateData(customerList);
+
+					// Populating the result object with success codes & messages.
+					resObj.setStatusCode(Constants.successCode);
+					resObj.setStatusMessage(Constants.accountCreatedMessage);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+
+			}
 		}
-		dbManager.CleanUpSession();
+
+		dbManager.cleanUpSession();
 		return resObj;
+
 	}
 
 	/*
@@ -86,15 +108,26 @@ public class CustomerHome implements ICustomerHome {
 	 * Customer)
 	 */
 	@Override
-	public Result getAccount(Customer customer) {
-		List<String> accountInfo = new ArrayList<String>();
-		if (!customer.equals(null)) {
-			accountInfo.add(customer.getUserName());
+	public Customer getAccount(String accountName, String accountPassword, Customer accountInfo) {
+		Customer accountInfoResult = null;
+
+		// adding the accountName in the parameter list
+		List<String> accountInfoList = new ArrayList<String>();
+		if (!accountName.isEmpty()) {
+			accountInfoList.add(accountName);
 		}
-		Result resObj = dbManager.GetQueryResult(Constants.getAccountInfo, accountInfo);
 
-		dbManager.CleanUpSession();
-		return resObj;
+		Result resObj = dbManager.getQueryResult(Constants.getAccountInfo, accountInfoList);
 
+		dbManager.cleanUpSession();
+
+		// Extracting the accountInfo from the result list.
+		if (!resObj.equals(null) && !resObj.getResultList().isEmpty()) {
+			if (resObj.getResultList().iterator().hasNext()) {
+				accountInfoResult = (Customer) resObj.getResultList().iterator().next();
+			}
+		}
+
+		return accountInfoResult;
 	}
 }

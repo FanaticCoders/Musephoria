@@ -3,17 +3,15 @@
  */
 package com.musephoria.webservice;
 
-import java.util.Iterator;
+import org.apache.commons.lang3.StringUtils;
 
 import com.musephoria.dao.CustomerHome;
 import com.musephoria.entity.Cartitem;
 import com.musephoria.entity.Customer;
-import com.musephoria.entity.Customerdetail;
 import com.musephoria.entity.Order;
 import com.musephoria.entity.Paymentinfo;
 import com.musephoria.entity.Result;
 import com.musephoria.entity.Shipping;
-import com.musephoria.util.Constants;
 
 /**
  * @author FanaticCoders
@@ -28,38 +26,23 @@ public class OrderProcessService implements IOrderProcessService {
 	}
 
 	@Override
-	public Result createAccount(String accountName, Customer loginInfo, Customerdetail addressInfo) {
+	public String createAccount(String accountName, Customer accountInfo) {
 		CustomerHome customerDao = new CustomerHome();
-		Result resultObj = new Result();
-		boolean flag = customerDao.checkIfAccountExists(accountName);
+		String status = StringUtils.EMPTY;
 
-		if (flag) {
-			resultObj.setStatusCode(Constants.errorUserNameExists);
-			resultObj.setStatusMessage(Constants.userNameExists);
-		} else {
-			resultObj = customerDao.createAccount(loginInfo);
+		Result resultObj = customerDao.createAccount(accountName, accountInfo);
+		if (!resultObj.equals(null)) {
+
+			status = resultObj.getStatusMessage();
 		}
-
-		return resultObj;
+		return status;
 
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Customer getAccount(String accountName, String accountPassword, Customer accountInfo) {
 		CustomerHome customerDao = new CustomerHome();
-		Customer customer = new Customer();
-		Result resObj = customerDao.getAccount(accountInfo);
-
-		if (!resObj.equals(null)) {
-			if (!resObj.getResultList().isEmpty()) {
-				Iterator<Customer> temp = (Iterator<Customer>) resObj.getResultList().iterator();
-				if (temp.hasNext()) {
-					customer = temp.next();
-				}
-			}
-		}
-		return customer;
+		return customerDao.getAccount(accountName, accountPassword, accountInfo);
 	}
 
 	@Override
