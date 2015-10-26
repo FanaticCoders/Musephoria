@@ -39,12 +39,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>RegisterServlet</display-name>
-    <servlet-name>RegisterServlet</servlet-name>
-    <servlet-class>RegisterServlet</servlet-class>
+    <display-name>NewCustomer</display-name>
+    <servlet-name>NewCustomer</servlet-name>
+    <servlet-class>com.musephoria.controller.NewCustomer</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>RegisterServlet</servlet-name>
-    <url-pattern>/RegisterServlet</url-pattern>
+    <servlet-name>NewCustomer</servlet-name>
+    <url-pattern>/NewCustomer</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -30,12 +30,13 @@
 	
 	</script>
 	
-	<%
+	
+ 	<%-- <%
 	String msg=request.getAttribute("message").toString();
-	if(!msg.equals("")&& msg.equals("Username Exists, Please select another username"))
+	if(!msg.equals("")&& msg.equals("Passwords do not match, please enter a valid password"))
 	{
 	%>
-		alert("!Username Exists, Please select another username");
+		alert("Passwords do not match, please enter a valid password");
 	<%
 	} %>
 	<%
@@ -51,14 +52,14 @@
 	%>
 		alert("Account Creation Successful,please login with your credentials");
 	<%}
-	%>
+	%> --%>
 	
 	
 	
 	
 				 			
 		
-			<form class="form-container" action="RegisterServlet" method="post" onsubmit="return checkPass()">
+			<form class="form-container" action="NewCustomer" method="post" onsubmit="return checkPass()">
 			<fieldset><legend> Customer Information Form </legend>
 			<table>
 				<tr>
