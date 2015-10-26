@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 public class Result implements java.io.Serializable {
 
 	private List<?> resultList;
+	private List<Integer> primaryIdList;
 	private int resultCount;
 	private int statusCode;
 	private String statusMessage;
@@ -19,6 +20,14 @@ public class Result implements java.io.Serializable {
 
 	public void setResultList(List<?> resultList) {
 		this.resultList = resultList;
+	}
+
+	public List<Integer> getPrimaryIdList() {
+		return primaryIdList;
+	}
+
+	public void setPrimaryIdList(List<Integer> primaryIdList) {
+		this.primaryIdList = primaryIdList;
 	}
 
 	public int getResultCount() {
@@ -44,5 +53,7 @@ public class Result implements java.io.Serializable {
 	public void setStatusMessage(String statusMessage) {
 		this.statusMessage = statusMessage;
 	}
+
+
 
 }

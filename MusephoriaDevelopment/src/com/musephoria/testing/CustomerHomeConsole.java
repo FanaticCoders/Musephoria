@@ -28,7 +28,7 @@ public class CustomerHomeConsole {
 
 			ICustomerHome customerHome = new CustomerHome();
 			Customer accountInfo = new Customer();
-			accountInfo.setUserName("u1sername");
+			accountInfo.setUserName("monis");
 			accountInfo.setPassword("pa1ssword");
 			accountInfo.setCustomerName("firstname");
 			accountInfo.setDateOfBirth(Helper.FormatDate("1989/01/25"));

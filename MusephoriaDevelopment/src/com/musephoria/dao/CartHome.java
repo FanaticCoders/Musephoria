@@ -7,11 +7,13 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.musephoria.dbmanager.DBManager;
-import com.musephoria.entity.*;
+import com.musephoria.entity.Cart;
+import com.musephoria.entity.Result;
 
 
 /**
@@ -21,9 +23,9 @@ import com.musephoria.entity.*;
  */
 @Stateless
 public class CartHome {
-	
+
 	DBManager dbManager;
-	
+
 	public CartHome(){
 		dbManager = new DBManager();
 	}
@@ -78,33 +80,33 @@ public class CartHome {
 			throw re;
 		}
 	}
-	
+
 	public boolean insertToCart(Cart cartinfo){
 		Result resobj = null;
 		boolean flag = false;
 		try{
-			List<Object> datalist = new ArrayList<Object>();
-			datalist.add(cartinfo);
-			
+			List<Object> dataList = new ArrayList<Object>();
+			dataList.add(cartinfo);
+
 			//Inserting the cart information to the database
-			if(!datalist.isEmpty()){
-				resobj = dbManager.saveOrUpdateData(datalist); 
+			if(!dataList.isEmpty()){
+				resobj = dbManager.saveNewData(dataList);
 			}
-			
+
 			//Checking if the data is inserted and setting flag accordingly
 			if(resobj.getResultCount() > 0){
 				flag = true;
 			}
-			
-				
+
+
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		
+
 		return flag;
-	}	
-		
-	
-		
+	}
+
+
+
 }

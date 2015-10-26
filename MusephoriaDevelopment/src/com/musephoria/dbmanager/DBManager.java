@@ -3,6 +3,7 @@
  */
 package com.musephoria.dbmanager;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -137,10 +138,11 @@ public class DBManager {
 				hQuery = hSession.createQuery(sqlQuery);
 
 			}
-
-			resObj = setResultObject(null, hQuery.list().size(), Constants.successCode, Constants.successMessage);
+			// Setting the result object with no of rows affected & success code/message.
+			resObj = setResultObject(null, null, hQuery.list().size(), Constants.successCode, Constants.successMessage);
 		} catch (Exception e) {
-			resObj = setResultObject(null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
+			// Setting the result object with failure code/message.
+			resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
 			log.error(e.getLocalizedMessage(), e);
 		}
 		return resObj;
@@ -162,12 +164,13 @@ public class DBManager {
 			if (!sqlQuery.isEmpty()) {
 				hQuery = hSession.createQuery(sqlQuery);
 			}
-
-			resObj = setResultObject(hQuery.list(), hQuery.list().size(), Constants.successCode,
+			// Setting the result object with result set, no of rows affected & success code/message.
+			resObj = setResultObject(hQuery.list(), null, hQuery.list().size(), Constants.successCode,
 					Constants.successMessage);
 
 		} catch (Exception e) {
-			resObj = setResultObject(null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
+			// Setting the result object with failure code/message.
+			resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
 			log.error(e.getLocalizedMessage(), e);
 		}
 		return resObj;
@@ -179,23 +182,26 @@ public class DBManager {
 	 * @param dataList
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public Result saveNewData(List<?> dataList) {
 		Result resObj = null;
+		List<Integer> primaryIdList = new ArrayList<Integer>();
+
 		try {
 			if (!dataList.equals(null)) {
 				{
 					// Iterating the items in the list.
 					Iterator<?> item = dataList.iterator();
 					while (item.hasNext()) {
-						hSession.save(item.next());
+					primaryIdList = (List<Integer>) hSession.save(item.next());
 					}
 				}
 			}
 			// Setting the result object with success information.
-			resObj = setResultObject(null, 1, Constants.successCode, Constants.dataSaved);
+			resObj = setResultObject(null, primaryIdList, primaryIdList.size(), Constants.successCode, Constants.dataSaved);
 		} catch (Exception e) {
 			// Setting the result object with failure information.
-			resObj = setResultObject(null, 0, Constants.errorCode, Constants.dataNotSaved);
+			resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.dataNotSaved);
 			log.error(e.getLocalizedMessage(), e);
 			System.out.println(e.getLocalizedMessage());
 		}
@@ -212,11 +218,12 @@ public class DBManager {
 	 * @param statusMessage
 	 * @return resultObj
 	 */
-	public Result setResultObject(Object resultList, int resultCount, int statusCode, String statusMessage) {
+	public Result setResultObject(Object resultList, List<Integer> primaryIdList, int resultCount, int statusCode, String statusMessage) {
 		Result resultObj = new Result();
 		try {
 			// Setting the result object based on the parameters passed.
 			resultObj.setResultList((List<?>) resultList);
+			resultObj.setPrimaryIdList(primaryIdList);
 			resultObj.setResultCount(resultCount);
 			resultObj.setStatusCode(statusCode);
 			resultObj.setStatusMessage(statusMessage);
