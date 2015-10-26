@@ -23,8 +23,7 @@
 		<!-- Enity Class Mapping -->
 		<mapping class="com.musephoria.entity.Paymentinfo" />
 		<mapping class="com.musephoria.entity.Shipping" />
-		<mapping class="com.musephoria.entity.Cartitem" />
-		<mapping class="com.musephoria.entity.Customerdetail" />
+		<mapping class="com.musephoria.entity.Cartitem" />		
 		<mapping class="com.musephoria.entity.Cart" />
 		<mapping class="com.musephoria.entity.Order" />
 		<mapping class="com.musephoria.entity.Customer" />

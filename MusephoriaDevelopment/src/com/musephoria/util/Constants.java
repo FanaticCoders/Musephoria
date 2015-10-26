@@ -40,7 +40,7 @@ public final class Constants {
 
 	// Property Keys
 	public static final String fetchAllCd = "fetchAllCd";
-	public static final String getCategoryList = "fetCategoryList";
+	public static final String getCategoryList = "getCategoryList";
 	public static final String checkIfUserExists = "checkIfUserExists";
 	public static final String getAccountInfo = "getAccountInfo";
 	public static final String getCustomerDetails = "getCustomerDetails";

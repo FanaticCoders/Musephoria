@@ -3,6 +3,7 @@
  */
 package com.musephoria.testing;
 
+import java.util.Iterator;
 import java.util.List;
 
 import com.musephoria.dao.CdHome;
@@ -25,13 +26,15 @@ public class CdHomeConsole {
 		try {
 
 			ICdHome cdDaoObj = new CdHome();
-			Result resObj = cdDaoObj.getProductInfo(1001);
+			Result resObj = cdDaoObj.GetCategoryList();
 
 			List<Cd> temp = (List<Cd>) resObj.getResultList();
-
-			for (Cd c : temp) {
-				System.out.println(c.getPrice());
+			Iterator<Cd> temp1 = temp.iterator();
+			while(temp1.hasNext())
+			{
+				System.out.println(temp1.next());
 			}
+
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

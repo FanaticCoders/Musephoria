@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.musephoria.webserviceclient.OrderProcessServiceStub.CreateAccount;
 import com.musephoria.webserviceclient.OrderProcessServiceStub.CreateAccountResponse;
 import com.musephoria.webserviceclient.OrderProcessServiceStub.Customer;
-import com.musephoria.webserviceclient.OrderProcessServiceStub.Customerdetail;
 
 /**
  * @author FanaticCoders
@@ -19,22 +18,19 @@ import com.musephoria.webserviceclient.OrderProcessServiceStub.Customerdetail;
  */
 public class OrderProcessServiceClient {
 
-	public String createAccount(String accountName, Customer loginInfo, Customerdetail addressInfo) {
+	public String createAccount(String accountName, Customer accountInfo) {
 		String statusMessage = StringUtils.EMPTY;
 		try {
 			OrderProcessServiceStub client = new OrderProcessServiceStub();
 			CreateAccount paramter = new CreateAccount();
 			paramter.setAccountName(accountName);
-			paramter.setLoginInfo(loginInfo);
-			paramter.setAddressInfo(addressInfo);
+			paramter.setAccountInfo(accountInfo);
 
 			try {
-				CreateAccountResponse res = client.createAccount(paramter);
-				if (!res.equals(null)) {
-					statusMessage = res.get_return().getStatusMessage();
+				CreateAccountResponse result = client.createAccount(paramter);
+				if (!result.equals(null)) {
+					statusMessage = result.get_return();
 				}
-
-
 
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block

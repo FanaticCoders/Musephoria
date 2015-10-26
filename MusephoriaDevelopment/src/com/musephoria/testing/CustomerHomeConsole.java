@@ -9,6 +9,7 @@ import java.util.Date;
 import com.musephoria.dao.CustomerHome;
 import com.musephoria.dao.ICustomerHome;
 import com.musephoria.entity.Customer;
+import com.musephoria.entity.Result;
 import com.musephoria.helper.Helper;
 import com.musephoria.util.Types;
 
@@ -26,22 +27,27 @@ public class CustomerHomeConsole {
 		try {
 
 			ICustomerHome customerHome = new CustomerHome();
-			Customer customer = new Customer();
-			customer.setUserName("ajay");
-			customer.setPassword("1232");
-			customer.setSex(Types.Sex.Male.toString());
-			customer.setDateOfBirth(Helper.FormatDate("1988/01/27"));
-			customer.setDefaultPaymentInfo(Types.PaymentInfo.Credit.toString());
-			customer.setIsCustomerActive(true);
+			Customer accountInfo = new Customer();
+			accountInfo.setUserName("username");
+			accountInfo.setPassword("password");
+			accountInfo.setCustomerName("firstname");
+			accountInfo.setDateOfBirth(Helper.FormatDate("1989/01/25"));
+			accountInfo.setSex(Types.Sex.Male.toString());
+			accountInfo.setAddress("address");
+			accountInfo.setCity("city");
+			accountInfo.setProvince("prov");
+			accountInfo.setCountry("country");
+			accountInfo.setZipCode("zip");
+			accountInfo.setEmail("email");
+			accountInfo.setPhone("phone");
+			accountInfo.setDefaultPaymentInfo(Types.PaymentInfo.Credit.toString());
 			Date today = new Date();
-			customer.setTimeStamp(new Timestamp(today.getTime()));
+			accountInfo.setTimeStamp(new Timestamp(today.getTime()));
+			accountInfo.setIsCustomerActive(true);
+			Result res = customerHome.createAccount(accountInfo.getUserName(), accountInfo);
+			String status = res.getStatusMessage();
 
-			// boolean flag = name.checkIfAccountExists(name1.getUserName());
-			// System.out.println(flag);
-
-			/*Iterator<Customer> temp = (Iterator<Customer>) customerHome.getAccount(customer).getResultList().iterator();
-			Customer cust = temp.next();
-			System.out.println(cust.getCustomerId());*/
+			System.out.println(status);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
