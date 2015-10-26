@@ -3,8 +3,8 @@
 		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
 		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
-       <!-- MySQL Configuration -->
+	<session-factory>
+		<!-- MySQL Configuration -->
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.password">root</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/musephoria</property>
@@ -12,18 +12,28 @@
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.search.autoregister_listeners">false</property>
 		<property name="hibernate.validator.apply_to_ddl">false</property>
+		<property name="hibernate.show.sql">true</property>
+		<property name="format_sql">true</property>
+
+		<!-- Enable Hibernate's automatic session context management -->
+		<property name="current_session_context_class">thread</property>
 		
+		<!-- Disable the second-level cache -->
+		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+
 		<!-- Hibernate Pooling Configuration -->
 		<property name="hibernate.c3p0.min_size">5</property>
 		<property name="hibernate.c3p0.max_size">50</property>
 		<property name="hibernate.c3p0.timeout">300</property>
 		<property name="hibernate.c3p0.max_statements">30</property>
 		<property name="hibernate.c3p0.idle_test_period">3000</property>
-		
+
+
+
 		<!-- Enity Class Mapping -->
 		<mapping class="com.musephoria.entity.Paymentinfo" />
 		<mapping class="com.musephoria.entity.Shipping" />
-		<mapping class="com.musephoria.entity.Cartitem" />		
+		<mapping class="com.musephoria.entity.Cartitem" />
 		<mapping class="com.musephoria.entity.Cart" />
 		<mapping class="com.musephoria.entity.Order" />
 		<mapping class="com.musephoria.entity.Customer" />
@@ -31,6 +41,6 @@
 		<mapping class="com.musephoria.entity.Orderitem" />
 		<mapping class="com.musephoria.entity.Session" />
 		<mapping class="com.musephoria.entity.Track" />
-		<mapping class="com.musephoria.entity.Purchaseorder" />			
-    </session-factory>
+		<mapping class="com.musephoria.entity.Purchaseorder" />
+	</session-factory>
 </hibernate-configuration>

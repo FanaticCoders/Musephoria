@@ -3,15 +3,11 @@
  */
 package com.musephoria.testing;
 
-import java.sql.Timestamp;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.musephoria.dao.CustomerHome;
-import com.musephoria.dao.ICustomerHome;
+import com.musephoria.dbmanager.DBManager;
 import com.musephoria.entity.Customer;
-import com.musephoria.entity.Result;
-import com.musephoria.helper.Helper;
-import com.musephoria.util.Types;
 
 /**
  * @author FanaticCoders
@@ -22,13 +18,15 @@ public class CustomerHomeConsole {
 	/**
 	 * @param args
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void main(String[] args) {
 		try {
 
+			//Do Not Delete this. For Testing
+/*
 			ICustomerHome customerHome = new CustomerHome();
 			Customer accountInfo = new Customer();
-			accountInfo.setUserName("monis");
+			accountInfo.setUserName("m1213");
 			accountInfo.setPassword("pa1ssword");
 			accountInfo.setCustomerName("firstname");
 			accountInfo.setDateOfBirth(Helper.FormatDate("1989/01/25"));
@@ -45,9 +43,17 @@ public class CustomerHomeConsole {
 			accountInfo.setTimeStamp(new Timestamp(today.getTime()));
 			accountInfo.setIsCustomerActive(true);
 			Result res = customerHome.createAccount(accountInfo.getUserName(), accountInfo);
-			String status = res.getStatusMessage();
+			String status = res.getStatusMessage();*/
 
-			System.out.println(status);
+
+			// Do Not Delete this. For Testing
+			List<Integer> primaryIdList = new ArrayList<Integer>();
+			primaryIdList.add(3015);
+			DBManager db = new DBManager();
+			db.DeleteData(Customer.class, primaryIdList);
+			db.cleanUpSession();
+
+
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -26,6 +26,7 @@ import com.musephoria.util.Constants;
 /**
  * @author FanaticCoders
  *
+ *
  */
 
 public class DBManager {
@@ -138,8 +139,11 @@ public class DBManager {
 				hQuery = hSession.createQuery(sqlQuery);
 
 			}
-			// Setting the result object with no of rows affected & success code/message.
+
+			// Setting the result object with no of rows affected & success
+			// code/message.
 			resObj = setResultObject(null, null, hQuery.list().size(), Constants.successCode, Constants.successMessage);
+
 		} catch (Exception e) {
 			// Setting the result object with failure code/message.
 			resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
@@ -164,10 +168,11 @@ public class DBManager {
 			if (!sqlQuery.isEmpty()) {
 				hQuery = hSession.createQuery(sqlQuery);
 			}
-			// Setting the result object with result set, no of rows affected & success code/message.
+
+			// Setting the result object with result set, no of rows affected &
+			// success code/message.
 			resObj = setResultObject(hQuery.list(), null, hQuery.list().size(), Constants.successCode,
 					Constants.successMessage);
-
 		} catch (Exception e) {
 			// Setting the result object with failure code/message.
 			resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.connectionFailed + e.getMessage());
@@ -182,28 +187,60 @@ public class DBManager {
 	 * @param dataList
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
+
 	public Result saveNewData(List<?> dataList) {
 		Result resObj = null;
+		int i = 0;
 		List<Integer> primaryIdList = new ArrayList<Integer>();
-
 		try {
 			if (!dataList.equals(null)) {
 				{
 					// Iterating the items in the list.
 					Iterator<?> item = dataList.iterator();
 					while (item.hasNext()) {
-					primaryIdList = (List<Integer>) hSession.save(item.next());
+						i = (int) hSession.save(item.next());
+						primaryIdList.add(i);
 					}
 				}
 			}
+
 			// Setting the result object with success information.
-			resObj = setResultObject(null, primaryIdList, primaryIdList.size(), Constants.successCode, Constants.dataSaved);
+			resObj = setResultObject(null, primaryIdList, primaryIdList.size(), Constants.successCode,
+					Constants.dataSaved);
 		} catch (Exception e) {
 			// Setting the result object with failure information.
 			resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.dataNotSaved);
 			log.error(e.getLocalizedMessage(), e);
 			System.out.println(e.getLocalizedMessage());
+		}
+
+		return resObj;
+	}
+
+	/**
+	 * Deletes data from DB Table.
+	 * @param entityClass
+	 * @param primaryKeyList
+	 */
+
+	public <T> Result DeleteData(Class<T> entityClass, List<Integer> primaryKeyList) {
+		Result resObj = null;
+		if(!primaryKeyList.equals(null) && !primaryKeyList.isEmpty())
+		{
+			Iterator<Integer> item = primaryKeyList.iterator();
+
+			while (item.hasNext()) {
+				try {
+					hSession.delete(hSession.get(entityClass, item.next()));
+				} catch (HibernateException e) {
+					// Setting the result object with failure information.
+					resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.dataDeleteFailed);
+					log.error(e.getLocalizedMessage(), e);
+				}
+			}
+
+			// Setting the result object with success information.
+			resObj = setResultObject(null, null, 0, Constants.successCode, Constants.dataDeleted);
 		}
 
 		return resObj;
@@ -218,7 +255,8 @@ public class DBManager {
 	 * @param statusMessage
 	 * @return resultObj
 	 */
-	public Result setResultObject(Object resultList, List<Integer> primaryIdList, int resultCount, int statusCode, String statusMessage) {
+	public Result setResultObject(Object resultList, List<Integer> primaryIdList, int resultCount, int statusCode,
+			String statusMessage) {
 		Result resultObj = new Result();
 		try {
 			// Setting the result object based on the parameters passed.

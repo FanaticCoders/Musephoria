@@ -20,6 +20,7 @@ public final class Constants {
 	// Error Messages
 	public static final String connectionFailed = "Failed to Get/Make Connection. ";
 	public static final String userNameExists = " user already exists.";
+	public static final String dataDeleteFailed = "Data Delete Failed.";
 
 	// Error Codes
 	public static final int errorCode = -1;
@@ -31,6 +32,7 @@ public final class Constants {
 	public static final String dataSaved = "Data Saved.";
 	public static final String dataNotSaved = "Failed to Save Data.";
 	public static final String accountCreatedMessage = "Account Created";
+	public static final String dataDeleted = "Data is Deleted";
 
 	// Success Codes
 	public static final int successCode = 1;
