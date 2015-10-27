@@ -219,14 +219,16 @@ public class DBManager {
 
 	/**
 	 * Deletes data from DB Table.
+	 *
 	 * @param entityClass
 	 * @param primaryKeyList
 	 */
 
 	public <T> Result DeleteData(Class<T> entityClass, List<Integer> primaryKeyList) {
+		// Reference :
+		// http://examples.javacodegeeks.com/enterprise-java/hibernate/delete-persistent-object-with-hibernate/
 		Result resObj = null;
-		if(!primaryKeyList.equals(null) && !primaryKeyList.isEmpty())
-		{
+		if (!primaryKeyList.equals(null) && !primaryKeyList.isEmpty()) {
 			Iterator<Integer> item = primaryKeyList.iterator();
 
 			while (item.hasNext()) {
@@ -241,6 +243,42 @@ public class DBManager {
 
 			// Setting the result object with success information.
 			resObj = setResultObject(null, null, 0, Constants.successCode, Constants.dataDeleted);
+		}
+
+		return resObj;
+	}
+
+	/**
+	 * Updating the table based on the data passed.
+	 * @param dataList
+	 * @return
+	 */
+	//TODO This method is not functional. To be implemented.
+	public Result UpdateData(List<?> dataList)
+	{
+		Result resObj = null;
+		try {
+			if (!dataList.equals(null)) {
+				{
+					for (Object item : dataList) {
+						hSession.update(item);
+					}
+
+					hSession.flush();
+
+						//hSession.update(item.next());
+
+				}
+			}
+
+			// Setting the result object with success information.
+			resObj = setResultObject(null, null, 0, Constants.successCode,
+					Constants.dataSaved);
+		} catch (Exception e) {
+			// Setting the result object with failure information.
+			resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.dataNotSaved);
+			log.error(e.getLocalizedMessage(), e);
+			System.out.println(e.getLocalizedMessage());
 		}
 
 		return resObj;

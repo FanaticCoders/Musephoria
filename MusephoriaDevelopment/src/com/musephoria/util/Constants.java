@@ -41,7 +41,6 @@ public final class Constants {
 	public static final String sqlQueryProperty = "com/musephoria/util/SqlQuery.properties";
 
 	// Property Keys
-	public static final String fetchAllCd = "fetchAllCd";
 	public static final String getCategoryList = "getCategoryList";
 	public static final String checkIfUserExists = "checkIfUserExists";
 	public static final String getAccountInfo = "getAccountInfo";

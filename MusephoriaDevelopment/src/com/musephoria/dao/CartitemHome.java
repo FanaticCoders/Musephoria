@@ -1,6 +1,7 @@
 package com.musephoria.dao;
 // default package
-// Generated Oct 24, 2015 10:30:11 PM by Hibernate Tools 4.0.0.Final
+
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -9,15 +10,25 @@ import javax.persistence.PersistenceContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.musephoria.dbmanager.DBManager;
 import com.musephoria.entity.Cartitem;
+import com.musephoria.entity.Result;
+import com.musephoria.util.Constants;
 
 /**
  * Home object for domain model class Cartitem.
+ *
  * @see .Cartitem
  * @author Hibernate Tools
  */
 @Stateless
 public class CartitemHome {
+
+	DBManager dbManager;
+
+	public CartitemHome() {
+		dbManager = new DBManager();
+	}
 
 	private static final Log log = LogFactory.getLog(CartitemHome.class);
 
@@ -68,5 +79,47 @@ public class CartitemHome {
 			log.error("get failed", re);
 			throw re;
 		}
+	}
+
+	public boolean deleteCartItems(List<Integer> cartItems) {
+		Result resobj = null;
+		boolean flag = false;
+
+		resobj = dbManager.DeleteData(Cartitem.class, cartItems);
+		dbManager.cleanUpSession();
+
+		if (!resobj.equals(null)) {
+			flag = resobj.getStatusMessage().equals(Constants.dataDeleted) ? true : false;
+		}
+		return flag;
+	}
+
+	public boolean addCartItems(List<Cartitem> cartItems)
+	{
+		Result resobj = null;
+		boolean flag = false;
+
+		resobj = dbManager.saveNewData(cartItems);
+		dbManager.cleanUpSession();
+
+		if (!resobj.equals(null)) {
+			flag = resobj.getStatusMessage().equals(Constants.dataSaved) ? true : false;
+		}
+		return flag;
+	}
+
+	public boolean updateCartItems(List<Cartitem> cartItems)
+	{
+		Result resobj = null;
+		boolean flag = false;
+
+		resobj = dbManager.UpdateData(cartItems);
+		//dbManager.cleanUpSession();
+
+		if (!resobj.equals(null)) {
+			flag = resobj.getStatusMessage().equals(Constants.dataSaved) ? true : false;
+		}
+
+		return flag;
 	}
 }

@@ -3,16 +3,18 @@
  */
 package com.musephoria.webservice;
 
-import com.musephoria.entity.Result;
+import java.util.List;
+
+import com.musephoria.entity.Cd;
 
 /**
  * @author FanaticCoders
  *
  */
 public interface IProductCatalogService {
-	public Result getCategoryList();
+	public List<String> getCategoryList();
 
-	public Result getProductList(int categoryId);
+	public List<Cd> getProductList(String categoryId);
 
-	public Result getProductInfo(int productid);
+	public Cd getProductInfo(int productid);
 }

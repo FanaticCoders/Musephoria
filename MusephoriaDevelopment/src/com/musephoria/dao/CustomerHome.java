@@ -18,7 +18,7 @@ import com.musephoria.util.Constants;
  * @author Hibernate Tools
  */
 @Stateless
-public class CustomerHome implements ICustomerHome {
+public class CustomerHome {
 
 	DBManager dbManager;
 
@@ -34,7 +34,6 @@ public class CustomerHome implements ICustomerHome {
 	 *
 	 * @see com.musephoria.dao.ICustomerHome#CheckIfUserExists(java.lang.String)
 	 */
-	@Override
 	public boolean checkIfAccountExists(String userName) {
 		boolean flag = false;
 		Result resObj = null;
@@ -66,7 +65,6 @@ public class CustomerHome implements ICustomerHome {
 	 * com.musephoria.dao.ICustomerHome#CreateNewAccount(com.musephoria.entity.
 	 * Customer, com.musephoria.entity.Customerdetail)
 	 */
-	@Override
 	public Result createAccount(String accountName, Customer accountInfo) {
 		Result resObj = new Result();
 
@@ -83,14 +81,14 @@ public class CustomerHome implements ICustomerHome {
 					customerList.add(accountInfo);
 					dbManager.saveNewData(customerList);
 
-					// Populating the result object with success codes & messages.
+					// Populating the result object with success codes &
+					// messages.
 					resObj.setStatusCode(Constants.successCode);
 					resObj.setStatusMessage(Constants.accountCreatedMessage);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
 
 			}
 		}
@@ -107,7 +105,6 @@ public class CustomerHome implements ICustomerHome {
 	 * com.musephoria.dao.ICustomerHome#GetAccountInfo(com.musephoria.entity.
 	 * Customer)
 	 */
-	@Override
 	public Customer getAccount(String accountName, String accountPassword, Customer accountInfo) {
 		Customer accountInfoResult = null;
 

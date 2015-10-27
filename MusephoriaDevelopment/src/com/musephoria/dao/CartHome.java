@@ -14,10 +14,11 @@ import org.apache.commons.logging.LogFactory;
 import com.musephoria.dbmanager.DBManager;
 import com.musephoria.entity.Cart;
 import com.musephoria.entity.Result;
-
+import com.musephoria.util.Constants;
 
 /**
  * Home object for domain model class Cart.
+ *
  * @see com.musephoria.entity.Cart
  * @author Hibernate Tools
  */
@@ -26,7 +27,7 @@ public class CartHome {
 
 	DBManager dbManager;
 
-	public CartHome(){
+	public CartHome() {
 		dbManager = new DBManager();
 	}
 
@@ -81,32 +82,51 @@ public class CartHome {
 		}
 	}
 
-	public boolean insertToCart(Cart cartinfo){
-		Result resobj = null;
+	public boolean insertToCart(Cart cartinfo) {
+		Result resObj = null;
 		boolean flag = false;
-		try{
+		try {
 			List<Object> dataList = new ArrayList<Object>();
 			dataList.add(cartinfo);
 
-			//Inserting the cart information to the database
-			if(!dataList.isEmpty()){
-				resobj = dbManager.saveNewData(dataList);
+			// Inserting the cart information to the database
+			if (!dataList.isEmpty()) {
+				resObj = dbManager.saveNewData(dataList);
 			}
 
-			//Checking if the data is inserted and setting flag accordingly
-			if(resobj.getResultCount() > 0){
-				flag = true;
-			}
+			dbManager.cleanUpSession();
 
+			// Checking if the data is inserted and setting flag accordingly
 
-		}
-		catch(Exception e){
+			flag = resObj.getResultCount() > 0 ? true : false;
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		return flag;
 	}
 
+	/**
+	 * Deletes the card for a particular customer.
+	 * @param cardId
+	 * @return
+	 */
+	public boolean deleteFromCart(int cardId) {
+		Result resobj = null;
+		boolean flag = false;
+		List<Integer> cardIdList = new ArrayList<Integer>();
+		if (cardId > 0) {
+			cardIdList.add(cardId);
+		}
 
+		resobj = dbManager.DeleteData(Cart.class, cardIdList);
+		dbManager.cleanUpSession();
+
+		if (!resobj.equals(null)) {
+			flag = resobj.getStatusMessage().equals(Constants.dataDeleted) ? true : false;
+		}
+		return flag;
+	}
 
 }

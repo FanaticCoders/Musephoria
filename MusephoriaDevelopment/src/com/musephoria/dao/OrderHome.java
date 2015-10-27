@@ -22,7 +22,7 @@ import com.musephoria.util.Constants;
  * @author Hibernate Tools
  */
 @Stateless
-public class OrderHome implements IOrderHome{
+public class OrderHome {
 
 	DBManager dbManager;
 
@@ -31,7 +31,6 @@ public class OrderHome implements IOrderHome{
 	}
 
 
-	@Override
 	public boolean createOrder(Cart cartinfo, String shippinginfo){
 		Result resobj1, resobj2;
 		Purchaseorder po = new Purchaseorder();
