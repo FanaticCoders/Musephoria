@@ -1,29 +1,23 @@
 package com.musephoria.controller;
 
-
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.musephoria.dao.*;
-import com.musephoria.entity.*;
+
+import com.musephoria.dao.CdHome;
 
 /**
- * Servlet implementation class ProductCatalogue
+ * Servlet implementation class ProductDetail
  */
-public class ProductCatalogue extends HttpServlet {
+public class ProductDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductCatalogue() {
+    public ProductDetail() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,42 +29,14 @@ public class ProductCatalogue extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		List<Cd> resobj;
-		PrintWriter out = response.getWriter();
-		//String genre ="";
+		int cdId = Integer.parseInt(request.getParameter("cdId"));
 		
-		CdHome cdhome = new CdHome();
-		
-		/*if(request.getParameter("genre").equals(""))
-		{
-			resobj = cdhome.getProductList("");
-			
-		}
-		else
-		{
-			genre=request.getParameter("genre");
-			resobj = cdhome.getProductList("genre");
-		}*/
+		CdHome cdob= new CdHome();
+		request.setAttribute("cddetail",cdob.getProductInfo(cdId));
+		request.getRequestDispatcher("ProductDetail.jsp").forward(request, response);
 		
 		
-		resobj = cdhome.getProductList("");
-		
-		if(!resobj.isEmpty()){
-			request.setAttribute("Product", resobj);
-			//System.out.println(resobj.get(0).getName());
-			
-		}
-		
-		/*Iterator<Cd> looper = resobj.iterator();
-		while(looper.hasNext()){
-			out.println(looper.next().getName());
-		}*/
-		
-	
-		request.getRequestDispatcher("Product.jsp").forward(request, response);
-	
-		
-		
+
 	}
 
 	/**

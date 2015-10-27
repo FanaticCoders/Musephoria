@@ -20,6 +20,19 @@
 View As Categories
 <button class="submit-button" id="active" type="submit" formaction="categories.jsp">Categories</button>
 </div>
+<table border="1" align="center">
+    <c:forEach items="${Product}" var="Product">
+        <tr>
+       <td >><a href=" ${pageContext.request.contextPath}/ProductDetail?cdId=${Product.cdId}" >
+       <img src="Resources/icon.jpg" /></a> </td>
+        </tr>
+        <tr>
+        <td align="center">${Product.name}</td>
+        </tr>
+    </c:forEach>
+    <br><br>
+
+</table>
 </div>
 </body>
 <%@ include file="Footer.jsp" %>
