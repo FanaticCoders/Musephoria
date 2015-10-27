@@ -7,24 +7,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="Resources/css/style.css" type="text/css" />
 </head>
-<%String username="a"; %>
+<div class="submit-button" align="Right">
+<%String username=""; %>
 <body>
 
   <!--   String username = (String)request.getParameter("username");     -->
 	
-	<div id="logo">
-			<a href="home.jsp"><img src="Resources/gangesh.png" align="left" alt="" /></a>
-				
-		</div>
+	
+			<a href="home.jsp"><img src="Resources/gangesh.png" align="left" alt="" /></a>		
+	
 	
 	
 		
 <%
 if ((username== null) || (username == "")){
 %>
-	<div class="submit-button" align="right">	
+	<div class="header"	>
     <h3 align="right"> Welcome Guest</h3>  
-    <a href="Login" >Login</a> 
+    <a href="Login">Login</a> 
        
        <form method="post" action="mycart">
        <a href="Mycart">MyCart</a>
@@ -32,8 +32,7 @@ if ((username== null) || (username == "")){
      </div>
      
 <%}else{
-%> 
- <div class="submit-button" align="right">
+%>
     <h3 align="right"> Welcome </h3>  
     <a href="Logout">Logout</a> 
        
@@ -42,7 +41,7 @@ if ((username== null) || (username == "")){
        </form>
        <% }
 %>
-   </div>  
+     </div>
 	
 </body>
 </html>
