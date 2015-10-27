@@ -6,7 +6,7 @@
 <head>
 	<title>Musephoria</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" href="css/sheet.css" type="text/css" />
+	<link rel="stylesheet" href="Resources/css/style.css" type="text/css" />
 </head>
 
 <body bgcolor="#F0F0F0">
@@ -20,5 +20,3 @@
  			
 </body>
 </html>
-
-

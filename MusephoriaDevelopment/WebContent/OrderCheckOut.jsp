@@ -1,4 +1,4 @@
-
+<%@ include file="Header.jsp" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -32,7 +32,8 @@ $(document).ready(function(){
 </script>
     
 </head>
-<body>
+
+<body background="Resources/proj1.jpg">
          <div id="title" align="center">
         Order Checkout Page
 		</div><br>
@@ -55,7 +56,8 @@ $(document).ready(function(){
         Want to enter a new Shipping Address? Yes<input id="Radio1" name="R1" type="radio" value="V1" />No<input id="Radio2"  name="R2" type="radio" checked="checked" value="V1" /> </p>
         </div>
             <br />
-    <div id = "mydiv" align="Center" >
+        <form class="form-container" method=post >   
+    <div  id = "mydiv" align="Center" >
 	Enter new Shipping Information<br><br>
             <table id="table 2" style="height: 37px; width: 22px; "  border="1" cellpadding="2" cellspacing="0" >
                 <tr>
@@ -93,6 +95,7 @@ $(document).ready(function(){
                 </tr>
 
                 </table>
+                
     </div>
         
 		<div id="mydiv2" align="center">
@@ -152,3 +155,4 @@ $(document).ready(function(){
        
             </body>
 </html>
+<%@ include file="Footer.jsp" %>

@@ -1,65 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ include file="Header.jsp" %>
 <html>
 <head>
 <link rel="stylesheet" href="Resources/css/style.css" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Registration page</title>
 </head>
-<div id="background">
-	<img src="Resources/proj1.jpg" class="stretch">
-</div>
-<body>
+
+<body background="Resources/proj1.jpg">
 	<script language="javascript">
-	
-	
-	
     		 
-	function checkPass()
-	{
-		if((document.form.pwd.value) != (document.form.repwd.value))
-			{
-			alert("Passwords do not match ");
-            document.form.repwd.focus();
-            return false;
-			
-			}
-		return true;
-	}
-	
+	 function checkPass()
+                {
+		                                                            
+                   if((document.form.pwd.value) != (document.form.repwd.value))
+                    {
+                        alert("Passwords do not match ");
+                        document.form.repwd.focus();
+                        return false;
+                    }
+                   return true;
+              
+                }
 	</script>
-	
-	
- 	<%-- <%
-	String msg=request.getAttribute("message").toString();
-	if(!msg.equals("")&& msg.equals("Passwords do not match, please enter a valid password"))
-	{
-	%>
-		alert("Passwords do not match, please enter a valid password");
-	<%
-	} %>
-	<%
-	if(!msg.equals("")&& msg.equals("Username Exists, Please select another username"))
-	{
-	%>
-		alert("!Username Exists, Please select another username");
-	<%}
-	%>
-	<%
-	if(!msg.equals("")&& msg.equals("Account Creation Successful,please login with your credentials")) 
-	{
-	%>
-		alert("Account Creation Successful,please login with your credentials");
-	<%}
-	%> --%>
-	
-	
-	
-	
-				 			
-		
-			<form class="form-container" action="NewCustomer" method="post" onsubmit="return checkPass()">
+					 			
+		<div id="content">
+		<form class="form-container" action="RegisterServlet" method="post" onsubmit="return checkPass()">
 			<fieldset><legend> Customer Information Form </legend>
 			<table>
 				<tr>
@@ -133,5 +101,7 @@
 			</table>
 			</fieldset>
 			</form>
+			</div>
+			<%@ include file="Footer.jsp" %>
 </body>
 </html>
