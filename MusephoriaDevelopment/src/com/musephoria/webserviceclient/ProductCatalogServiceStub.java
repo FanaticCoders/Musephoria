@@ -4072,30 +4072,30 @@
             
 
                         /**
-                        * field for Productid
+                        * field for ProductId
                         */
 
                         
-                                    protected int localProductid ;
+                                    protected int localProductId ;
                                 
 
                            /**
                            * Auto generated getter method
                            * @return int
                            */
-                           public  int getProductid(){
-                               return localProductid;
+                           public  int getProductId(){
+                               return localProductId;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Productid
+                               * @param param ProductId
                                */
-                               public void setProductid(int param){
+                               public void setProductId(int param){
                             
-                                            this.localProductid=param;
+                                            this.localProductId=param;
                                        
 
                                }
@@ -4161,14 +4161,14 @@
                    }
                
                                     namespace = "http://webservice.musephoria.com";
-                                    writeStartElement(null, namespace, "productid", xmlWriter);
+                                    writeStartElement(null, namespace, "productId", xmlWriter);
                              
-                                               if (localProductid==java.lang.Integer.MIN_VALUE) {
+                                               if (localProductId==java.lang.Integer.MIN_VALUE) {
                                            
-                                                         throw new org.apache.axis2.databinding.ADBException("productid cannot be null!!");
+                                                         throw new org.apache.axis2.databinding.ADBException("productId cannot be null!!");
                                                       
                                                } else {
-                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localProductid));
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localProductId));
                                                }
                                     
                                    xmlWriter.writeEndElement();
@@ -4359,10 +4359,10 @@
 
                 
                                       elementList.add(new javax.xml.namespace.QName("http://webservice.musephoria.com",
-                                                                      "productid"));
+                                                                      "productId"));
                                  
                                 elementList.add(
-                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localProductid));
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localProductId));
                             
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
@@ -4442,17 +4442,17 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://webservice.musephoria.com","productid").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://webservice.musephoria.com","productId").equals(reader.getName())){
                                 
                                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                     if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"productid" +"  cannot be null");
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"productId" +"  cannot be null");
                                     }
                                     
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setProductid(
+                                              object.setProductId(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
                                               
                                         reader.next();

@@ -9,6 +9,7 @@ import com.musephoria.webserviceclient.ProductCatalogServiceStub.Cd;
 import com.musephoria.webserviceclient.ProductCatalogServiceStub.GetCategoryList;
 import com.musephoria.webserviceclient.ProductCatalogServiceStub.GetCategoryListResponse;
 import com.musephoria.webserviceclient.ProductCatalogServiceStub.GetProductInfo;
+import com.musephoria.webserviceclient.ProductCatalogServiceStub.GetProductInfoResponse;
 import com.musephoria.webserviceclient.ProductCatalogServiceStub.GetProductList;
 import com.musephoria.webserviceclient.ProductCatalogServiceStub.GetProductListResponse;
 
@@ -54,23 +55,23 @@ public class ProductCatalogServiceClient {
 		return productList;
 	}
 
-	public void getProductInfo(int productId) {
+	public Cd getProductInfo(int productId) {
 		Cd productInfo = null;
 		try {
 			ProductCatalogServiceStub stub = new ProductCatalogServiceStub();
 			GetProductInfo parameter = new GetProductInfo();
 			if (productId > 0) {
-				parameter.setProductid(productId);
+				parameter.setProductId(productId);
 			}
 
-			stub.getProductInfo(parameter);
-			//response.get_return();
+			GetProductInfoResponse response = stub.getProductInfo(parameter);
+			productInfo = response.get_return();
 
 		} catch (RemoteException e) {
 			System.out.println(e.getStackTrace());
 		}
 
-	//	return productInfo;
+		return productInfo;
 	}
 
 }
