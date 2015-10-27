@@ -16,5 +16,5 @@ public interface IProductCatalogService {
 
 	public List<Cd> getProductList(String categoryId);
 
-	public Cd getProductInfo(int productid);
+	public Cd getProductInfo(int productId);
 }

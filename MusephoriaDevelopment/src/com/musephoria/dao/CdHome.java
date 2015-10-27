@@ -1,4 +1,4 @@
-package com.musephoria.dao;
+	package com.musephoria.dao;
 // Generated Oct 19, 2015 11:46:20 PM by Hibernate Tools 4.3.1.Final
 
 import java.util.ArrayList;
@@ -97,22 +97,22 @@ public class CdHome {
 	}
 
 	/**
-	 * Ger Product Info based on the product id.
-	 * @param productid
+	 * Get Product Info based on the product id.
+	 * @param productId
 	 * @return
 	 */
-	public Cd getProductInfo(int productid) {
+	public Cd getProductInfo(int productId) {
 		Result resObj = null;
 		Cd productInfo = new Cd();
 
 		List<Integer> parameterList = new ArrayList<Integer>();
-		if (productid != 0) {
-			parameterList.add(productid);
+		if (productId != 0) {
+			parameterList.add(productId);
 
 			try {
 				resObj = dbManager.getQueryResult(Constants.getProductInfo, parameterList);
 			} catch (Exception e) {
-				log.error(e.getLocalizedMessage(), e);
+				//log.error(e.getLocalizedMessage(), e);
 			}
 
 			if (!resObj.equals(null) && !resObj.getResultList().isEmpty()) {

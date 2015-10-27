@@ -5,15 +5,12 @@ package com.musephoria.entity;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -40,9 +37,9 @@ public class Cd implements java.io.Serializable {
 	private int numberOfTrack;
 	private byte[] albumArt;
 	private boolean isCdActive;
-	private Set<Orderitem> orderitems = new HashSet<Orderitem>(0);
+	/*private Set<Orderitem> orderitems = new HashSet<Orderitem>(0);
 	private Set<Track> tracks = new HashSet<Track>(0);
-	private Set<Cartitem> cartitems = new HashSet<Cartitem>(0);
+	private Set<Cartitem> cartitems = new HashSet<Cartitem>(0);*/
 
 	public Cd() {
 	}
@@ -73,9 +70,9 @@ public class Cd implements java.io.Serializable {
 		this.numberOfTrack = numberOfTrack;
 		this.albumArt = albumArt;
 		this.isCdActive = isCdActive;
-		this.orderitems = orderitems;
+	/*	this.orderitems = orderitems;
 		this.tracks = tracks;
-		this.cartitems = cartitems;
+		this.cartitems = cartitems;*/
 	}
 
 	@Id
@@ -208,7 +205,7 @@ public class Cd implements java.io.Serializable {
 		this.isCdActive = isCdActive;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cd")
+	/*@OneToMany(fetch = FetchType.LAZY, mappedBy = "cd")
 	public Set<Orderitem> getOrderitems() {
 		return this.orderitems;
 	}
@@ -233,6 +230,6 @@ public class Cd implements java.io.Serializable {
 
 	public void setCartitems(Set<Cartitem> cartitems) {
 		this.cartitems = cartitems;
-	}
+	}*/
 
 }

@@ -38,9 +38,9 @@ public class ProductCatalogService implements IProductCatalogService {
 	 * @see com.musephoria.webservice.IProductCatalogService#getProductInfo(int)
 	 */
 	@Override
-	public Cd getProductInfo(int productid) {
+	public Cd getProductInfo(int productId) {
 		CdHome cdDao = new CdHome();
-		Cd productInfo = cdDao.getProductInfo(productid);
+		Cd productInfo = cdDao.getProductInfo(productId);
 		return productInfo;
 	}
 
