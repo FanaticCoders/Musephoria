@@ -3,6 +3,9 @@
  */
 package com.musephoria.testing;
 
+import java.util.Iterator;
+import java.util.List;
+
 import com.musephoria.dao.CdHome;
 import com.musephoria.entity.Cd;
 
@@ -30,16 +33,16 @@ public class CdHomeConsole {
 			}*/
 
 
-			/*List<Cd> resObj1 = cdDaoObj.getProductList("Rock");
+			List<Cd> resObj1 = cdDaoObj.getProductList("Rock");
 			Iterator<Cd> iterator1 = resObj1.iterator();
 			while(iterator1.hasNext())
 			{
 				System.out.println(iterator1.next().getArtist());
-			}*/
-
-			Cd cdObj = cdDaoObj.getProductInfo(1001);
+			}
+			/*List<Cd> cdlist;
+			cdDaoObj.getProductList("Rock");
 			System.out.println(cdObj.getGenre());
-
+*/
 
 
 
