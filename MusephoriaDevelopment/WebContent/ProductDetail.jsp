@@ -32,7 +32,7 @@ http://stackoverflow.com/questions/42763/is-there-a-max-number-of-options-values
 	<form method="post" action="Cart">
 	<table  border="1" bordercolor="black" align="center">
 		<tr>
-			<td> <img src="Resources/icon.jpg"  width="150px" /></td>
+			<td> <img src="AlbumArt/${cddetail.cdId}.jpg"  width="150px" /></td>
 		</tr>
 		<tr>
 			<td>Name: ${cddetail.name}</td>

@@ -32,7 +32,7 @@
 			<c:forEach items="${Product}" var="Product" varStatus="loop">
 			<td color="orange" align="Center"><a
 						href=" ${pageContext.request.contextPath}/ProductDetail?cdId=${Product.cdId}">
-							<img src="Resources/icon.jpg" />
+							<img src="AlbumArt/${Product.cdId}.jpg" />
 					</a> <br /> Name : ${Product.name} <br /> Price $:${Product.price}
 					<br />					
 					</td>							
