@@ -36,8 +36,6 @@ public class ProductCatalogue extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		List<Cd> resobj;
-		PrintWriter out = response.getWriter();
-		//String genre ="";
 		
 		CdHome cdhome = new CdHome();
 		

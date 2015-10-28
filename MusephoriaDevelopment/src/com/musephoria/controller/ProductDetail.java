@@ -37,6 +37,7 @@ public class ProductDetail extends HttpServlet {
 		CdHome cdob = new CdHome();
 		// Adding Cd into a session object corresponding to it's cdID
 		request.getSession().setAttribute("cddetail", cdob.getProductInfo(cdId));
+		request.getSession().setAttribute("flag", 0);
 		request.getRequestDispatcher("ProductDetail.jsp").forward(request, response);
 		
 		/*request.setAttribute("cddetail", cdob.getProductInfo(cdId));

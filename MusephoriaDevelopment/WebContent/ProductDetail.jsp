@@ -1,7 +1,7 @@
 <!--  References
 http://stackoverflow.com/questions/42763/is-there-a-max-number-of-options-values-in-html-drop-down-control -->
 
-<script src="${pageContext.request.contextPath}/jquery-1.11.3.min.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/jquery-1.11.3.min.js"></script>
 <script>
 	$(document).ready(function() {
 		for (var i = 1; i <= ${cddetail.quantity}; i++) {
@@ -10,7 +10,7 @@ http://stackoverflow.com/questions/42763/is-there-a-max-number-of-options-values
 			sel.options[sel.options.length] = new Option(name, i);
 		}
 	});
-</script>
+</script> --%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -29,6 +29,7 @@ http://stackoverflow.com/questions/42763/is-there-a-max-number-of-options-values
 
 	<br>
 	<div >
+	<form method="post" action="Cart">
 	<table  border="1" bordercolor="black" align="center">
 		<tr>
 			<td> <img src="Resources/icon.jpg"  width="150px" /></td>
@@ -60,18 +61,19 @@ http://stackoverflow.com/questions/42763/is-there-a-max-number-of-options-values
 		<tr>
 			<td>Language: ${cddetail.language}</td>
 		</tr>
-		<tr>
+		<!-- <tr>
 			<td>Quantity:<select id="list" class="form-fi">
 					<option class="form-fi">--Select--</option>
 			</select></td>
 
-		</tr>
+		</tr> -->
 		<tr>
-			<td align="center"><input type="button" value="Add to Cart"
-				action="mycart"></td>
+			<td align="center"><input type="submit" value="Add to Cart"
+				></td>
 		</tr>
 
 	</table>
+	</form>
 	</div>
 </body>
 <%@ include file="Footer.jsp"%>

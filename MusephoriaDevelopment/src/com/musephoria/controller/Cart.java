@@ -1,6 +1,7 @@
 package com.musephoria.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -39,7 +40,7 @@ public void viewCart(HttpServletRequest request, HttpServletResponse response, S
 		Float totalCartPrice = myCart.getTotalPrice();
 		request.getSession().setAttribute("cartItem", cartItem);
 		request.getSession().setAttribute("totalCartPrice", totalCartPrice);
-		request.getRequestDispatcher("Mycart.jsp").forward(request, response);
+		request.getRequestDispatcher("MyCart.jsp").forward(request, response);
 		
 	}
 	
@@ -62,11 +63,16 @@ public void viewCart(HttpServletRequest request, HttpServletResponse response, S
 		// visitor.
 
 		int flag = (int) request.getSession().getAttribute("flag");
+		
+		PrintWriter out = response.getWriter();
 
 		ShoppingCart myCart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
 
 		// Acquiring Cd object from the current session set in ProductDetail
 		Cd cd = (Cd) request.getSession().getAttribute("cddetail");
+		
+		
+		out.println(flag);
 
 		// Checking if cart exists for both visitor as well as registered user
 		// If the cart doesn't exit, we create a new cart and add bind it to the

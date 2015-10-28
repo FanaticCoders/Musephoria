@@ -3,6 +3,7 @@
  */
 package com.musephoria.shoppingcart;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.musephoria.entity.Cd;
@@ -15,6 +16,11 @@ public class ShoppingCart {
 
 	public List<Cd> cdList;
 	public float totalPrice;
+	
+	public ShoppingCart(){
+		cdList = new ArrayList<Cd>();
+		totalPrice = 0;
+	}
 
 	public List<Cd> getCdList() {
 		return cdList;
