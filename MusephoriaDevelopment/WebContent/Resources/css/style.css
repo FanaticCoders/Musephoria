@@ -185,4 +185,14 @@ html,body{
 
 }
 
+#content2 {
+  padding-top: 100px;
+  padding-bottom: 300px;
+  height: -webkit-calc(100% - 200px);
+  height: -moz-calc(100% - 200px);
+  height: -ms-calc(100% - 200px);
+  height; -o-calc(100% - 200px);
+  height: calc(100% - 200px);
+
+}
    }
