@@ -21,14 +21,16 @@
 <div id="content">
 
 
-<div align="right">
-View As Categories
-<button class="submit-button" id="active" type="submit" formaction="Categories.jsp">Categories</button>
+<div align="Right">
+
+ <form method="post" action="Categories.jsp">
+<button class="submit-button" id="active" type="submit" >View As Categories</button>
+</form>
 </div>
 <table border="1" align="center">
     <c:forEach items="${Product}" var="Product">
         <tr>
-       <td align="Center" ><a href=" ${pageContext.request.contextPath}/ProductDetail?cdId=${Product.cdId}" >
+       <td color="orange" align="Center" ><a href=" ${pageContext.request.contextPath}/ProductDetail?cdId=${Product.cdId}" >
        <img src="Resources/icon.jpg" /></a> </td>
         </tr>
         <tr>
