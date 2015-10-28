@@ -67,4 +67,14 @@
     <servlet-name>ProductDetail</servlet-name>
     <url-pattern>/ProductDetail</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description>Manages the shopping cart for visitors and registered users</description>
+    <display-name>Cart</display-name>
+    <servlet-name>Cart</servlet-name>
+    <servlet-class>com.musephoria.controller.Cart</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Cart</servlet-name>
+    <url-pattern>/Cart</url-pattern>
+  </servlet-mapping>
 </web-app>

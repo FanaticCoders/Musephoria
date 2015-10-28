@@ -68,6 +68,8 @@ public class ProductCatalogue extends HttpServlet {
 		
 	
 		request.getRequestDispatcher("Product.jsp").forward(request, response);
+		
+		//response.sendRedirect("Product.jsp");
 	
 		
 		
