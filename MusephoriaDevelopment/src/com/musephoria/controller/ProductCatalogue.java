@@ -33,16 +33,21 @@ public class ProductCatalogue extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Cd[] resObj = null;
+		String genre = request.getParameter("Genre");
 
 		ProductCatalogServiceClient client = new ProductCatalogServiceClient();
 
-		Cd[] resObj  = client.getProductList(StringUtils.EMPTY);
+		if (genre == null || genre.isEmpty()) {
+			resObj = client.getProductList(StringUtils.EMPTY);
+		} else {
+			resObj = client.getProductList(genre);
+		}
 
 		if (!resObj.equals(null)) {
 			request.setAttribute("Product", resObj);
 			request.getRequestDispatcher("Product.jsp").forward(request, response);
 		}
-
 
 	}
 
