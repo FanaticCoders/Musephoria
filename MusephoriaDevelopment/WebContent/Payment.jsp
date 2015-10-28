@@ -41,7 +41,7 @@
 					  <tr>
 						    <td ></td>
 						    <td><br><b><font size="2" class="form-title" color="black" face="arial">Card Number :</font></b><br></br></td>
-					            <td width="15%"><br><input class="form-fi" type="text"  style="height: 20px; width: 200px; font-size: 14px;"/><br></br></td>
+					            <td width="15%"><br><input class="form-fi" type="number"  style="height: 20px; width: 200px; font-size: 14px;"/><br></br></td>
 					  </tr>
 								
                                           <tr>

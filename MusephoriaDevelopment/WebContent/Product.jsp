@@ -28,7 +28,7 @@
 		</div>
 		<table border="0" align="center">
 			<tr>	
-			<!-- Reference : http://htmlasks.com/how_to_iterate_data_horizontally_in_jstl		 -->
+			<!-- Reference : http://htmlasks.com/how_to_iterate_data_horizontally_in_jstl -->
 			<c:forEach items="${Product}" var="Product" varStatus="loop">
 			<td color="orange" align="Center"><a
 						href=" ${pageContext.request.contextPath}/ProductDetail?cdId=${Product.cdId}">

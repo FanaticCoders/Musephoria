@@ -15,7 +15,7 @@
   <!--   String username = (String)request.getParameter("username");     -->
 	
 	
-			<a href="home.jsp"><img src="Resources/gangesh.png" align="left" alt="" /></a>		
+			<a href="Home.jsp"><img src="Resources/gangesh.png" align="left" alt="" /></a>		
 	
 	
 	
@@ -25,7 +25,7 @@ if ((username== null) || (username == "")){
 %>
 	<div class="header"	>
     <h3 align="right"> Welcome Guest</h3>  
-    <a href="Login">Login</a> 
+    <a href="Login.jsp">Login</a> 
        
        <form method="post" action="mycart">
        <a href="Mycart">MyCart</a>

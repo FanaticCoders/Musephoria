@@ -3,11 +3,8 @@
 <head>
 <title>About Us</title>
 </head>
-
-<div id="background">
-<img src="Resources/proj1.jpg" class="stretch">
-</div>
-
+ 
+ <body background="Resources/proj1.jpg">
 		<center><h3>About Us</h3></center>
 		<font size="3" color="red" face ="arial" >
 		<p>we are musephoria</p>
@@ -19,5 +16,6 @@
 		
 		</font>
 		<br><br><br><br>
-
+		
+</body>
 </html>
