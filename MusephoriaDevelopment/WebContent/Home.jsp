@@ -17,7 +17,7 @@
 
 <div class="submit-container">
 Welcome to MusePhoria!<br><br>
-<button class="submit-button" type="submit" formaction="Products.jsp">Click here to Enter</button>
+<button class="submit-button" type="submit" formaction="ProductCatalogue">Click here to Enter</button>
 </div>
 </form>
 

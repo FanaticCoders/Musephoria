@@ -35,8 +35,6 @@ public class ProductDetail extends HttpServlet {
 		request.setAttribute("cddetail",cdob.getProductInfo(cdId));
 		request.getRequestDispatcher("ProductDetail.jsp").forward(request, response);
 		
-		
-
 	}
 
 	/**
