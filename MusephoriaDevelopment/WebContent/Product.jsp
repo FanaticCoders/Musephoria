@@ -28,12 +28,15 @@ View As Categories
 <table border="1" align="center">
     <c:forEach items="${Product}" var="Product">
         <tr>
-       <td ><a href=" ${pageContext.request.contextPath}/ProductDetail?cdId=${Product.cdId}" >
+       <td align="Center" ><a href=" ${pageContext.request.contextPath}/ProductDetail?cdId=${Product.cdId}" >
        <img src="Resources/icon.jpg" /></a> </td>
         </tr>
         <tr>
-        <td align="center">${Product.name}</td>
-        </tr>
+        <td align="center">Name : ${Product.name}</td>
+         </tr>
+         <tr>
+         <td align="center"> Price $:${Product.price}</td>
+         </tr>
     </c:forEach>
     <br><br>
 
