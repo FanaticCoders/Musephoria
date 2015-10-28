@@ -31,12 +31,12 @@ public class CdHomeConsole {
 			 * System.out.println(iterator.next().toString()); }
 			 */
 
-			/*List<Cd> resObj1 = cdDaoObj.getProductList(StringUtils.EMPTY);
-			Iterator<Cd> iterator1 = resObj1.iterator();
-			while (iterator1.hasNext()) {
-				System.out.println(iterator1.next().getGenre());
-			}
-*/
+			/*
+			 * List<Cd> resObj1 = cdDaoObj.getProductList(StringUtils.EMPTY);
+			 * Iterator<Cd> iterator1 = resObj1.iterator(); while
+			 * (iterator1.hasNext()) {
+			 * System.out.println(iterator1.next().getGenre()); }
+			 */
 			/*
 			 * Cd resObj1 = cdDaoObj.getProductInfo(1001);
 			 * System.out.println(resObj1.getName());
@@ -49,16 +49,17 @@ public class CdHomeConsole {
 			 * System.out.println(string.toString()); }
 			 */
 
+			ProductCatalogServiceClient client = new ProductCatalogServiceClient();
+			Cd[] temp = client.getProductList("");
+			for (Cd string : temp) {
+				System.out.println(string.getCdId());
+			}
+
 			/*
 			 * ProductCatalogServiceClient client = new
-			 * ProductCatalogServiceClient(); Cd[] temp =
-			 * client.getProductList("Rock"); for (Cd string : temp) {
-			 * System.out.println(string.getCdId()); }
+			 * ProductCatalogServiceClient(); Cd temp =
+			 * client.getProductInfo(1002); System.out.println(temp.getGenre());
 			 */
-
-			ProductCatalogServiceClient client = new ProductCatalogServiceClient();
-			Cd temp = client.getProductInfo(1002);
-			System.out.println(temp.getGenre());
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

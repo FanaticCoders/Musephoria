@@ -8,8 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.musephoria.entity.Cd;
+import com.musephoria.webserviceclient.*;
+import com.musephoria.webserviceclient.ProductCatalogServiceStub.Cd;
 import com.musephoria.shoppingcart.ShoppingCart;
 
 /**

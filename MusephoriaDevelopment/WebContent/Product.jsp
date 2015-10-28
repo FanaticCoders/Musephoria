@@ -26,6 +26,23 @@
 					As Categories</button>
 			</form>
 		</div>
+
+		<form method="post" action="ProductCatalogue">
+			<table>
+				<tr>
+					<td class="fo">Select Genre :&nbsp;</td>
+					<td><select name="Genre" id="dd" class="form-fi">
+							<option value="Rock" class="form-fi" id="Rock">Rock</option>
+							<option value="Pop" class="form-fi" id="Pop">Pop</option>
+							<option value="Country" class="form-fi" id="Country">Country</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="Submit"></td>
+
+				</tr>
+			</table>
+		</form>
 		<table border="0" align="center">
 			<tr>	
 			<!-- Reference : http://htmlasks.com/how_to_iterate_data_horizontally_in_jstl -->
@@ -33,14 +50,14 @@
 			<td color="orange" align="Center"><a
 						href=" ${pageContext.request.contextPath}/ProductDetail?cdId=${Product.cdId}">
 							<img src="AlbumArt/${Product.cdId}.jpg" />
-					</a> <br /> Name : ${Product.name} <br /> Price $:${Product.price}
-					<br />					
-					</td>							
-			<c:if test="${(loop.index + 1)  % 3  == 0}"> 
-			  </tr><tr>
-            </c:if>
-             </c:forEach>
-             </tr>
+					</a> <br /> Name : ${Product.name} <br /> Price $:${Product.price} <br />
+					</td>
+					<c:if test="${(loop.index + 1)  % 3  == 0}">
+			</tr>
+			<tr>
+				</c:if>
+				</c:forEach>
+			</tr>
 		</table>
 
 
