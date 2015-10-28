@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -68,6 +69,12 @@ public class CdHome {
 	public List<Cd> getProductList(String categoryId) {
 		Result resObj = null;
 		List<Cd> productlist = null;
+
+
+
+		if(categoryId == null) {
+			categoryId = StringUtils.EMPTY;
+		}
 
 		// Adding the category id to the list.
 		List<String> parameterList = new ArrayList<String>();
