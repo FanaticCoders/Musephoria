@@ -39,6 +39,7 @@ public final class Constants {
 
 	// FileNames
 	public static final String sqlQueryProperty = "com/musephoria/util/SqlQuery.properties";
+	public static final String hibernatePropertyFile = "hibernate.cfg.xml";
 
 	// Property Keys
 	public static final String getCategoryList = "getCategoryList";
@@ -50,4 +51,10 @@ public final class Constants {
 	public static final String getProductInfo="getProductInfo";
 	public static final String getCartItems = "getCartItems";
 	public static final String getCustomerIdbyUsername="getCustomerIdbyUsername";
+
+	// Log Messages
+
+	public static final String executeSQLQueryExecuted = "ExcuteSQL method Executed.";
+	public static final String getQueryResultExecuted = "Get Query method Executed.";
+	public static final String saveMethodExecuted = "Save Method Executed.";
 }

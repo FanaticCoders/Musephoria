@@ -53,7 +53,7 @@ public class DBManager {
 	 */
 	public Configuration loadConfiguration() {
 		hConfig = new Configuration();
-		return hConfig.configure("hibernate.cfg.xml");
+		return hConfig.configure(Constants.hibernatePropertyFile);
 	}
 
 	/**
@@ -69,8 +69,7 @@ public class DBManager {
 				hSession = hSessionFactory.openSession();
 			}
 		} catch (HibernateException e) {
-			// log.error(e.getLocalizedMessage(), e);
-			System.out.println(e.getMessage());
+			log.error(e.getLocalizedMessage(), e);
 		}
 		return hSession;
 	}
@@ -86,9 +85,9 @@ public class DBManager {
 			if (!hSession.equals(null)) {
 				hTransaction = hSession.beginTransaction();
 			}
-		} catch (Exception e) {
-			// log.error(e.getLocalizedMessage(), e);
-			System.out.println(e.getMessage());
+		} catch (HibernateException e) {
+			log.error(e.getLocalizedMessage(), e);
+
 		}
 		return hTransaction;
 	}
@@ -100,24 +99,18 @@ public class DBManager {
 	 * @param hSession
 	 */
 	public void cleanUpSession() {
-		try {
-			if (!hTransaction.equals(null) && !hSession.equals(null)) {
-				try {
-					hSession.flush();
-					hTransaction.commit();
-					hSession.close();
-				} catch (HibernateException e) {
-					log.error(e.getLocalizedMessage(), e);
-				}
+		if (!hTransaction.equals(null) && !hSession.equals(null)) {
+			try {
+				hSession.flush();
+				hTransaction.commit();
+				hSession.close();
+			} catch (TransactionException e) {
+				log.error(e.getLocalizedMessage(), e);
 			}
-		}
 
-		catch (TransactionException e) {
-			log.error(e.getLocalizedMessage(), e);
-		}
-
-		catch (SessionException e) {
-			log.error(e.getLocalizedMessage(), e);
+			catch (SessionException e) {
+				log.error(e.getLocalizedMessage(), e);
+			}
 		}
 	}
 
@@ -132,12 +125,14 @@ public class DBManager {
 	public Result executeSQL(String queryID, List<?> parameterList) {
 		Result resObj = null;
 		Query hQuery = null;
+
+		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
+		String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID, parameterList);
+
 		try {
-			Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
-			String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID, parameterList);
 			if (!sqlQuery.isEmpty()) {
 				hQuery = hSession.createQuery(sqlQuery);
-
+				log.info(Constants.executeSQLQueryExecuted);
 			}
 
 			// Setting the result object with no of rows affected & success
@@ -162,11 +157,14 @@ public class DBManager {
 	public Result getQueryResult(String queryID, List<?> parameterList) {
 		Result resObj = null;
 		Query hQuery = null;
+
+		Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
+		String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID, parameterList);
+
 		try {
-			Properties propertyObj = Helper.LoadProperty(Constants.sqlQueryProperty);
-			String sqlQuery = Helper.FetchPropertyAndProcessQuery(propertyObj, queryID, parameterList);
 			if (!sqlQuery.isEmpty()) {
 				hQuery = hSession.createQuery(sqlQuery);
+				log.info(Constants.getQueryResultExecuted);
 			}
 
 			// Setting the result object with result set, no of rows affected &
@@ -200,6 +198,7 @@ public class DBManager {
 					while (item.hasNext()) {
 						i = (int) hSession.save(item.next());
 						primaryIdList.add(i);
+						log.info(Constants.saveMethodExecuted);
 					}
 				}
 			}
@@ -211,7 +210,6 @@ public class DBManager {
 			// Setting the result object with failure information.
 			resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.dataNotSaved);
 			log.error(e.getLocalizedMessage(), e);
-			System.out.println(e.getLocalizedMessage());
 		}
 
 		return resObj;
@@ -250,12 +248,12 @@ public class DBManager {
 
 	/**
 	 * Updating the table based on the data passed.
+	 *
 	 * @param dataList
 	 * @return
 	 */
-	//TODO This method is not functional. To be implemented.
-	public Result UpdateData(List<?> dataList)
-	{
+	// TODO This method is not functional. To be implemented.
+	public Result UpdateData(List<?> dataList) {
 		Result resObj = null;
 		try {
 			if (!dataList.equals(null)) {
@@ -266,14 +264,13 @@ public class DBManager {
 
 					hSession.flush();
 
-						//hSession.update(item.next());
+					// hSession.update(item.next());
 
 				}
 			}
 
 			// Setting the result object with success information.
-			resObj = setResultObject(null, null, 0, Constants.successCode,
-					Constants.dataSaved);
+			resObj = setResultObject(null, null, 0, Constants.successCode, Constants.dataSaved);
 		} catch (Exception e) {
 			// Setting the result object with failure information.
 			resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.dataNotSaved);

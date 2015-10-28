@@ -11,10 +11,10 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * @author Fanatic Coders
@@ -22,10 +22,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class Helper {
 
-	public static void LogError(Exception ex, Level logLevel) {
-		final Logger logger = Logger.getLogger(ex.getClass().getName());
-		logger.log(logLevel, ex.getMessage());
-	}
+	private static final Log log = LogFactory.getLog(Helper.class);
 
 	/**
 	 * Loads the property file using the below parameters.
@@ -49,7 +46,7 @@ public class Helper {
 			}
 
 		} catch (IOException e) {
-			Helper.LogError(e, Level.FINER);
+			log.error(e.getLocalizedMessage(), e);
 		}
 		return property;
 	}
@@ -117,8 +114,7 @@ public class Helper {
 		try {
 			date = dateFormat.parse(dateString);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.getLocalizedMessage(), e);
 		}
 		return date;
 	}
