@@ -63,6 +63,7 @@ $(document).ready(function(){
 				</tr>
 			</table>
 		</form>
+<<<<<<< HEAD
 		</div>
 	<div id="content" align="center">
 		<table border="0">
@@ -70,6 +71,13 @@ $(document).ready(function(){
 				<!-- Reference : http://htmlasks.com/how_to_iterate_data_horizontally_in_jstl		 -->
 				<c:forEach items="${Product}" var="Product" varStatus="loop">
 					<td  align="Center"><a
+=======
+		<table border="0" align="center">
+			<tr>	
+			<!-- Reference : http://htmlasks.com/how_to_iterate_data_horizontally_in_jstl -->
+			<c:forEach items="${Product}" var="Product" varStatus="loop">
+			<td color="orange" align="Center"><a
+>>>>>>> branch 'master' of https://github.com/FanaticCoders/MusephoriaDevelopment.git
 						href=" ${pageContext.request.contextPath}/ProductDetail?cdId=${Product.cdId}">
 							<img src="AlbumArt/${Product.cdId}.jpg" />
 					</a> <br /> Name : ${Product.name} <br /> Price $:${Product.price} <br />
