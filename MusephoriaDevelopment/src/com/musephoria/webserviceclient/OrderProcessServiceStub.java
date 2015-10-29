@@ -2656,7 +2656,7 @@
                         */
 
                         
-                                    protected Customer local_return ;
+                                    protected Result local_return ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
@@ -2672,9 +2672,9 @@
 
                            /**
                            * Auto generated getter method
-                           * @return Customer
+                           * @return Result
                            */
-                           public  Customer get_return(){
+                           public  Result get_return(){
                                return local_return;
                            }
 
@@ -2684,7 +2684,7 @@
                                * Auto generated setter method
                                * @param param _return
                                */
-                               public void set_return(Customer param){
+                               public void set_return(Result param){
                             local_returnTracker = true;
                                    
                                             this.local_return=param;
@@ -3045,7 +3045,7 @@
                                           
                                       }else{
                                     
-                                                object.set_return(Customer.Factory.parse(reader));
+                                                object.set_return(Result.Factory.parse(reader));
                                               
                                         reader.next();
                                     }
@@ -7624,6 +7624,63 @@
             
 
                         /**
+                        * field for PrimaryIdList
+                        * This was an Array!
+                        */
+
+                        
+                                    protected int[] localPrimaryIdList ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localPrimaryIdListTracker = false ;
+
+                           public boolean isPrimaryIdListSpecified(){
+                               return localPrimaryIdListTracker;
+                           }
+
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return int[]
+                           */
+                           public  int[] getPrimaryIdList(){
+                               return localPrimaryIdList;
+                           }
+
+                           
+                        
+
+
+                               
+                              /**
+                               * validate the array for PrimaryIdList
+                               */
+                              protected void validatePrimaryIdList(int[] param){
+                             
+                              }
+
+
+                             /**
+                              * Auto generated setter method
+                              * @param param PrimaryIdList
+                              */
+                              public void setPrimaryIdList(int[] param){
+                              
+                                   validatePrimaryIdList(param);
+
+                               localPrimaryIdListTracker = true;
+                                      
+                                      this.localPrimaryIdList=param;
+                              }
+
+                               
+                             
+
+                        /**
                         * field for ResultCount
                         */
 
@@ -7855,7 +7912,43 @@
 
                
                    }
-                if (localResultCountTracker){
+                if (localPrimaryIdListTracker){
+                             if (localPrimaryIdList!=null) {
+                                   namespace = "http://entity.musephoria.com/xsd";
+                                   for (int i = 0;i < localPrimaryIdList.length;i++){
+                                        
+                                                   if (localPrimaryIdList[i]!=java.lang.Integer.MIN_VALUE) {
+                                               
+                                                writeStartElement(null, namespace, "primaryIdList", xmlWriter);
+
+                                            
+                                                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPrimaryIdList[i]));
+                                                xmlWriter.writeEndElement();
+                                            
+                                                } else {
+                                                   
+                                                           // write null attribute
+                                                            namespace = "http://entity.musephoria.com/xsd";
+                                                            writeStartElement(null, namespace, "primaryIdList", xmlWriter);
+                                                            writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                            xmlWriter.writeEndElement();
+                                                       
+                                                }
+
+                                   }
+                             } else {
+                                 
+                                         // write the null attribute
+                                        // write null attribute
+                                           writeStartElement(null, "http://entity.musephoria.com/xsd", "primaryIdList", xmlWriter);
+
+                                           // write the nil attribute
+                                           writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                           xmlWriter.writeEndElement();
+                                    
+                             }
+
+                        } if (localResultCountTracker){
                                     namespace = "http://entity.musephoria.com/xsd";
                                     writeStartElement(null, namespace, "resultCount", xmlWriter);
                              
@@ -8108,7 +8201,27 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                 if (localResultCountTracker){
+                 if (localPrimaryIdListTracker){
+                            if (localPrimaryIdList!=null){
+                                  for (int i = 0;i < localPrimaryIdList.length;i++){
+                                      
+                                          elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
+                                                                                                                       "primaryIdList"));
+                                          elementList.add(
+                                          org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPrimaryIdList[i]));
+
+                                      
+
+                                  }
+                            } else {
+                              
+                                    elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
+                                                                              "primaryIdList"));
+                                    elementList.add(null);
+                                
+                            }
+
+                        } if (localResultCountTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
                                                                       "resultCount"));
                                  
@@ -8209,6 +8322,68 @@
                     
                     reader.next();
                 
+                        java.util.ArrayList list1 = new java.util.ArrayList();
+                    
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","primaryIdList").equals(reader.getName())){
+                                
+                                    
+                                    
+                                    // Process the array and step past its final element's end.
+                                    
+                                              nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                              if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                                  list1.add(String.valueOf(java.lang.Integer.MIN_VALUE));
+                                                       
+                                                  reader.next();
+                                              } else {
+                                            list1.add(reader.getElementText());
+                                            }
+                                            //loop until we find a start element that is not part of this array
+                                            boolean loopDone1 = false;
+                                            while(!loopDone1){
+                                                // Ensure we are at the EndElement
+                                                while (!reader.isEndElement()){
+                                                    reader.next();
+                                                }
+                                                // Step out of this element
+                                                reader.next();
+                                                // Step to next element event.
+                                                while (!reader.isStartElement() && !reader.isEndElement())
+                                                    reader.next();
+                                                if (reader.isEndElement()){
+                                                    //two continuous end elements means we are exiting the xml structure
+                                                    loopDone1 = true;
+                                                } else {
+                                                    if (new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","primaryIdList").equals(reader.getName())){
+                                                         
+                                                          nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                                          if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                                              list1.add(String.valueOf(java.lang.Integer.MIN_VALUE));
+                                                                   
+                                                              reader.next();
+                                                          } else {
+                                                        list1.add(reader.getElementText());
+                                                        }
+                                                    }else{
+                                                        loopDone1 = true;
+                                                    }
+                                                }
+                                            }
+                                            // call the converter utility  to convert and set the array
+                                            
+                                            object.setPrimaryIdList((int[])
+                                                org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
+                                                            int.class,list1));
+                                                
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -9657,48 +9832,6 @@
                             
 
                         /**
-                        * field for Cartitems
-                        */
-
-                        
-                                    protected Set localCartitems ;
-                                
-                           /*  This tracker boolean wil be used to detect whether the user called the set method
-                          *   for this attribute. It will be used to determine whether to include this field
-                           *   in the serialized XML
-                           */
-                           protected boolean localCartitemsTracker = false ;
-
-                           public boolean isCartitemsSpecified(){
-                               return localCartitemsTracker;
-                           }
-
-                           
-
-                           /**
-                           * Auto generated getter method
-                           * @return Set
-                           */
-                           public  Set getCartitems(){
-                               return localCartitems;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param Cartitems
-                               */
-                               public void setCartitems(Set param){
-                            localCartitemsTracker = true;
-                                   
-                                            this.localCartitems=param;
-                                       
-
-                               }
-                            
-
-                        /**
                         * field for CdId
                         */
 
@@ -9999,48 +10132,6 @@
                             
 
                         /**
-                        * field for Orderitems
-                        */
-
-                        
-                                    protected Set localOrderitems ;
-                                
-                           /*  This tracker boolean wil be used to detect whether the user called the set method
-                          *   for this attribute. It will be used to determine whether to include this field
-                           *   in the serialized XML
-                           */
-                           protected boolean localOrderitemsTracker = false ;
-
-                           public boolean isOrderitemsSpecified(){
-                               return localOrderitemsTracker;
-                           }
-
-                           
-
-                           /**
-                           * Auto generated getter method
-                           * @return Set
-                           */
-                           public  Set getOrderitems(){
-                               return localOrderitems;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param Orderitems
-                               */
-                               public void setOrderitems(Set param){
-                            localOrderitemsTracker = true;
-                                   
-                                            this.localOrderitems=param;
-                                       
-
-                               }
-                            
-
-                        /**
                         * field for Price
                         */
 
@@ -10212,48 +10303,6 @@
                             
 
                         /**
-                        * field for Tracks
-                        */
-
-                        
-                                    protected Set localTracks ;
-                                
-                           /*  This tracker boolean wil be used to detect whether the user called the set method
-                          *   for this attribute. It will be used to determine whether to include this field
-                           *   in the serialized XML
-                           */
-                           protected boolean localTracksTracker = false ;
-
-                           public boolean isTracksSpecified(){
-                               return localTracksTracker;
-                           }
-
-                           
-
-                           /**
-                           * Auto generated getter method
-                           * @return Set
-                           */
-                           public  Set getTracks(){
-                               return localTracks;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param Tracks
-                               */
-                               public void setTracks(Set param){
-                            localTracksTracker = true;
-                                   
-                                            this.localTracks=param;
-                                       
-
-                               }
-                            
-
-                        /**
                         * field for Year
                         */
 
@@ -10389,19 +10438,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             } if (localCartitemsTracker){
-                                    if (localCartitems==null){
-
-                                        writeStartElement(null, "http://entity.musephoria.com/xsd", "cartitems", xmlWriter);
-
-                                       // write the nil attribute
-                                      writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
-                                      xmlWriter.writeEndElement();
-                                    }else{
-                                     localCartitems.serialize(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","cartitems"),
-                                        xmlWriter);
-                                    }
-                                } if (localCdIdTracker){
+                             } if (localCdIdTracker){
                                     namespace = "http://entity.musephoria.com/xsd";
                                     writeStartElement(null, namespace, "cdId", xmlWriter);
                              
@@ -10512,19 +10549,7 @@
                                                }
                                     
                                    xmlWriter.writeEndElement();
-                             } if (localOrderitemsTracker){
-                                    if (localOrderitems==null){
-
-                                        writeStartElement(null, "http://entity.musephoria.com/xsd", "orderitems", xmlWriter);
-
-                                       // write the nil attribute
-                                      writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
-                                      xmlWriter.writeEndElement();
-                                    }else{
-                                     localOrderitems.serialize(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","orderitems"),
-                                        xmlWriter);
-                                    }
-                                } if (localPriceTracker){
+                             } if (localPriceTracker){
                                     namespace = "http://entity.musephoria.com/xsd";
                                     writeStartElement(null, namespace, "price", xmlWriter);
                              
@@ -10586,19 +10611,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             } if (localTracksTracker){
-                                    if (localTracks==null){
-
-                                        writeStartElement(null, "http://entity.musephoria.com/xsd", "tracks", xmlWriter);
-
-                                       // write the nil attribute
-                                      writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
-                                      xmlWriter.writeEndElement();
-                                    }else{
-                                     localTracks.serialize(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","tracks"),
-                                        xmlWriter);
-                                    }
-                                } if (localYearTracker){
+                             } if (localYearTracker){
                                     namespace = "http://entity.musephoria.com/xsd";
                                     writeStartElement(null, namespace, "year", xmlWriter);
                              
@@ -10812,14 +10825,7 @@
                                  
                                          elementList.add(localArtist==null?null:
                                          org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localArtist));
-                                    } if (localCartitemsTracker){
-                            elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
-                                                                      "cartitems"));
-                            
-                            
-                                    elementList.add(localCartitems==null?null:
-                                    localCartitems);
-                                } if (localCdIdTracker){
+                                    } if (localCdIdTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
                                                                       "cdId"));
                                  
@@ -10861,14 +10867,7 @@
                                  
                                 elementList.add(
                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localNumberOfTrack));
-                            } if (localOrderitemsTracker){
-                            elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
-                                                                      "orderitems"));
-                            
-                            
-                                    elementList.add(localOrderitems==null?null:
-                                    localOrderitems);
-                                } if (localPriceTracker){
+                            } if (localPriceTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
                                                                       "price"));
                                  
@@ -10892,14 +10891,7 @@
                                  
                                          elementList.add(localReview==null?null:
                                          org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localReview));
-                                    } if (localTracksTracker){
-                            elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
-                                                                      "tracks"));
-                            
-                            
-                                    elementList.add(localTracks==null?null:
-                                    localTracks);
-                                } if (localYearTracker){
+                                    } if (localYearTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
                                                                       "year"));
                                  
@@ -11026,30 +11018,6 @@
                                       
                                         reader.next();
                                     
-                              }  // End of if for expected property start element
-                                
-                                    else {
-                                        
-                                    }
-                                
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","cartitems").equals(reader.getName())){
-                                
-                                      nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                      if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                          object.setCartitems(null);
-                                          reader.next();
-                                            
-                                            reader.next();
-                                          
-                                      }else{
-                                    
-                                                object.setCartitems(Set.Factory.parse(reader));
-                                              
-                                        reader.next();
-                                    }
                               }  // End of if for expected property start element
                                 
                                     else {
@@ -11253,30 +11221,6 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","orderitems").equals(reader.getName())){
-                                
-                                      nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                      if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                          object.setOrderitems(null);
-                                          reader.next();
-                                            
-                                            reader.next();
-                                          
-                                      }else{
-                                    
-                                                object.setOrderitems(Set.Factory.parse(reader));
-                                              
-                                        reader.next();
-                                    }
-                              }  // End of if for expected property start element
-                                
-                                    else {
-                                        
-                                    }
-                                
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","price").equals(reader.getName())){
                                 
                                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
@@ -11382,30 +11326,6 @@
                                       
                                         reader.next();
                                     
-                              }  // End of if for expected property start element
-                                
-                                    else {
-                                        
-                                    }
-                                
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","tracks").equals(reader.getName())){
-                                
-                                      nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                      if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                          object.setTracks(null);
-                                          reader.next();
-                                            
-                                            reader.next();
-                                          
-                                      }else{
-                                    
-                                                object.setTracks(Set.Factory.parse(reader));
-                                              
-                                        reader.next();
-                                    }
                               }  // End of if for expected property start element
                                 
                                     else {

@@ -5,7 +5,7 @@
 </head>
 
 <div id="background">
-<img src="Resources/proj1.jpg" class="stretch">
+<img src="Resources/Background.jpg" class="stretch">
 </div>
 
 		<center><h3>About Us</h3></center>

@@ -34,7 +34,7 @@ $(document).ready(function(){
     
 </head>
 
-<body background="Resources/proj1.jpg">
+<body background="Resources/Background.jpg">
          <div id="title" align="center">
         Order Checkout Page
 		</div><br>

@@ -18,9 +18,9 @@ public final class Constants {
 	public static final String mysqlPoolName = "jdbc/mysqlPool";
 
 	// Error Messages
-	public static final String connectionFailed = "Failed to Get/Make Connection. ";
-	public static final String userNameExists = " user already exists.";
-	public static final String dataDeleteFailed = "Data Delete Failed.";
+	public static final String connectionFailed = "Failed to Get/Make Connection";
+	public static final String userNameExists = "User Already Exists";
+	public static final String dataDeleteFailed = "Data Delete Failed";
 
 	// Error Codes
 	public static final int errorCode = -1;
@@ -29,10 +29,12 @@ public final class Constants {
 
 	// Success Messages
 	public static final String successMessage = "Success";
-	public static final String dataSaved = "Data Saved.";
-	public static final String dataNotSaved = "Failed to Save Data.";
+	public static final String dataSaved = "Data Saved";
+	public static final String dataNotSaved = "Failed to Save Data";
 	public static final String accountCreatedMessage = "Account Created";
 	public static final String dataDeleted = "Data is Deleted";
+	public static final String accountInfoPopulated = "Account Info is Populated";
+	public static final String userNamePasswordMismatch = "Username and Password doesn't match";
 
 	// Success Codes
 	public static final int successCode = 1;

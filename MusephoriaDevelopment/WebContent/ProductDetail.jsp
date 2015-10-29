@@ -25,7 +25,7 @@ http://stackoverflow.com/questions/42763/is-there-a-max-number-of-options-values
 <link rel="stylesheet" href="Resources/css/style.css" type="text/css" />
 <title>Login</title>
 </head>
-<body background="Resources/proj1.jpg">
+<body background="Resources/Background.jpg">
 
 	<br>
 	<div >

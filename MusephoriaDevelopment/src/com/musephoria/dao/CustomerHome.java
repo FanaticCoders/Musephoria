@@ -79,12 +79,16 @@ public class CustomerHome {
 				try {
 					List<Customer> customerList = new ArrayList<Customer>();
 					customerList.add(accountInfo);
-					dbManager.saveNewData(customerList);
+					resObj = dbManager.saveNewData(customerList);
 
-					// Populating the result object with success codes &
-					// messages.
-					resObj.setStatusCode(Constants.successCode);
-					resObj.setStatusMessage(Constants.accountCreatedMessage);
+					if (!resObj.equals(null)) {
+						if (resObj.getStatusMessage().equals(Constants.successMessage)) {
+							// Populating the result object with account created
+							// message.
+							resObj.setStatusMessage(Constants.accountCreatedMessage);
+						}
+					}
+
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -105,26 +109,42 @@ public class CustomerHome {
 	 * com.musephoria.dao.ICustomerHome#GetAccountInfo(com.musephoria.entity.
 	 * Customer)
 	 */
-	public Customer getAccount(String accountName, String accountPassword, Customer accountInfo) {
-		Customer accountInfoResult = null;
+	public Result getAccount(String accountName, String accountPassword, Customer accountInfo) {
+		Result resObj = new Result();
 
-		// adding the accountName in the parameter list
-		List<String> accountInfoList = new ArrayList<String>();
-		if (!accountName.isEmpty()) {
-			accountInfoList.add(accountName);
-		}
+		// Checks if the userName exists in the database.
+		boolean flag = checkIfAccountExists(accountName);
 
-		Result resObj = dbManager.getQueryResult(Constants.getAccountInfo, accountInfoList);
+		if (flag) {
+			// User exists. Return appropriate Error Messages.
+			resObj = dbManager.setResultObject(null, null, 0, Constants.errorCode, Constants.userNameExists);
+		} else {
+			// adding the accountName in the parameter list
+			List<String> accountInfoList = new ArrayList<String>();
+			if (!accountName.isEmpty()) {
+				accountInfoList.add(accountName);
+			}
 
-		dbManager.cleanUpSession();
+			if (!accountPassword.isEmpty()) {
+				accountInfoList.add(accountPassword);
+			}
 
-		// Extracting the accountInfo from the result list.
-		if (!resObj.equals(null) && !resObj.getResultList().isEmpty()) {
-			if (resObj.getResultList().iterator().hasNext()) {
-				accountInfoResult = (Customer) resObj.getResultList().iterator().next();
+			resObj = dbManager.getQueryResult(Constants.getAccountInfo, accountInfoList);
+
+			if (!resObj.equals(null)) {
+				if (resObj.getResultCount() > 0) {
+					// User is Validated. Populate result object with success messages.
+					resObj.setStatusCode(Constants.successCode);
+					resObj.setStatusMessage(Constants.accountInfoPopulated);
+				} else {
+					// Bad Credentials. Populate result object with error
+					// messages.
+					resObj.setStatusCode(Constants.errorCode);
+					resObj.setStatusMessage(Constants.userNamePasswordMismatch);
+				}
 			}
 		}
-
-		return accountInfoResult;
+		dbManager.cleanUpSession();
+		return resObj;
 	}
 }

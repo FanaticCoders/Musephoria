@@ -9,7 +9,7 @@
 <title>Login</title>
 </head>
 <div id="content">
-<body background="Resources/proj1.jpg">
+<body background="Resources/Background.jpg">
 <form class="form-container" method=post >
 <div class="form-title"><h2>Login</h2></div>
 <div class="form-title">Username</div>

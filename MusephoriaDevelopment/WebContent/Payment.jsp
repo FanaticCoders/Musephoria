@@ -10,7 +10,7 @@
 <title>Musephoria</title>
 </head>
 
-<body background="Resources/proj1.jpg">
+<body background="Resources/Background.jpg">
 	<div id="content">
 					<table class="form-container" border="0" align="center">
 									<td colspan="3"> 

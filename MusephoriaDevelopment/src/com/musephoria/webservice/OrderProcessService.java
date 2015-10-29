@@ -40,7 +40,7 @@ public class OrderProcessService implements IOrderProcessService {
 	}
 
 	@Override
-	public Customer getAccount(String accountName, String accountPassword, Customer accountInfo) {
+	public Result getAccount(String accountName, String accountPassword, Customer accountInfo) {
 		CustomerHome customerDao = new CustomerHome();
 		return customerDao.getAccount(accountName, accountPassword, accountInfo);
 	}

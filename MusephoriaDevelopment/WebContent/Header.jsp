@@ -15,7 +15,7 @@
   <!--   String username = (String)request.getParameter("username");     -->
 	
 	
-			<a href="home.jsp"><img src="Resources/gangesh.png" align="left" alt="" /></a>		
+			<a href="home.jsp"><img src="Resources/Header.png" align="left" alt="" /></a>		
 	
 	
 	

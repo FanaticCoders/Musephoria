@@ -15,7 +15,7 @@
 <title>Login</title>
 </head>
 
-<body background="Resources/proj1.jpg">
+<body background="Resources/Background.jpg">
 
 
 
