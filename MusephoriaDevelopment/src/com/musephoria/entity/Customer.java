@@ -5,15 +5,12 @@ package com.musephoria.entity;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,11 +40,11 @@ public class Customer implements java.io.Serializable {
 	private String phone;
 	private String defaultPaymentInfo;
 	private boolean isCustomerActive;
-	private Set<Session> sessions = new HashSet<Session>(0);
+/*	private Set<Session> sessions = new HashSet<Session>(0);
 	private Set<Order> orders = new HashSet<Order>(0);
 	private Set<Paymentinfo> paymentinfos = new HashSet<Paymentinfo>(0);
 	private Set<Cart> carts = new HashSet<Cart>(0);
-	private Set<Purchaseorder> purchaseorders = new HashSet<Purchaseorder>(0);
+	private Set<Purchaseorder> purchaseorders = new HashSet<Purchaseorder>(0);*/
 
 	public Customer() {
 	}
@@ -89,11 +86,11 @@ public class Customer implements java.io.Serializable {
 		this.phone = phone;
 		this.defaultPaymentInfo = defaultPaymentInfo;
 		this.isCustomerActive = isCustomerActive;
-		this.sessions = sessions;
+/*		this.sessions = sessions;
 		this.orders = orders;
 		this.paymentinfos = paymentinfos;
 		this.carts = carts;
-		this.purchaseorders = purchaseorders;
+		this.purchaseorders = purchaseorders;*/
 	}
 
 	@Id
@@ -246,7 +243,7 @@ public class Customer implements java.io.Serializable {
 		this.isCustomerActive = isCustomerActive;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+	/*@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
 	public Set<Session> getSessions() {
 		return this.sessions;
 	}
@@ -289,6 +286,6 @@ public class Customer implements java.io.Serializable {
 
 	public void setPurchaseorders(Set<Purchaseorder> purchaseorders) {
 		this.purchaseorders = purchaseorders;
-	}
+	}*/
 
 }

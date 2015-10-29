@@ -30,7 +30,7 @@ public class CustomerHomeConsole {
 			OrderProcessServiceClient client = new OrderProcessServiceClient();
 
 			Customer accountInfo = new Customer();
-			accountInfo.setUserName("user1");
+			accountInfo.setUserName("user12");
 			accountInfo.setPassword("pa1ssword");
 			accountInfo.setCustomerName("firstname");
 			accountInfo.setDateOfBirth(Helper.FormatDate("1989/01/25"));
@@ -48,10 +48,10 @@ public class CustomerHomeConsole {
 			accountInfo.setIsCustomerActive(true);
 
 
-			//String res = client.createAccount(accountInfo.getUserName(), accountInfo);
-			//System.out.println(res);
+	/*		String res = client.createAccount(accountInfo.getUserName(), accountInfo);
+			System.out.println(res);*/
 
-			Result res1 = client.getAccount("monis256", "sdf", accountInfo);
+			Result res1 = client.getAccount("monis256", "1234", accountInfo);
 			System.out.println(res1.getStatusMessage());
 
 

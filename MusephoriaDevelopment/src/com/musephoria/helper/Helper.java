@@ -85,13 +85,13 @@ public class Helper {
 	 * @return
 	 */
 	public static String ProcessQuery(List<?> parameterList, String rawQuery) {
-		String processedString = StringUtils.EMPTY;
+		String processedString = rawQuery;
 		int i = 1;
 
 		Iterator<?> iterator = parameterList.iterator();
 		while(iterator.hasNext())
 		{
-			processedString = rawQuery.replace("@param" + i, iterator.next().toString());
+			processedString = processedString.replace("@param" + i, iterator.next().toString());
 			i++;
 		}
 

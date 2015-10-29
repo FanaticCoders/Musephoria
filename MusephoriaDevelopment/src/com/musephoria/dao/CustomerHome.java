@@ -82,7 +82,7 @@ public class CustomerHome {
 					resObj = dbManager.saveNewData(customerList);
 
 					if (!resObj.equals(null)) {
-						if (resObj.getStatusMessage().equals(Constants.successMessage)) {
+						if (resObj.getStatusMessage().equals(Constants.dataSaved)) {
 							// Populating the result object with account created
 							// message.
 							resObj.setStatusMessage(Constants.accountCreatedMessage);
@@ -115,9 +115,11 @@ public class CustomerHome {
 		// Checks if the userName exists in the database.
 		boolean flag = checkIfAccountExists(accountName);
 
-		if (flag) {
-			// User exists. Return appropriate Error Messages.
-			resObj = dbManager.setResultObject(null, null, 0, Constants.errorCode, Constants.userNameExists);
+		if (!flag) {
+			// User exists. Set result object with appropriate Error Messages.
+			resObj.setStatusCode(Constants.errorCode);
+			resObj.setStatusMessage(Constants.userNameExists);
+
 		} else {
 			// adding the accountName in the parameter list
 			List<String> accountInfoList = new ArrayList<String>();
