@@ -117,34 +117,36 @@ public class CustomerHome {
 
 		if (flag) {
 			// adding the accountName in the parameter list
-						List<String> accountInfoList = new ArrayList<String>();
-						if (!accountName.isEmpty()) {
-							accountInfoList.add(accountName);
-						}
+			List<String> accountInfoList = new ArrayList<String>();
+			if (!accountName.isEmpty()) {
+				accountInfoList.add(accountName);
+			}
 
-						if (!accountPassword.isEmpty()) {
-							accountInfoList.add(accountPassword);
-						}
+			if (!accountPassword.isEmpty()) {
+				accountInfoList.add(accountPassword);
+			}
 
-						resObj = dbManager.getQueryResult(Constants.getAccountInfo, accountInfoList);
+			resObj = dbManager.getQueryResult(Constants.getAccountInfo, accountInfoList);
 
-						if (!resObj.equals(null)) {
-							if (resObj.getResultCount() > 0) {
-								// User is Validated. Populate result object with success messages.
-								resObj.setStatusCode(Constants.successCode);
-								resObj.setStatusMessage(Constants.accountInfoPopulated);
-							} else {
-								// Bad Credentials. Populate result object with error
-								// messages.
-								resObj.setStatusCode(Constants.errorCode);
-								resObj.setStatusMessage(Constants.userNamePasswordMismatch);
-							}
-						}
+			if (!resObj.equals(null)) {
+				if (resObj.getResultCount() > 0) {
+					// User is Validated. Populate result object with success
+					// messages.
+					resObj.setStatusCode(Constants.successCode);
+					resObj.setStatusMessage(Constants.accountInfoPopulated);
+				} else {
+					// Bad Credentials. Populate result object with error
+					// messages.
+					resObj.setStatusCode(Constants.errorCode);
+					resObj.setStatusMessage(Constants.userNamePasswordMismatch);
+				}
+			}
 
 		} else {
-			// User doesnt exists. Set result object with appropriate Error Messages.
-						resObj.setStatusCode(Constants.errorCode);
-						resObj.setStatusMessage(Constants.userNameDoesntExist);
+			// User doesnt exists. Set result object with appropriate Error
+			// Messages.
+			resObj.setStatusCode(Constants.errorCode);
+			resObj.setStatusMessage(Constants.userNameDoesntExist);
 		}
 		dbManager.cleanUpSession();
 		return resObj;
