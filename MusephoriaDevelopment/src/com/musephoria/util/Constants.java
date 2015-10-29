@@ -19,8 +19,9 @@ public final class Constants {
 
 	// Error Messages
 	public static final String connectionFailed = "Failed to Get/Make Connection";
-	public static final String userNameExists = "User Already Exists";
+	public static final String userNameExist = "User Already Exist";
 	public static final String dataDeleteFailed = "Data Delete Failed";
+	public static final String userNameDoesntExist = "User Dosent Exist";
 
 	// Error Codes
 	public static final int errorCode = -1;

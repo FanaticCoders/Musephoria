@@ -72,7 +72,7 @@ public class CustomerHome {
 		boolean flag = checkIfAccountExists(accountName);
 		if (flag) {
 			resObj.setStatusCode(Constants.errorCode);
-			resObj.setStatusMessage(Constants.userNameExists);
+			resObj.setStatusMessage(Constants.userNameExist);
 		} else {
 			if (!accountInfo.equals(null)) {
 				// Adding the accountInfo object into a list to be sent to save.
@@ -115,36 +115,36 @@ public class CustomerHome {
 		// Checks if the userName exists in the database.
 		boolean flag = checkIfAccountExists(accountName);
 
-		if (!flag) {
-			// User exists. Set result object with appropriate Error Messages.
-			resObj.setStatusCode(Constants.errorCode);
-			resObj.setStatusMessage(Constants.userNameExists);
+		if (flag) {
+			// adding the accountName in the parameter list
+						List<String> accountInfoList = new ArrayList<String>();
+						if (!accountName.isEmpty()) {
+							accountInfoList.add(accountName);
+						}
+
+						if (!accountPassword.isEmpty()) {
+							accountInfoList.add(accountPassword);
+						}
+
+						resObj = dbManager.getQueryResult(Constants.getAccountInfo, accountInfoList);
+
+						if (!resObj.equals(null)) {
+							if (resObj.getResultCount() > 0) {
+								// User is Validated. Populate result object with success messages.
+								resObj.setStatusCode(Constants.successCode);
+								resObj.setStatusMessage(Constants.accountInfoPopulated);
+							} else {
+								// Bad Credentials. Populate result object with error
+								// messages.
+								resObj.setStatusCode(Constants.errorCode);
+								resObj.setStatusMessage(Constants.userNamePasswordMismatch);
+							}
+						}
 
 		} else {
-			// adding the accountName in the parameter list
-			List<String> accountInfoList = new ArrayList<String>();
-			if (!accountName.isEmpty()) {
-				accountInfoList.add(accountName);
-			}
-
-			if (!accountPassword.isEmpty()) {
-				accountInfoList.add(accountPassword);
-			}
-
-			resObj = dbManager.getQueryResult(Constants.getAccountInfo, accountInfoList);
-
-			if (!resObj.equals(null)) {
-				if (resObj.getResultCount() > 0) {
-					// User is Validated. Populate result object with success messages.
-					resObj.setStatusCode(Constants.successCode);
-					resObj.setStatusMessage(Constants.accountInfoPopulated);
-				} else {
-					// Bad Credentials. Populate result object with error
-					// messages.
-					resObj.setStatusCode(Constants.errorCode);
-					resObj.setStatusMessage(Constants.userNamePasswordMismatch);
-				}
-			}
+			// User doesnt exists. Set result object with appropriate Error Messages.
+						resObj.setStatusCode(Constants.errorCode);
+						resObj.setStatusMessage(Constants.userNameDoesntExist);
 		}
 		dbManager.cleanUpSession();
 		return resObj;

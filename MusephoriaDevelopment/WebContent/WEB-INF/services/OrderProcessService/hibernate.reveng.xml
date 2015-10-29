@@ -2,16 +2,10 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
-  <table-filter match-catalog="musephoria" match-name="cart"/>
-  <table-filter match-catalog="musephoria" match-name="cartitem"/>
   <table-filter match-catalog="musephoria" match-name="cd"/>
   <table-filter match-catalog="musephoria" match-name="customer"/>
-  <table-filter match-catalog="musephoria" match-name="customerdetail"/>
-  <table-filter match-catalog="musephoria" match-name="order"/>
-  <table-filter match-catalog="musephoria" match-name="orderitem"/>
   <table-filter match-catalog="musephoria" match-name="paymentinfo"/>
   <table-filter match-catalog="musephoria" match-name="purchaseorder"/>
-  <table-filter match-catalog="musephoria" match-name="session"/>
+  <table-filter match-catalog="musephoria" match-name="purchaseorderitem"/>
   <table-filter match-catalog="musephoria" match-name="shipping"/>
-  <table-filter match-catalog="musephoria" match-name="track"/>
 </hibernate-reverse-engineering>
