@@ -7,6 +7,28 @@
 <html>
 
 <head>
+<script src="${pageContext.request.contextPath}/jquery-1.11.3.min.js"></script>
+<script>
+
+
+$(document).ready(function(){
+	
+
+	$("#mydiv").ready(function(){
+		
+	     $("#table1").hide();
+		 
+	  });
+
+    $("#active").click(function(){
+        $("#table1").show();
+	});
+
+});
+
+</script>
+
+
 <script language="javascript">
 	
 </script>
@@ -15,30 +37,32 @@
 <title>Login</title>
 </head>
 
-<body background="Resources/Background.jpg">
+<body background="Resources/proj1.jpg">
 
 
 
 	<div id="content">
 		<div align="Right">
-			<form method="post" action="Categories.jsp">
+			
 				<button class="submit-button" id="active" type="submit">View
 					As Categories</button>
-			</form>
+		
 		</div>
 
 		<form method="post" action="ProductCatalogue">
-			<table>
+			<table id="table1" align="Center">
 				<tr>
 					<td class="fo">Select Genre :&nbsp;</td>
 					<td><select name="Genre" id="dd" class="form-fi">
+					        <option value="" class="form-fi" id="All">All</option>
 							<option value="Rock" class="form-fi" id="Rock">Rock</option>
 							<option value="Pop" class="form-fi" id="Pop">Pop</option>
-							<option value="Country" class="form-fi" id="Country">Country</option>
+							<option value="Blues" class="form-fi" id="Blues">Blues</option>
+							
 					</select></td>
 				</tr>
 				<tr>
-					<td><input type="submit" value="Submit"></td>
+					<td><input class="submit-button"  type="submit" value="Submit" ></td>
 
 				</tr>
 			</table>
@@ -47,7 +71,7 @@
 			<tr>
 				<!-- Reference : http://htmlasks.com/how_to_iterate_data_horizontally_in_jstl		 -->
 				<c:forEach items="${Product}" var="Product" varStatus="loop">
-					<td color="orange" align="Center"><a
+					<td  align="Center"><a
 						href=" ${pageContext.request.contextPath}/ProductDetail?cdId=${Product.cdId}">
 							<img src="AlbumArt/${Product.cdId}.jpg" />
 					</a> <br /> Name : ${Product.name} <br /> Price $:${Product.price} <br />
