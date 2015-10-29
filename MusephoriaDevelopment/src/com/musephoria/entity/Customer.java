@@ -1,6 +1,6 @@
 package com.musephoria.entity;
 // default package
-// Generated Oct 25, 2015 10:59:42 PM by Hibernate Tools 4.0.0.Final
+// Generated Oct 29, 2015 12:25:05 AM by Hibernate Tools 4.0.0.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -40,11 +40,6 @@ public class Customer implements java.io.Serializable {
 	private String phone;
 	private String defaultPaymentInfo;
 	private boolean isCustomerActive;
-/*	private Set<Session> sessions = new HashSet<Session>(0);
-	private Set<Order> orders = new HashSet<Order>(0);
-	private Set<Paymentinfo> paymentinfos = new HashSet<Paymentinfo>(0);
-	private Set<Cart> carts = new HashSet<Cart>(0);
-	private Set<Purchaseorder> purchaseorders = new HashSet<Purchaseorder>(0);*/
 
 	public Customer() {
 	}
@@ -70,8 +65,8 @@ public class Customer implements java.io.Serializable {
 
 	public Customer(String userName, String password, String customerName, Date dateOfBirth, String sex, String address,
 			String city, String province, String country, String zipCode, String email, String phone,
-			String defaultPaymentInfo, boolean isCustomerActive, Set<Session> sessions, Set<Order> orders,
-			Set<Paymentinfo> paymentinfos, Set<Cart> carts, Set<Purchaseorder> purchaseorders) {
+			String defaultPaymentInfo, boolean isCustomerActive, Set<Paymentinfo> paymentinfos,
+			Set<Purchaseorder> purchaseorders) {
 		this.userName = userName;
 		this.password = password;
 		this.customerName = customerName;
@@ -86,11 +81,6 @@ public class Customer implements java.io.Serializable {
 		this.phone = phone;
 		this.defaultPaymentInfo = defaultPaymentInfo;
 		this.isCustomerActive = isCustomerActive;
-/*		this.sessions = sessions;
-		this.orders = orders;
-		this.paymentinfos = paymentinfos;
-		this.carts = carts;
-		this.purchaseorders = purchaseorders;*/
 	}
 
 	@Id
@@ -242,50 +232,4 @@ public class Customer implements java.io.Serializable {
 	public void setIsCustomerActive(boolean isCustomerActive) {
 		this.isCustomerActive = isCustomerActive;
 	}
-
-	/*@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-	public Set<Session> getSessions() {
-		return this.sessions;
-	}
-
-	public void setSessions(Set<Session> sessions) {
-		this.sessions = sessions;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-	public Set<Order> getOrders() {
-		return this.orders;
-	}
-
-	public void setOrders(Set<Order> orders) {
-		this.orders = orders;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-	public Set<Paymentinfo> getPaymentinfos() {
-		return this.paymentinfos;
-	}
-
-	public void setPaymentinfos(Set<Paymentinfo> paymentinfos) {
-		this.paymentinfos = paymentinfos;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-	public Set<Cart> getCarts() {
-		return this.carts;
-	}
-
-	public void setCarts(Set<Cart> carts) {
-		this.carts = carts;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-	public Set<Purchaseorder> getPurchaseorders() {
-		return this.purchaseorders;
-	}
-
-	public void setPurchaseorders(Set<Purchaseorder> purchaseorders) {
-		this.purchaseorders = purchaseorders;
-	}*/
-
 }

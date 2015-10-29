@@ -1,6 +1,6 @@
 package com.musephoria.entity;
 // default package
-// Generated Oct 25, 2015 10:59:42 PM by Hibernate Tools 4.0.0.Final
+// Generated Oct 29, 2015 12:25:05 AM by Hibernate Tools 4.0.0.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -22,43 +22,37 @@ import javax.persistence.Table;
 public class Shipping implements java.io.Serializable {
 
 	private Integer shippingId;
-	private Order order;
-	private String status;
+	private Purchaseorder purchaseorder;
 	private String address;
 	private String city;
 	private String province;
 	private String country;
 	private String zipCode;
-	private String email;
 	private String phone;
 	private Boolean isShippingActive;
 
 	public Shipping() {
 	}
 
-	public Shipping(Order order, String status, String address, String city, String province, String country,
-			String zipCode, String email, String phone) {
-		this.order = order;
-		this.status = status;
+	public Shipping(Purchaseorder purchaseorder, String address, String city, String province, String country,
+			String zipCode, String phone) {
+		this.purchaseorder = purchaseorder;
 		this.address = address;
 		this.city = city;
 		this.province = province;
 		this.country = country;
 		this.zipCode = zipCode;
-		this.email = email;
 		this.phone = phone;
 	}
 
-	public Shipping(Order order, String status, String address, String city, String province, String country,
-			String zipCode, String email, String phone, Boolean isShippingActive) {
-		this.order = order;
-		this.status = status;
+	public Shipping(Purchaseorder purchaseorder, String address, String city, String province, String country,
+			String zipCode, String phone, Boolean isShippingActive) {
+		this.purchaseorder = purchaseorder;
 		this.address = address;
 		this.city = city;
 		this.province = province;
 		this.country = country;
 		this.zipCode = zipCode;
-		this.email = email;
 		this.phone = phone;
 		this.isShippingActive = isShippingActive;
 	}
@@ -76,22 +70,13 @@ public class Shipping implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "OrderId", nullable = false)
-	public Order getOrder() {
-		return this.order;
+	@JoinColumn(name = "PurchaseOrderId", nullable = false)
+	public Purchaseorder getPurchaseorder() {
+		return this.purchaseorder;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
-	}
-
-	@Column(name = "Status", nullable = false, length = 9)
-	public String getStatus() {
-		return this.status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
+	public void setPurchaseorder(Purchaseorder purchaseorder) {
+		this.purchaseorder = purchaseorder;
 	}
 
 	@Column(name = "Address", nullable = false, length = 45)
@@ -137,15 +122,6 @@ public class Shipping implements java.io.Serializable {
 
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
-	}
-
-	@Column(name = "Email", nullable = false, length = 45)
-	public String getEmail() {
-		return this.email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	@Column(name = "Phone", nullable = false, length = 45)

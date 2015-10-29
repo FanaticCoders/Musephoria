@@ -1,28 +1,31 @@
 package com.musephoria.dao;
-// Generated Oct 19, 2015 11:46:20 PM by Hibernate Tools 4.3.1.Final
+// default package
+// Generated Oct 29, 2015 12:25:06 AM by Hibernate Tools 4.0.0.Final
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import com.musephoria.entity.*;
+
+import com.musephoria.entity.Purchaseorderitem;
 
 /**
- * Home object for domain model class Track.
- * @see com.musephoria.entity.Track
+ * Home object for domain model class Purchaseorderitem.
+ * @see .Purchaseorderitem
  * @author Hibernate Tools
  */
 @Stateless
-public class TrackHome {
+public class PurchaseorderitemHome {
 
-	private static final Log log = LogFactory.getLog(TrackHome.class);
+	private static final Log log = LogFactory.getLog(PurchaseorderitemHome.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public void persist(Track transientInstance) {
-		log.debug("persisting Track instance");
+	public void persist(Purchaseorderitem transientInstance) {
+		log.debug("persisting Purchaseorderitem instance");
 		try {
 			entityManager.persist(transientInstance);
 			log.debug("persist successful");
@@ -32,8 +35,8 @@ public class TrackHome {
 		}
 	}
 
-	public void remove(Track persistentInstance) {
-		log.debug("removing Track instance");
+	public void remove(Purchaseorderitem persistentInstance) {
+		log.debug("removing Purchaseorderitem instance");
 		try {
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
@@ -43,10 +46,10 @@ public class TrackHome {
 		}
 	}
 
-	public Track merge(Track detachedInstance) {
-		log.debug("merging Track instance");
+	public Purchaseorderitem merge(Purchaseorderitem detachedInstance) {
+		log.debug("merging Purchaseorderitem instance");
 		try {
-			Track result = entityManager.merge(detachedInstance);
+			Purchaseorderitem result = entityManager.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -55,10 +58,10 @@ public class TrackHome {
 		}
 	}
 
-	public Track findById(Integer id) {
-		log.debug("getting Track instance with id: " + id);
+	public Purchaseorderitem findById(Integer id) {
+		log.debug("getting Purchaseorderitem instance with id: " + id);
 		try {
-			Track instance = entityManager.find(Track.class, id);
+			Purchaseorderitem instance = entityManager.find(Purchaseorderitem.class, id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {

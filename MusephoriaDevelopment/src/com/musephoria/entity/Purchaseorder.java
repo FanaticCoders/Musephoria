@@ -1,8 +1,10 @@
 package com.musephoria.entity;
 // default package
-// Generated Oct 25, 2015 10:59:42 PM by Hibernate Tools 4.0.0.Final
+// Generated Oct 29, 2015 12:25:05 AM by Hibernate Tools 4.0.0.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
+
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,25 +25,30 @@ public class Purchaseorder implements java.io.Serializable {
 
 	private Integer purchaseOrderId;
 	private Customer customer;
-	private String purchaseOrderItem;
-	private int quantity;
-	private float baseAmount;
-	private String shippingAddress;
+	private int totalQuantity;
+	private float totalPrice;
+	private float taxes;
 	private String purchaseOrderStatus;
-	private boolean isPurchaseOrderActive;
 
 	public Purchaseorder() {
 	}
 
-	public Purchaseorder(Customer customer, String purchaseOrderItem, int quantity, float baseAmount,
-			String shippingAddress, String purchaseOrderStatus, boolean isPurchaseOrderActive) {
+	public Purchaseorder(Customer customer, int totalQuantity, float totalPrice, float taxes,
+			String purchaseOrderStatus) {
 		this.customer = customer;
-		this.purchaseOrderItem = purchaseOrderItem;
-		this.quantity = quantity;
-		this.baseAmount = baseAmount;
-		this.shippingAddress = shippingAddress;
+		this.totalQuantity = totalQuantity;
+		this.totalPrice = totalPrice;
+		this.taxes = taxes;
 		this.purchaseOrderStatus = purchaseOrderStatus;
-		this.isPurchaseOrderActive = isPurchaseOrderActive;
+	}
+
+	public Purchaseorder(Customer customer, int totalQuantity, float totalPrice, float taxes,
+			String purchaseOrderStatus, Set<Purchaseorderitem> purchaseorderitems, Set<Shipping> shippings) {
+		this.customer = customer;
+		this.totalQuantity = totalQuantity;
+		this.totalPrice = totalPrice;
+		this.taxes = taxes;
+		this.purchaseOrderStatus = purchaseOrderStatus;
 	}
 
 	@Id
@@ -66,40 +73,31 @@ public class Purchaseorder implements java.io.Serializable {
 		this.customer = customer;
 	}
 
-	@Column(name = "PurchaseOrderItem", nullable = false, length = 45)
-	public String getPurchaseOrderItem() {
-		return this.purchaseOrderItem;
+	@Column(name = "TotalQuantity", nullable = false)
+	public int getTotalQuantity() {
+		return this.totalQuantity;
 	}
 
-	public void setPurchaseOrderItem(String purchaseOrderItem) {
-		this.purchaseOrderItem = purchaseOrderItem;
+	public void setTotalQuantity(int totalQuantity) {
+		this.totalQuantity = totalQuantity;
 	}
 
-	@Column(name = "Quantity", nullable = false)
-	public int getQuantity() {
-		return this.quantity;
+	@Column(name = "TotalPrice", nullable = false, precision = 12, scale = 0)
+	public float getTotalPrice() {
+		return this.totalPrice;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setTotalPrice(float totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
-	@Column(name = "BaseAmount", nullable = false, precision = 12, scale = 0)
-	public float getBaseAmount() {
-		return this.baseAmount;
+	@Column(name = "Taxes", nullable = false, precision = 12, scale = 0)
+	public float getTaxes() {
+		return this.taxes;
 	}
 
-	public void setBaseAmount(float baseAmount) {
-		this.baseAmount = baseAmount;
-	}
-
-	@Column(name = "ShippingAddress", nullable = false, length = 45)
-	public String getShippingAddress() {
-		return this.shippingAddress;
-	}
-
-	public void setShippingAddress(String shippingAddress) {
-		this.shippingAddress = shippingAddress;
+	public void setTaxes(float taxes) {
+		this.taxes = taxes;
 	}
 
 	@Column(name = "PurchaseOrderStatus", nullable = false, length = 8)
@@ -110,14 +108,4 @@ public class Purchaseorder implements java.io.Serializable {
 	public void setPurchaseOrderStatus(String purchaseOrderStatus) {
 		this.purchaseOrderStatus = purchaseOrderStatus;
 	}
-
-	@Column(name = "IsPurchaseOrderActive", nullable = false)
-	public boolean isIsPurchaseOrderActive() {
-		return this.isPurchaseOrderActive;
-	}
-
-	public void setIsPurchaseOrderActive(boolean isPurchaseOrderActive) {
-		this.isPurchaseOrderActive = isPurchaseOrderActive;
-	}
-
 }

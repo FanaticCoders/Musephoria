@@ -40,27 +40,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `musephoria`.`Track`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `musephoria`.`Track` ;
-
-CREATE TABLE IF NOT EXISTS `musephoria`.`Track` (
-  `TrackId` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
-  `CdId` INT UNSIGNED NOT NULL COMMENT '',
-  `Description` NVARCHAR(300) NULL COMMENT '',
-  `Artist` NVARCHAR(45) NOT NULL COMMENT '',
-  `Duration` NVARCHAR(25) NOT NULL COMMENT '',
-  PRIMARY KEY (`TrackId`)  COMMENT '',
-  INDEX `TrackCd_idx` (`CdId` ASC)  COMMENT '',
-  CONSTRAINT `TrackCd`
-    FOREIGN KEY (`CdId`)
-    REFERENCES `musephoria`.`Cd` (`CdId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION) AUTO_INCREMENT = 2001,
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `musephoria`.`Customer`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `musephoria`.`Customer` ;
@@ -82,80 +61,29 @@ CREATE TABLE IF NOT EXISTS `musephoria`.`Customer` (
   `DefaultPaymentInfo` ENUM('Credit', 'Debit') NOT NULL COMMENT '',
   `TimeStamp` DATETIME NOT NULL COMMENT '',
   `IsCustomerActive` TINYINT(1) NOT NULL COMMENT '',
-  PRIMARY KEY (`CustomerId`)  COMMENT '') AUTO_INCREMENT = 3001,
+  PRIMARY KEY (`CustomerId`)  COMMENT '') AUTO_INCREMENT = 2001,
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `musephoria`.`Order`
+-- Table `musephoria`.`PurchaseOrder`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `musephoria`.`Order` ;
+DROP TABLE IF EXISTS `musephoria`.`PurchaseOrder` ;
 
-CREATE TABLE IF NOT EXISTS `musephoria`.`Order` (
-  `OrderId` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
+CREATE TABLE IF NOT EXISTS `musephoria`.`PurchaseOrder` (
+  `PurchaseOrderId` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
   `CustomerId` INT UNSIGNED NOT NULL COMMENT '',
-  `NetAmount` FLOAT NULL COMMENT '',
-  `Tax` FLOAT NULL COMMENT '',
-  `TotalAmount` FLOAT UNSIGNED NOT NULL COMMENT '',
-  `TimeStamp` DATETIME NOT NULL COMMENT '',
-  `IsOrderActive` TINYINT(1) NULL COMMENT '',
-  PRIMARY KEY (`OrderId`)  COMMENT '',
-  INDEX `OrderCustomer_idx` (`CustomerId` ASC)  COMMENT '',
-  CONSTRAINT `OrderCustomer`
+  `TotalQuantity` INT NOT NULL COMMENT '',
+  `TotalPrice` FLOAT NOT NULL COMMENT '',
+  `Taxes` FLOAT NOT NULL COMMENT '',
+  `PurchaseOrderStatus` ENUM('Ordered', 'Approved', 'Rejected') NOT NULL COMMENT '',
+  PRIMARY KEY (`PurchaseOrderId`)  COMMENT '',
+  INDEX `PurchaseOrderCustomer_idx` (`CustomerId` ASC)  COMMENT '',
+  CONSTRAINT `PurchaseOrderCustomer`
     FOREIGN KEY (`CustomerId`)
     REFERENCES `musephoria`.`Customer` (`CustomerId`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION) AUTO_INCREMENT = 4001,
-ENGINE = InnoDB
-COMMENT = '	';
-
-
--- -----------------------------------------------------
--- Table `musephoria`.`Cart`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `musephoria`.`Cart` ;
-
-CREATE TABLE IF NOT EXISTS `musephoria`.`Cart` (
-  `CartId` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
-  `CustomerId` INT UNSIGNED NOT NULL COMMENT '',
-  `NetAmount` FLOAT NOT NULL COMMENT '',
-  `Tax` FLOAT NOT NULL COMMENT '',
-  `TotalAmount` FLOAT NOT NULL COMMENT '',
-  `IsCartActive` TINYINT(1) NOT NULL COMMENT '',
-  PRIMARY KEY (`CartId`)  COMMENT '',
-  INDEX `CustomerId_idx` (`CustomerId` ASC)  COMMENT '',
-  CONSTRAINT `CustomerCartId`
-    FOREIGN KEY (`CustomerId`)
-    REFERENCES `musephoria`.`Customer` (`CustomerId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION) AUTO_INCREMENT = 5001,
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `musephoria`.`CartItem`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `musephoria`.`CartItem` ;
-
-CREATE TABLE IF NOT EXISTS `musephoria`.`CartItem` (
-  `CartItemId` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
-  `CartId` INT UNSIGNED NOT NULL COMMENT '',
-  `CdId` INT UNSIGNED NOT NULL COMMENT '',
-  `CardItemName` NVARCHAR(45) NOT NULL COMMENT '',
-  `Quantity` INT UNSIGNED NOT NULL COMMENT '',
-  `BaseAmount` FLOAT UNSIGNED NOT NULL COMMENT '',
-  PRIMARY KEY (`CartItemId`)  COMMENT '',
-  INDEX `CdId_idx` (`CdId` ASC)  COMMENT '',
-  CONSTRAINT `CartItemCart`
-    FOREIGN KEY (`CartId`)
-    REFERENCES `musephoria`.`Cart` (`CartId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `CartItemCd`
-    FOREIGN KEY (`CdId`)
-    REFERENCES `musephoria`.`Cd` (`CdId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION) AUTO_INCREMENT = 6001,
+    ON UPDATE NO ACTION) AUTO_INCREMENT = 3001,
 ENGINE = InnoDB;
 
 
@@ -166,73 +94,48 @@ DROP TABLE IF EXISTS `musephoria`.`Shipping` ;
 
 CREATE TABLE IF NOT EXISTS `musephoria`.`Shipping` (
   `ShippingId` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
-  `OrderId` INT UNSIGNED NOT NULL COMMENT '',
-  `Status` ENUM('Ordered', 'Processed', 'InTransit', 'Delivered', 'Cancelled') NOT NULL COMMENT '',
+  `PurchaseOrderId` INT UNSIGNED NOT NULL COMMENT '',
   `Address` NVARCHAR(45) NOT NULL COMMENT '',
   `City` NVARCHAR(45) NOT NULL COMMENT '',
   `Province` NVARCHAR(45) NOT NULL COMMENT '',
   `Country` NVARCHAR(45) NOT NULL COMMENT '',
   `ZipCode` NVARCHAR(7) NOT NULL COMMENT '',
-  `Email` NVARCHAR(45) NOT NULL COMMENT '',
   `Phone` NVARCHAR(45) NOT NULL COMMENT '',
   `IsShippingActive` TINYINT(1) NULL COMMENT '',
   PRIMARY KEY (`ShippingId`)  COMMENT '',
-  CONSTRAINT `ShippingOrder`
-    FOREIGN KEY (`OrderId`)
-    REFERENCES `musephoria`.`Order` (`OrderId`)
+  INDEX `ShippingPurchaseOrder_idx` (`PurchaseOrderId` ASC)  COMMENT '',
+  CONSTRAINT `ShippingPurchaseOrder`
+    FOREIGN KEY (`PurchaseOrderId`)
+    REFERENCES `musephoria`.`PurchaseOrder` (`PurchaseOrderId`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION) AUTO_INCREMENT = 7001,
+    ON UPDATE NO ACTION) AUTO_INCREMENT = 4001,
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `musephoria`.`Session`
+-- Table `musephoria`.`PurchaseOrderItem`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `musephoria`.`Session` ;
+DROP TABLE IF EXISTS `musephoria`.`PurchaseOrderItem` ;
 
-CREATE TABLE IF NOT EXISTS `musephoria`.`Session` (
-  `SessionId` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
-  `CustomerId` INT UNSIGNED NOT NULL COMMENT '',
-  `IpAddress` NVARCHAR(25) NULL COMMENT '',
-  `UserAgent` NVARCHAR(25) NULL COMMENT '',
-  `SessionStartTime` DATETIME NOT NULL COMMENT '',
-  `SessionEndTime` DATETIME NOT NULL COMMENT '',
-  `IsSessionActive` TINYINT(1) NOT NULL COMMENT '',
-  PRIMARY KEY (`SessionId`)  COMMENT '',
-  INDEX `CustomerId_idx` (`CustomerId` ASC)  COMMENT '',
-  CONSTRAINT `SessionCustomer`
-    FOREIGN KEY (`CustomerId`)
-    REFERENCES `musephoria`.`Customer` (`CustomerId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION) AUTO_INCREMENT = 8001,
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `musephoria`.`OrderItem`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `musephoria`.`OrderItem` ;
-
-CREATE TABLE IF NOT EXISTS `musephoria`.`OrderItem` (
-  `OrderItemId` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
-  `OrderId` INT UNSIGNED NOT NULL COMMENT '',
+CREATE TABLE IF NOT EXISTS `musephoria`.`PurchaseOrderItem` (
+  `PurchaseOrderItemId` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
+  `PurchaseOrderId` INT UNSIGNED NOT NULL COMMENT '',
   `CdId` INT UNSIGNED NOT NULL COMMENT '',
-  `OrderItemName` NVARCHAR(45) NOT NULL COMMENT '',
-  `OrderQuantity` INT UNSIGNED NOT NULL COMMENT '',
+  `PurchaseOrderItemName` NVARCHAR(45) NOT NULL COMMENT '',
   `BaseAmount` FLOAT NOT NULL COMMENT '',
-  INDEX `OrderId_idx` (`OrderId` ASC)  COMMENT '',
   INDEX `CdId_idx` (`CdId` ASC)  COMMENT '',
-  PRIMARY KEY (`OrderItemId`)  COMMENT '',
-  CONSTRAINT `OrderItemOrder`
-    FOREIGN KEY (`OrderId`)
-    REFERENCES `musephoria`.`Order` (`OrderId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `OrderItemCd`
+  PRIMARY KEY (`PurchaseOrderItemId`)  COMMENT '',
+  INDEX `PurchaseOrderItemPurchaseOrder_idx` (`PurchaseOrderId` ASC)  COMMENT '',
+  CONSTRAINT `PurchaseOrderItemCd`
     FOREIGN KEY (`CdId`)
     REFERENCES `musephoria`.`Cd` (`CdId`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION) AUTO_INCREMENT = 9001,
+    ON UPDATE NO ACTION,
+  CONSTRAINT `PurchaseOrderItemPurchaseOrder`
+    FOREIGN KEY (`PurchaseOrderId`)
+    REFERENCES `musephoria`.`PurchaseOrder` (`PurchaseOrderId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION) AUTO_INCREMENT = 5001,
 ENGINE = InnoDB;
 
 
@@ -253,31 +156,7 @@ CREATE TABLE IF NOT EXISTS `musephoria`.`PaymentInfo` (
     FOREIGN KEY (`CustomerId`)
     REFERENCES `musephoria`.`Customer` (`CustomerId`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION) AUTO_INCREMENT = 10001,
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `musephoria`.`PurchaseOrder`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `musephoria`.`PurchaseOrder` ;
-
-CREATE TABLE IF NOT EXISTS `musephoria`.`PurchaseOrder` (
-  `PurchaseOrderId` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
-  `CustomerId` INT UNSIGNED NOT NULL COMMENT '',
-  `PurchaseOrderItem` NVARCHAR(45) NOT NULL COMMENT '',
-  `Quantity` INT NOT NULL COMMENT '',
-  `BaseAmount` FLOAT NOT NULL COMMENT '',
-  `ShippingAddress` NVARCHAR(45) NOT NULL COMMENT '',
-  `PurchaseOrderStatus` ENUM('Ordered', 'Approved', 'Rejected') NOT NULL COMMENT '',
-  `IsPurchaseOrderActive` TINYINT(1) NOT NULL COMMENT '',
-  PRIMARY KEY (`PurchaseOrderId`)  COMMENT '',
-  INDEX `PurchaseOrderCustomer_idx` (`CustomerId` ASC)  COMMENT '',
-  CONSTRAINT `PurchaseOrderCustomer`
-    FOREIGN KEY (`CustomerId`)
-    REFERENCES `musephoria`.`Customer` (`CustomerId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION) AUTO_INCREMENT = 11001,
+    ON UPDATE NO ACTION) AUTO_INCREMENT = 6001,
 ENGINE = InnoDB;
 
 

@@ -6,12 +6,12 @@ package com.musephoria.webservice;
 import org.apache.commons.lang3.StringUtils;
 
 import com.musephoria.dao.CustomerHome;
-import com.musephoria.entity.Cartitem;
 import com.musephoria.entity.Customer;
-import com.musephoria.entity.Order;
 import com.musephoria.entity.Paymentinfo;
+import com.musephoria.entity.Purchaseorder;
 import com.musephoria.entity.Result;
 import com.musephoria.entity.Shipping;
+import com.musephoria.shoppingcart.ShoppingCart;
 
 /**
  * @author FanaticCoders
@@ -20,7 +20,7 @@ import com.musephoria.entity.Shipping;
 public class OrderProcessService implements IOrderProcessService {
 
 	@Override
-	public Result createOrder(Cartitem shoppingCartInfo, Shipping shippingInfo) {
+	public Result createOrder(ShoppingCart shoppingCartInfo, Shipping shippingInfo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -46,7 +46,7 @@ public class OrderProcessService implements IOrderProcessService {
 	}
 
 	@Override
-	public Result confirmOrder(Order orderInfo, Shipping shippingInfo, Paymentinfo paymentInfo) {
+	public Result confirmOrder(Purchaseorder orderInfo, Shipping shippingInfo, Paymentinfo paymentInfo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

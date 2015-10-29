@@ -1,6 +1,6 @@
 package com.musephoria.entity;
 // default package
-// Generated Oct 25, 2015 10:59:42 PM by Hibernate Tools 4.0.0.Final
+// Generated Oct 29, 2015 12:25:05 AM by Hibernate Tools 4.0.0.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -37,9 +37,6 @@ public class Cd implements java.io.Serializable {
 	private int numberOfTrack;
 	private byte[] albumArt;
 	private boolean isCdActive;
-	/*private Set<Orderitem> orderitems = new HashSet<Orderitem>(0);
-	private Set<Track> tracks = new HashSet<Track>(0);
-	private Set<Cartitem> cartitems = new HashSet<Cartitem>(0);*/
 
 	public Cd() {
 	}
@@ -56,7 +53,7 @@ public class Cd implements java.io.Serializable {
 
 	public Cd(String name, String description, float price, Integer quantity, String genre, String artist, Date year,
 			String rating, String review, String language, int numberOfTrack, byte[] albumArt, boolean isCdActive,
-			Set<Orderitem> orderitems, Set<Track> tracks, Set<Cartitem> cartitems) {
+			Set<Purchaseorderitem> purchaseorderitems) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
@@ -70,9 +67,6 @@ public class Cd implements java.io.Serializable {
 		this.numberOfTrack = numberOfTrack;
 		this.albumArt = albumArt;
 		this.isCdActive = isCdActive;
-	/*	this.orderitems = orderitems;
-		this.tracks = tracks;
-		this.cartitems = cartitems;*/
 	}
 
 	@Id
@@ -204,32 +198,4 @@ public class Cd implements java.io.Serializable {
 	public void setIsCdActive(boolean isCdActive) {
 		this.isCdActive = isCdActive;
 	}
-
-	/*@OneToMany(fetch = FetchType.LAZY, mappedBy = "cd")
-	public Set<Orderitem> getOrderitems() {
-		return this.orderitems;
-	}
-
-	public void setOrderitems(Set<Orderitem> orderitems) {
-		this.orderitems = orderitems;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cd")
-	public Set<Track> getTracks() {
-		return this.tracks;
-	}
-
-	public void setTracks(Set<Track> tracks) {
-		this.tracks = tracks;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cd")
-	public Set<Cartitem> getCartitems() {
-		return this.cartitems;
-	}
-
-	public void setCartitems(Set<Cartitem> cartitems) {
-		this.cartitems = cartitems;
-	}*/
-
 }

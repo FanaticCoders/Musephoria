@@ -1,6 +1,6 @@
 package com.musephoria.entity;
 // default package
-// Generated Oct 25, 2015 10:59:42 PM by Hibernate Tools 4.0.0.Final
+// Generated Oct 29, 2015 12:25:05 AM by Hibernate Tools 4.0.0.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
 

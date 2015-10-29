@@ -1,6 +1,6 @@
 package com.musephoria.dao;
 // default package
-// Generated Oct 24, 2015 10:30:11 PM by Hibernate Tools 4.0.0.Final
+// Generated Oct 29, 2015 12:25:06 AM by Hibernate Tools 4.0.0.Final
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

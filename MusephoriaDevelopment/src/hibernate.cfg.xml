@@ -17,7 +17,7 @@
 
 		<!-- Enable Hibernate's automatic session context management -->
 		<property name="current_session_context_class">thread</property>
-		
+
 		<!-- Disable the second-level cache -->
 		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
 
@@ -28,19 +28,14 @@
 		<property name="hibernate.c3p0.max_statements">30</property>
 		<property name="hibernate.c3p0.idle_test_period">3000</property>
 
-
-
 		<!-- Enity Class Mapping -->
-		<mapping class="com.musephoria.entity.Paymentinfo" />
-		<mapping class="com.musephoria.entity.Shipping" />
-		<mapping class="com.musephoria.entity.Cartitem" />
-		<mapping class="com.musephoria.entity.Cart" />
-		<mapping class="com.musephoria.entity.Order" />
-		<mapping class="com.musephoria.entity.Customer" />
 		<mapping class="com.musephoria.entity.Cd" />
-		<mapping class="com.musephoria.entity.Orderitem" />
-		<mapping class="com.musephoria.entity.Session" />
-		<mapping class="com.musephoria.entity.Track" />
+		<mapping class="com.musephoria.entity.Customer" />
+		<mapping class="com.musephoria.entity.Paymentinfo" />
 		<mapping class="com.musephoria.entity.Purchaseorder" />
+		<mapping class="com.musephoria.entity.Shipping" />
+		<mapping class="com.musephoria.entity.Purchaseorderitem" />
+
+
 	</session-factory>
 </hibernate-configuration>
