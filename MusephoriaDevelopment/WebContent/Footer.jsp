@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<title>Musephoria</title>
+	<title>Footer</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="Resources/css/style.css" type="text/css" />
 </head>
@@ -14,7 +14,7 @@
 <div id="footer">
           <div align="center">
                <p>&copy; <a href="Home.jsp">Musephoria</a> Design by Fanatic coders</p>
-          <a href="homepage.jsp">Home</a> | <a href="Info.jsp">About</a> | <a href="Info.jsp">Contact</a>
+          <a href="Home.jsp">Home</a> | <a href="Aboutus.jsp">About</a> | <a href="Aboutus.jsp">Contact</a>
         </div>
      </div>
  			

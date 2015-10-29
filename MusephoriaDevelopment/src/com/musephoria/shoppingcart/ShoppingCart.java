@@ -5,8 +5,8 @@ package com.musephoria.shoppingcart;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.musephoria.entity.Cd;
+import com.musephoria.webserviceclient.*;
+import com.musephoria.webserviceclient.ProductCatalogServiceStub.Cd;
 
 /**
  * @author computer

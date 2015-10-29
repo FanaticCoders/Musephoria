@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="Resources/css/style.css" type="text/css" />
-<title>Login</title>
+<title>Categories</title>
 </head>
 <body background="Resources/Background.jpg">
 

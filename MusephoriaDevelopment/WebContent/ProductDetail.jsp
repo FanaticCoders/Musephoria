@@ -26,9 +26,9 @@ http://stackoverflow.com/questions/42763/is-there-a-max-number-of-options-values
 <title>Login</title>
 </head>
 <body background="Resources/Background.jpg">
-
+<div id="content">
 	<br>
-	<div >
+	
 	<form method="post" action="Cart">
 	<table  border="1" bordercolor="black" align="center">
 		<tr>
@@ -75,5 +75,6 @@ http://stackoverflow.com/questions/42763/is-there-a-max-number-of-options-values
 	</table>
 	</form>
 	</div>
+	
 </body>
 <%@ include file="Footer.jsp"%>

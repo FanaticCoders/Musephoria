@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.musephoria.dao.CdHome;
+import com.musephoria.webserviceclient.ProductCatalogServiceClient;
 
 /**
  * Servlet implementation class ProductDetail
@@ -34,15 +35,17 @@ public class ProductDetail extends HttpServlet {
 
 		int cdId = Integer.parseInt(request.getParameter("cdId"));
 
-		CdHome cdob = new CdHome();
+		ProductCatalogServiceClient client = new ProductCatalogServiceClient();
 		// Adding Cd into a session object corresponding to it's cdID
-		request.getSession().setAttribute("cddetail", cdob.getProductInfo(cdId));
+		request.getSession().setAttribute("cddetail", client.getProductInfo(cdId));
 		request.getSession().setAttribute("flag", 0);
 		request.getRequestDispatcher("ProductDetail.jsp").forward(request, response);
-		
-		/*request.setAttribute("cddetail", cdob.getProductInfo(cdId));
-		response.sendRedirect("ProductDetail.jsp");*/
-		}
+
+		/*
+		 * request.setAttribute("cddetail", cdob.getProductInfo(cdId));
+		 * response.sendRedirect("ProductDetail.jsp");
+		 */
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -51,7 +54,7 @@ public class ProductDetail extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
+		// doGet(request, response);
 
 	}
 
