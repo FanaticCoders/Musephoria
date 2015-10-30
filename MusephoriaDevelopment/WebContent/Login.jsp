@@ -21,9 +21,11 @@
 <div class="submit-container">
 <button class="submit-button" type="submit">Submit</button>
 </form>
-<button class="submit-button" type="submit" formaction="Register.jsp">New User</button>
+<form  method="post" action="Register.jsp" >
+<button class="submit-button" type="submit" >New User</button>
+</form>
 </div>
-<br><br>
+<br><br><br>
 <div class="form-title" align="Center" >
 <p> ${Message}</p>
 </div>
