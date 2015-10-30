@@ -11,16 +11,9 @@
 <div class="submit-button" align="Right">
 
 <body>
-<% String username="" ;%>
-  <!--   String username = (String)request.getParameter("username");     -->
-	
-	
-	
-			<a href="Home.jsp"><img src="Resources/Header.png" align="left" alt="" /></a>		
-	
-	
-	
-		
+
+  <% String username = (String)request.getSession().getAttribute("username");  %>
+<a href="Home.jsp"><img src="Resources/Header.png" align="left" alt="" /></a>		
 <%
 if ((username== null) || (username == "")){
 %>
@@ -35,7 +28,7 @@ if ((username== null) || (username == "")){
      
 <%}else{
 %>
-    <h3 align="right"> Welcome </h3>  
+    <h3 align="right"> Welcome ${username} </h3>  
     <a href="Logout">Logout</a> 
        
        <form method="post" action="mycart">
