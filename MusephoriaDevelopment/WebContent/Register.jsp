@@ -27,7 +27,7 @@
 	</script>
 					 			
 		<div id="content">
-		<form class="form-container" action="RegisterServlet" method="post" onsubmit="return checkPass()">
+		<form class="form-container" action=NewCustomer method="post" onsubmit="return checkPass()">
 			<fieldset><legend> Customer Information Form </legend>
 			<table>
 				<tr>

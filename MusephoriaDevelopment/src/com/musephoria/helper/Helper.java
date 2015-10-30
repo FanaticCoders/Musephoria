@@ -109,7 +109,7 @@ public class Helper {
 		// http://www.mkyong.com/java/java-date-and-calendar-examples/
 
 		Date date = null;
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 
 		try {
 			date = dateFormat.parse(dateString);
