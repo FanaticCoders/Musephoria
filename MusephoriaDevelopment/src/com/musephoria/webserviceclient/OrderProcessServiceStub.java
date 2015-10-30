@@ -3352,7 +3352,7 @@
         /* This type was generated from the piece of schema that had
                 name = ShoppingCart
                 Namespace URI = http://shoppingcart.musephoria.com/xsd
-                Namespace Prefix = ns4
+                Namespace Prefix = ns2
                 */
             
 
@@ -3393,6 +3393,96 @@
                             localCdListTracker = true;
                                    
                                             this.localCdList=param;
+                                       
+
+                               }
+                            
+
+                        /**
+                        * field for CustomerId
+                        */
+
+                        
+                                    protected int localCustomerId ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localCustomerIdTracker = false ;
+
+                           public boolean isCustomerIdSpecified(){
+                               return localCustomerIdTracker;
+                           }
+
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return int
+                           */
+                           public  int getCustomerId(){
+                               return localCustomerId;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param CustomerId
+                               */
+                               public void setCustomerId(int param){
+                            
+                                       // setting primitive attribute tracker to true
+                                       localCustomerIdTracker =
+                                       param != java.lang.Integer.MIN_VALUE;
+                                   
+                                            this.localCustomerId=param;
+                                       
+
+                               }
+                            
+
+                        /**
+                        * field for Tax
+                        */
+
+                        
+                                    protected float localTax ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localTaxTracker = false ;
+
+                           public boolean isTaxSpecified(){
+                               return localTaxTracker;
+                           }
+
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return float
+                           */
+                           public  float getTax(){
+                               return localTax;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Tax
+                               */
+                               public void setTax(float param){
+                            
+                                       // setting primitive attribute tracker to true
+                                       localTaxTracker =
+                                       !java.lang.Float.isNaN(param);
+                                   
+                                            this.localTax=param;
                                        
 
                                }
@@ -3525,7 +3615,33 @@
                             }
 
 
-                        } if (localTotalPriceTracker){
+                        } if (localCustomerIdTracker){
+                                    namespace = "http://shoppingcart.musephoria.com/xsd";
+                                    writeStartElement(null, namespace, "customerId", xmlWriter);
+                             
+                                               if (localCustomerId==java.lang.Integer.MIN_VALUE) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("customerId cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCustomerId));
+                                               }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localTaxTracker){
+                                    namespace = "http://shoppingcart.musephoria.com/xsd";
+                                    writeStartElement(null, namespace, "tax", xmlWriter);
+                             
+                                               if (java.lang.Float.isNaN(localTax)) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("tax cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localTax));
+                                               }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localTotalPriceTracker){
                                     namespace = "http://shoppingcart.musephoria.com/xsd";
                                     writeStartElement(null, namespace, "totalPrice", xmlWriter);
                              
@@ -3546,7 +3662,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://shoppingcart.musephoria.com/xsd")){
-                return "ns4";
+                return "ns2";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -3730,7 +3846,19 @@
                             
                                     elementList.add(localCdList==null?null:
                                     localCdList);
-                                } if (localTotalPriceTracker){
+                                } if (localCustomerIdTracker){
+                                      elementList.add(new javax.xml.namespace.QName("http://shoppingcart.musephoria.com/xsd",
+                                                                      "customerId"));
+                                 
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCustomerId));
+                            } if (localTaxTracker){
+                                      elementList.add(new javax.xml.namespace.QName("http://shoppingcart.musephoria.com/xsd",
+                                                                      "tax"));
+                                 
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localTax));
+                            } if (localTotalPriceTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://shoppingcart.musephoria.com/xsd",
                                                                       "totalPrice"));
                                  
@@ -3826,6 +3954,58 @@
                                 
                                     else {
                                         
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://shoppingcart.musephoria.com/xsd","customerId").equals(reader.getName())){
+                                
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"customerId" +"  cannot be null");
+                                    }
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setCustomerId(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                               object.setCustomerId(java.lang.Integer.MIN_VALUE);
+                                           
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://shoppingcart.musephoria.com/xsd","tax").equals(reader.getName())){
+                                
+                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"tax" +"  cannot be null");
+                                    }
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setTax(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToFloat(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                               object.setTax(java.lang.Float.NaN);
+                                           
                                     }
                                 
                                     

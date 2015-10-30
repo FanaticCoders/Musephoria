@@ -15,4 +15,8 @@ public class Types {
 	public enum PaymentInfo {
 		Credit, Debit
 	}
+
+	public enum PurchaseOrder {
+		Ordered, Approved, Rejected
+	}
 }

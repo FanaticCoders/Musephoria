@@ -28,7 +28,6 @@ public final class Constants {
 	public static final int errorCode = -1;
 	public static final int errorUserNameExists = 101;
 
-
 	// Success Messages
 	public static final String successMessage = "Success";
 	public static final String dataSaved = "Data Saved";
@@ -52,9 +51,9 @@ public final class Constants {
 	public static final String getCustomerDetails = "getCustomerDetails";
 	public static final String getProductList = "getProductList";
 	public static final String getProductListWithCategory = "getProductListWithCategory";
-	public static final String getProductInfo="getProductInfo";
+	public static final String getProductInfo = "getProductInfo";
 	public static final String getCartItems = "getCartItems";
-	public static final String getCustomerIdbyUsername="getCustomerIdbyUsername";
+	public static final String getCustomerIdbyUsername = "getCustomerIdbyUsername";
 
 	// Log Messages
 

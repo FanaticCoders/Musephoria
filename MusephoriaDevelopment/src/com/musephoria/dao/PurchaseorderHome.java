@@ -2,112 +2,96 @@ package com.musephoria.dao;
 // default package
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 // Generated Oct 29, 2015 12:25:06 AM by Hibernate Tools 4.0.0.Final
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.musephoria.dbmanager.DBManager;
-import com.musephoria.entity.Cd;
+import com.musephoria.entity.Customer;
 import com.musephoria.entity.Purchaseorder;
 import com.musephoria.entity.Purchaseorderitem;
+import com.musephoria.entity.Result;
 import com.musephoria.entity.Shipping;
 import com.musephoria.shoppingcart.ShoppingCart;
+import com.musephoria.util.Constants;
+import com.musephoria.util.Types;
 
 /**
  * Home object for domain model class Purchaseorder.
- * 
+ *
  * @see .Purchaseorder
  * @author Hibernate Tools
  */
 @Stateless
 public class PurchaseorderHome {
 
+	DBManager dbManager;
 	private static final Log log = LogFactory.getLog(PurchaseorderHome.class);
 
-	@PersistenceContext
-	private EntityManager entityManager;
-
-	public void persist(Purchaseorder transientInstance) {
-		log.debug("persisting Purchaseorder instance");
-		try {
-			entityManager.persist(transientInstance);
-			log.debug("persist successful");
-		} catch (RuntimeException re) {
-			log.error("persist failed", re);
-			throw re;
-		}
+	/**
+	 * Initialises the DBManager.
+	 */
+	public PurchaseorderHome() {
+		dbManager = new DBManager();
 	}
 
-	public void remove(Purchaseorder persistentInstance) {
-		log.debug("removing Purchaseorder instance");
+	public Result createOrder(ShoppingCart shoppingCartInfo, Shipping shippingInfo) {
+
+		Result poiResObj = null;
+
 		try {
-			entityManager.remove(persistentInstance);
-			log.debug("remove successful");
-		} catch (RuntimeException re) {
-			log.error("remove failed", re);
-			throw re;
-		}
-	}
+			if (!shoppingCartInfo.equals(null)) {
 
-	public Purchaseorder merge(Purchaseorder detachedInstance) {
-		log.debug("merging Purchaseorder instance");
-		try {
-			Purchaseorder result = entityManager.merge(detachedInstance);
-			log.debug("merge successful");
-			return result;
-		} catch (RuntimeException re) {
-			log.error("merge failed", re);
-			throw re;
-		}
-	}
+				// Creating an object of Purchase Order(PO).
+				Purchaseorder purchaseOrder = new Purchaseorder();
 
-	public Purchaseorder findById(Integer id) {
-		log.debug("getting Purchaseorder instance with id: " + id);
-		try {
-			Purchaseorder instance = entityManager.find(Purchaseorder.class, id);
-			log.debug("get successful");
-			return instance;
-		} catch (RuntimeException re) {
-			log.error("get failed", re);
-			throw re;
-		}
-	}
+				// Setting the customer id in PO object.
+				Customer customer = new Customer();
+				customer.setCustomerId(shoppingCartInfo.getCustomerId());
+				purchaseOrder.setCustomer(customer);
 
-	public boolean createOrder(ShoppingCart shoppingCartInfo, Shipping shippingInfo) {
+				// Setting other parameters of the PO object from shopping cart object.
+				purchaseOrder.setTotalQuantity(shoppingCartInfo.getCdList().size());
+				purchaseOrder.setTotalPrice(shoppingCartInfo.getTotalPrice());
+				purchaseOrder.setTaxes(shoppingCartInfo.getTax());
+				purchaseOrder.setPurchaseOrderStatus(Types.PurchaseOrder.Ordered.toString());
 
-		boolean isOrderCreated = false;
-		
-		List<Purchaseorderitem> poItem = new ArrayList<Purchaseorderitem>();		
-		List<Purchaseorder> poList = new ArrayList<Purchaseorder>();
-		
-		DBManager dbManager = new DBManager();
-		
+				List<Purchaseorder> purchaseOrderList = new ArrayList<Purchaseorder>();
+				purchaseOrderList.add(purchaseOrder);
 
-		if (shoppingCartInfo != null && shippingInfo != null) {
-			
-			
-			List<Cd> cdList = new ArrayList<Cd>();
-			cdList.add((Cd) shoppingCartInfo.getCdList());
-			Iterator<Cd> looper = cdList.iterator();
-			while(looper.hasNext()){
-	
+				// Saving the purchase order.
+				Result poResObj = dbManager.saveNewData(purchaseOrderList);
+
+				if (!poResObj.equals(null)) {
+					if (poResObj.getStatusMessage().equals(Constants.dataSaved)
+							&& poResObj.getPrimaryIdList().size() > 0) {
+						// Fetching the purchase order id.
+						int purchaseOrderId = poResObj.getPrimaryIdList().get(0);
+
+						// Creating a POI List to be saved.
+						PurchaseorderitemHome poDao = new PurchaseorderitemHome();
+						List<Purchaseorderitem> purchaseOrderItemList = poDao.createPurchaseOrderItem(purchaseOrderId,
+								shoppingCartInfo);
+
+						// Saving the POI List.
+						poiResObj = dbManager.saveNewData(purchaseOrderItemList);
+
+					}
+				}
+
 			}
-			
-			//poItem.add(shoppingCartInfo.g)
-			
-		
-			
+
+			dbManager.cleanUpSession();
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage(), e);
 		}
-		
-		return isOrderCreated;	
+
+		return poiResObj;
 	}
 
 }

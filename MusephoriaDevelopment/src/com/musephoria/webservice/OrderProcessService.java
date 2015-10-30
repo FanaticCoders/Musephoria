@@ -6,6 +6,7 @@ package com.musephoria.webservice;
 import org.apache.commons.lang3.StringUtils;
 
 import com.musephoria.dao.CustomerHome;
+import com.musephoria.dao.PurchaseorderHome;
 import com.musephoria.entity.Customer;
 import com.musephoria.entity.Paymentinfo;
 import com.musephoria.entity.Purchaseorder;
@@ -19,12 +20,20 @@ import com.musephoria.shoppingcart.ShoppingCart;
  */
 public class OrderProcessService implements IOrderProcessService {
 
+	/**
+	 * Creates an order based on shopping cart info & shipping info.
+	 */
 	@Override
 	public Result createOrder(ShoppingCart shoppingCartInfo, Shipping shippingInfo) {
-		// TODO Auto-generated method stub
-		return null;
+		PurchaseorderHome poDao = new PurchaseorderHome();
+		Result resObj = poDao.createOrder(shoppingCartInfo, shippingInfo);
+		return resObj;
+
 	}
 
+	/**
+	 * Creates an account if the account doesn't exists.
+	 */
 	@Override
 	public String createAccount(String accountName, Customer accountInfo) {
 		CustomerHome customerDao = new CustomerHome();
@@ -38,6 +47,10 @@ public class OrderProcessService implements IOrderProcessService {
 		return status;
 
 	}
+
+	/**
+	 * Gets the account if the credentials match.
+	 */
 
 	@Override
 	public Result getAccount(String accountName, String accountPassword, Customer accountInfo) {

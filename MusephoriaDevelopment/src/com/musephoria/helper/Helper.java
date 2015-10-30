@@ -89,8 +89,7 @@ public class Helper {
 		int i = 1;
 
 		Iterator<?> iterator = parameterList.iterator();
-		while(iterator.hasNext())
-		{
+		while (iterator.hasNext()) {
 			processedString = processedString.replace("@param" + i, iterator.next().toString());
 			i++;
 		}
