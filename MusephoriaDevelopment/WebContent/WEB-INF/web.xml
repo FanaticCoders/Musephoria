@@ -89,4 +89,14 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>OrderCheckOut</display-name>
+    <servlet-name>OrderCheckOut</servlet-name>
+    <servlet-class>com.musephoria.controller.OrderCheckOut</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderCheckOut</servlet-name>
+    <url-pattern>/OrderCheckOut</url-pattern>
+  </servlet-mapping>
 </web-app>
