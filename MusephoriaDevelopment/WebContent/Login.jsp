@@ -10,18 +10,17 @@
 </head>
 <div id="content">
 <body background="Resources/Background.jpg">
-<form class="form-container" method=post >
+<form class="form-container" method="post" action="Login" >
 <div class="form-title"><h2>Login</h2></div>
 <div class="form-title">Username</div>
 <input class="form-field" type="text" name="username" /><br>
 <div class="form-title">Password</div>
 <input class="form-field" type="password" name="password" /><br>
 <div class="submit-container">
-<button class="submit-button" type="submit" formaction="LoginServlet">Submit</button>
+<button class="submit-button" type="submit">Submit</button>
+</form>
 <button class="submit-button" type="submit" formaction="Register.jsp">New User</button>
 </div>
-</form>
-
 </body>
 </div>
 
