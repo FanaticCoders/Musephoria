@@ -34,12 +34,13 @@ window.onload = check;
 <table border="1" align="center">
 
     <c:forEach items="${cartItem}" var="Pro">
-    <input type="hidden" name="cdId" value="${Pro.cdId}" />
+    <input name="cdId" value="${Pro.cdId}" />
         <tr>
             <td> ${Pro.name}</td>
+            <td>${Pro.cdId}</td>
           
             <td>${Pro.price}</td>
-            <td> <input type="submit" value="Hatao Bhencho" class="submit-button"></td>
+            <td> <input type="submit" value="${Pro.cdId}" class="submit-button"></td>
             
         </tr>
     </c:forEach>

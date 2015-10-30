@@ -18,12 +18,12 @@ http://stackoverflow.com/questions/42763/is-there-a-max-number-of-options-values
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 
-<%@ include file="Header.jsp"%>
-
+<%-- <%@ include file="Header.jsp"%>
+ --%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="Resources/css/style.css" type="text/css" />
-<title>Login</title>
+<!-- <link rel="stylesheet" href="Resources/css/style.css" type="text/css" />
+ --><title>Login</title>
 </head>
 <body background="Resources/Background.jpg">
 <div id="content">
@@ -76,5 +76,5 @@ http://stackoverflow.com/questions/42763/is-there-a-max-number-of-options-values
 	</form>
 	</div>
 	
-</body>
-<%@ include file="Footer.jsp"%>
+</body><%-- 
+<%@ include file="Footer.jsp"%> --%>
