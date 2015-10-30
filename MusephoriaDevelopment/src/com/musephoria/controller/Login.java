@@ -43,25 +43,22 @@ public class Login extends HttpServlet {
 		int custId;
 		
 		
-		String username = request.getParameter("username");
-		
-		request.getSession().setAttribute("username", username);
-		
+		String username = request.getParameter("username");		
 		String password= (String) request.getParameter("password");
-		request.getSession().setAttribute("password", password);
+		
 		
 		OrderProcessServiceClient client = new OrderProcessServiceClient();
 		Result resObj = client.getAccount(username, password, null);
 		
 		 if (resObj.getStatusMessage().equals(Constants.userNameDoesntExist))
 		 {
-			 request.getSession().setAttribute("Message","Username doesn't Exists");
+			 request.getSession().setAttribute("Message",Constants.userNameDoesntExist);
 			 request.getRequestDispatcher("Login.jsp").forward(request, response);
 		 }
 		 
 		 else if (resObj.getStatusMessage().equals(Constants.userNamePasswordMismatch))
 		 {
-			 request.getSession().setAttribute("Message","Either username or Password is incorrect");
+			 request.getSession().setAttribute("Message",Constants.userNamePasswordMismatch);
 			 request.getRequestDispatcher("Login.jsp").forward(request, response);
 		 }
 		 
@@ -69,7 +66,9 @@ public class Login extends HttpServlet {
 		 {   
 			 custObj = (Customer) resObj.getResultList();			 
 			 custId=custObj.getCustomerId();
-			 request.getSession().setAttribute("custId",custId);			 
+			 request.getSession().setAttribute("custId",custId);
+             request.getSession().setAttribute("username", username);
+             request.getSession().setAttribute("password", password);
 			 request.getRequestDispatcher("Home.jsp").forward(request, response);
 		 }
 	}
