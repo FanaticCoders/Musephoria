@@ -1,6 +1,7 @@
 package com.musephoria.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -35,6 +36,12 @@ public class ProductCatalogue extends HttpServlet {
 			throws ServletException, IOException {
 		Cd[] resObj = null;
 		String genre = request.getParameter("Genre");
+		
+		request.getSession().setAttribute("flag", 0);
+		/*int flag = (int) request.getSession().getAttribute("flag");
+PrintWriter out = response.getWriter();
+		
+		out.println(flag);*/
 
 		ProductCatalogServiceClient client = new ProductCatalogServiceClient();
 

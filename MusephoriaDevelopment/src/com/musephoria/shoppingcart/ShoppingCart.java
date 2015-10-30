@@ -6,6 +6,8 @@ package com.musephoria.shoppingcart;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+
 import com.musephoria.webserviceclient.*;
 import com.musephoria.webserviceclient.ProductCatalogServiceStub.Cd;
 
@@ -45,32 +47,21 @@ public class ShoppingCart {
 	
 	public void removeFromCart(int Id) {
 		
-		Iterator<Cd> looper = cdList.iterator();
-		int i =0;
-		for(Cd item: cdList){
-			
-			i++;
-			if(item.getCdId() == Id){
-				
-				
-				cdList.remove(cdList.get(i));
+		Cd toremove = null;
+		
+		ListIterator<Cd> looper = cdList.listIterator();
+		
+		while(looper.hasNext()){
+			toremove = looper.next();
+			int check = toremove.getCdId();
+			//System.out.println(check);
+			if(check == Id){
+				totalPrice-= toremove.getPrice();
+				looper.remove();
+				break;
 			}
 		}
 		
-		
-		
-		/*while(looper.hasNext()){
-			
-			int check = looper.next().getCdId();
-			//System.out.println(check);
-			if(looper.next().getCdId() == Id){
-				totalPrice-=looper.next().getPrice();
-				looper.remove();
-			}
-		}*/
-		
-		/*cdList.remove(cdObj);
-		totalPrice -= cdObj.getPrice();
-*/	}
+	}
 	
 }
