@@ -2,16 +2,12 @@
 function check()
                 {
 		                                                            
-	               if ("${cartItem}"=="")
-                    {
+	               if ("${cartItem}"==""){
 	            	   alert("You Cart is empty ");
 	            	   document.getElementById("Checkout").style.visibility="hidden";
-                    }
-	               else
-	            	   {
-	            	   
+	            	   }
+	               else{
 	            	   document.getElementById("Checkout").style.visibility="visible";
-	            	   
 	            	   }
 	                                                
                 }
@@ -34,14 +30,16 @@ window.onload = check;
 <body background="Resources/Background.jpg">
 
 <br>
+<form action="RemoveFromCart" method = "post">
 <table border="1" align="center">
 
-    <c:forEach items="${cartItem}" var="Cart">
+    <c:forEach items="${cartItem}" var="Pro">
+    <input type="hidden" name="cdId" value="${Pro.cdId}" />
         <tr>
-            <td> ${Cart.name}</td>
+            <td> ${Pro.name}</td>
           
-            <td>${cartItem.price}</td>
-            <td> <input class="submit-button"  type="submit" value="Remove" ></td>
+            <td>${Pro.price}</td>
+            <td> <input type="submit" value="Hatao Bhencho" class="submit-button"></td>
             
         </tr>
     </c:forEach>
@@ -49,12 +47,12 @@ window.onload = check;
     <td>${totalCartPrice}</td>
     
   </table>
+  </form>
   <div align="Center">
-  <form action="OrderCheckOut.jsp">
+  <form action="OrderCheckOut" method="post">
   <input class="submit-button" id="Checkout" type="submit" value="Checkout" >
   </form>
   </div>
 </body>
 <%@ include file="Footer.jsp" %>
 </html>
-s

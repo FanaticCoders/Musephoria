@@ -33,7 +33,7 @@ public class Cart extends HttpServlet {
 	 *      response)
 	 */
 	
-public void viewCart(HttpServletRequest request, HttpServletResponse response, ShoppingCart myCart) throws ServletException, IOException{
+	public void viewCart(HttpServletRequest request, HttpServletResponse response, ShoppingCart myCart) throws ServletException, IOException{
 		
 		// Acquiring the list of Cd's as well as their total Cost and binding it to the current session of the user\visitor
 		List<Cd> cartItem = myCart.getCdList();
@@ -44,24 +44,28 @@ public void viewCart(HttpServletRequest request, HttpServletResponse response, S
 		
 	}
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	
+	public void removeCart(HttpServletRequest request, HttpServletResponse response, ShoppingCart removeMyCart) throws ServletException, IOException{
+		
+		int check = Integer.parseInt(request.getParameter("cdId"));
+		
+		PrintWriter out = response.getWriter();
+		
+		//out.println(check);
+			// call Delete from cart function.
+			//ProductCatalogServiceClient client = new ProductCatalogServiceClient();
+			removeMyCart.removeFromCart(check);
+			
+			viewCart(request,response,
+					removeMyCart);
+		
 	}
+	
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
-		// Logic implementing adding functionality to a shopping cart.
-		// set session flag variable in the home server(1st servlet) for a
-		// visitor.
-
+	public void addCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	
+	
+	
 		int flag = (int) request.getSession().getAttribute("flag");
 		
 		PrintWriter out = response.getWriter();
@@ -99,8 +103,64 @@ public void viewCart(HttpServletRequest request, HttpServletResponse response, S
 
 		viewCart(request,response,
 				myCart);
+		
+	}
+	
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at:").append(request.getContextPath());
 	}
 
-	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		
+		//Function to delete a CD from the cart
+		// We receive the cart from the session object. Now we need to delete a CD from the Cart.
+		
+		/*String check = request.getParameter("Pro.cdId");
+		if(check.startsWith("123")){
+			// call Delete from cart function.
+			ProductCatalogServiceClient client = new ProductCatalogServiceClient();
+			ShoppingCart myCart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
+			myCart.removeFromCart(client.getProductInfo(Integer.parseInt(check)));
+			
+			viewCart(request,response,
+				myCart);
+		}
+		else*/
+		
 
+		// Logic implementing adding functionality to a shopping cart.
+		// set session flag variable in the home server(1st servlet) for a
+		// visitor.
+		
+		
+		String path = request.getServletPath();
+		
+		PrintWriter out = response.getWriter();
+		
+		//out.println(path);
+		
+		if(path.equals("/AddToCart")){
+			addCart(request, response);
+		}
+		else{
+			ShoppingCart myCart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
+			removeCart(request, response, myCart);
+		}
+
+		
+			
+			
+		}
 }
+	
+	

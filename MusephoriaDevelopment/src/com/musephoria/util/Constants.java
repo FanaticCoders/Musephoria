@@ -22,6 +22,7 @@ public final class Constants {
 	public static final String userNameExist = "User Already Exist";
 	public static final String dataDeleteFailed = "Data Delete Failed";
 	public static final String userNameDoesntExist = "User Dosent Exist";
+	public static final String passwordsMismatch = "Passwords do not match, please enter a valid password";
 
 	// Error Codes
 	public static final int errorCode = -1;

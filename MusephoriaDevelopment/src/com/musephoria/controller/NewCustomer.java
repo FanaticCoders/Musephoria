@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.musephoria.helper.Helper;
 import com.musephoria.util.Constants;
 import com.musephoria.util.Types;
@@ -50,52 +52,55 @@ public class NewCustomer extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		OrderProcessServiceClient opc = new OrderProcessServiceClient();
+
 		String result;
 		Customer accountInfo = new Customer();
 
 		// Acquiring parameteres from the Register.jsp form.
-		String fname = request.getParameter("fname");
-		String lname = request.getParameter("lname");
+		String firstName = request.getParameter("fname");
+		String lastName = request.getParameter("lname");
 		String sex = request.getParameter("sex");
-		String usr = request.getParameter("usr");
-		String pwd = request.getParameter("pwd");
-		String repwd = request.getParameter("repwd");
-		String addr = request.getParameter("addr");
+		String userName = request.getParameter("usr");
+		String password = request.getParameter("pwd");
+		String rePassword = request.getParameter("repwd");
+		String dateOfBirth = request.getParameter("dob");
+		String address = request.getParameter("addr");
 		String city = request.getParameter("city");
-		String prov = request.getParameter("prov");
+		String province = request.getParameter("prov");
 		String country = request.getParameter("country");
-		String zip = request.getParameter("zip");
+		String zipCode = request.getParameter("zip");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
 
 		// Checking if the re-typed password is same as the original password
-		if (!pwd.equals(repwd)) {
-			request.setAttribute("fname", fname);
-			request.setAttribute("lname", lname);
+		if (!password.equals(rePassword)) {
+			request.setAttribute("fname", firstName);
+			request.setAttribute("lname", lastName);
 			request.setAttribute("sex", sex);
-			request.setAttribute("usr", usr);
-			request.setAttribute("addr", addr);
+			request.setAttribute("usr", userName);
+			request.setAttribute("dob", dateOfBirth);
+			request.setAttribute("addr", address);
 			request.setAttribute("city", city);
-			request.setAttribute("prov", prov);
+			request.setAttribute("prov", province);
 			request.setAttribute("country", country);
-			request.setAttribute("zip", zip);
+			request.setAttribute("zip", zipCode);
 			request.setAttribute("email", email);
 			request.setAttribute("phone", phone);
+
 			request.setAttribute("message", "Passwords do not match, please enter a valid password");
 			out.println("Passwords do not match, please enter a valid password");
 			request.getRequestDispatcher("Register.jsp").forward(request, response);
 		} else {
-			accountInfo.setUserName(usr);
-			accountInfo.setPassword(pwd);
-			accountInfo.setCustomerName(fname + lname);
-			accountInfo.setDateOfBirth(Helper.FormatDate("1989/01/25"));
+			accountInfo.setUserName(userName);
+			accountInfo.setPassword(password);
+			accountInfo.setCustomerName(firstName + StringUtils.SPACE + lastName);
+			accountInfo.setDateOfBirth(Helper.FormatDate(dateOfBirth));
 			accountInfo.setSex(sex);
-			accountInfo.setAddress(addr);
+			accountInfo.setAddress(address);
 			accountInfo.setCity(city);
-			accountInfo.setProvince(prov);
+			accountInfo.setProvince(province);
 			accountInfo.setCountry(country);
-			accountInfo.setZipCode(zip);
+			accountInfo.setZipCode(zipCode);
 			accountInfo.setEmail(email);
 			accountInfo.setPhone(phone);
 			accountInfo.setDefaultPaymentInfo(Types.PaymentInfo.Credit.toString());
@@ -104,7 +109,8 @@ public class NewCustomer extends HttpServlet {
 			accountInfo.setIsCustomerActive(true);
 
 			// Calling the client class for OrderProcess Web Service
-			result = opc.createAccount(usr, accountInfo);
+			OrderProcessServiceClient opc = new OrderProcessServiceClient();
+			result = opc.createAccount(userName, accountInfo);
 			if (result.equals(Constants.accountCreatedMessage)) {
 				request.setAttribute("message", "Account Creation Successful,please login with your credentials");
 				out.println("Account Creation Successful,please login with your credentials");

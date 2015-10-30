@@ -76,5 +76,7 @@
   <servlet-mapping>
     <servlet-name>Cart</servlet-name>
     <url-pattern>/Cart</url-pattern>
+    <url-pattern>/RemoveFromCart</url-pattern>
+    <url-pattern>/AddToCart</url-pattern>
   </servlet-mapping>
 </web-app>

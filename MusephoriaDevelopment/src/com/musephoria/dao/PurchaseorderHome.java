@@ -1,5 +1,10 @@
 package com.musephoria.dao;
 // default package
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 // Generated Oct 29, 2015 12:25:06 AM by Hibernate Tools 4.0.0.Final
 
 import javax.ejb.Stateless;
@@ -9,10 +14,16 @@ import javax.persistence.PersistenceContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.musephoria.dbmanager.DBManager;
+import com.musephoria.entity.Cd;
 import com.musephoria.entity.Purchaseorder;
+import com.musephoria.entity.Purchaseorderitem;
+import com.musephoria.entity.Shipping;
+import com.musephoria.shoppingcart.ShoppingCart;
 
 /**
  * Home object for domain model class Purchaseorder.
+ * 
  * @see .Purchaseorder
  * @author Hibernate Tools
  */
@@ -69,4 +80,34 @@ public class PurchaseorderHome {
 			throw re;
 		}
 	}
+
+	public boolean createOrder(ShoppingCart shoppingCartInfo, Shipping shippingInfo) {
+
+		boolean isOrderCreated = false;
+		
+		List<Purchaseorderitem> poItem = new ArrayList<Purchaseorderitem>();		
+		List<Purchaseorder> poList = new ArrayList<Purchaseorder>();
+		
+		DBManager dbManager = new DBManager();
+		
+
+		if (shoppingCartInfo != null && shippingInfo != null) {
+			
+			
+			List<Cd> cdList = new ArrayList<Cd>();
+			cdList.add((Cd) shoppingCartInfo.getCdList());
+			Iterator<Cd> looper = cdList.iterator();
+			while(looper.hasNext()){
+	
+			}
+			
+			//poItem.add(shoppingCartInfo.g)
+			
+		
+			
+		}
+		
+		return isOrderCreated;	
+	}
+
 }
