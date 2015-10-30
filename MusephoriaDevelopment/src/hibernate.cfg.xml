@@ -16,7 +16,7 @@
 		<property name="format_sql">true</property>
 
 		<!-- Enable Hibernate's automatic session context management -->
-		<property name="current_session_context_class">thread</property>
+		<property name="current_session_context_class">managed</property>
 
 		<!-- Disable the second-level cache -->
 		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>

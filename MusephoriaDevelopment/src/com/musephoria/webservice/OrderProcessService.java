@@ -45,7 +45,6 @@ public class OrderProcessService implements IOrderProcessService {
 			status = resultObj.getStatusMessage();
 		}
 		return status;
-
 	}
 
 	/**
@@ -55,7 +54,8 @@ public class OrderProcessService implements IOrderProcessService {
 	@Override
 	public Result getAccount(String accountName, String accountPassword, Customer accountInfo) {
 		CustomerHome customerDao = new CustomerHome();
-		return customerDao.getAccount(accountName, accountPassword, accountInfo);
+		Result resObj = customerDao.getAccount(accountName, accountPassword, accountInfo);
+		return resObj;
 	}
 
 	@Override

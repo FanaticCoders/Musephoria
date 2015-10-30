@@ -79,10 +79,10 @@ public class CustomerHome {
 				try {
 					List<Customer> customerList = new ArrayList<Customer>();
 					customerList.add(accountInfo);
-					resObj = dbManager.saveNewData(customerList);
+					Result tempResObj = dbManager.saveNewData(customerList);
 
-					if (!resObj.equals(null)) {
-						if (resObj.getStatusMessage().equals(Constants.dataSaved)) {
+					if (!tempResObj.equals(null)) {
+						if (tempResObj.getStatusMessage().equals(Constants.dataSaved)) {
 							// Populating the result object with account created
 							// message.
 							resObj.setStatusMessage(Constants.accountCreatedMessage);
@@ -126,14 +126,15 @@ public class CustomerHome {
 				accountInfoList.add(accountPassword);
 			}
 
-			resObj = dbManager.getQueryResult(Constants.getAccountInfo, accountInfoList);
+			Result tempResObj = dbManager.getQueryResult(Constants.getAccountInfo, accountInfoList);
 
-			if (!resObj.equals(null)) {
-				if (resObj.getResultCount() > 0) {
+			if (!tempResObj.equals(null)) {
+				if (tempResObj.getResultCount() > 0) {
 					// User is Validated. Populate result object with success
 					// messages.
+					resObj.setResultList(tempResObj.getResultList());
 					resObj.setStatusCode(Constants.successCode);
-					resObj.setStatusMessage(Constants.accountInfoPopulated);
+					resObj.setStatusMessage(Constants.userIsValidated);
 				} else {
 					// Bad Credentials. Populate result object with error
 					// messages.
@@ -148,6 +149,7 @@ public class CustomerHome {
 			resObj.setStatusCode(Constants.errorCode);
 			resObj.setStatusMessage(Constants.userNameDoesntExist);
 		}
+
 		dbManager.cleanUpSession();
 		return resObj;
 	}

@@ -23,6 +23,7 @@ public final class Constants {
 	public static final String dataDeleteFailed = "Data Delete Failed";
 	public static final String userNameDoesntExist = "User Dosent Exist";
 	public static final String passwordsMismatch = "Passwords do not match, please enter a valid password";
+	public static final String userNamePasswordMismatch = "Username and Password doesn't match";
 
 	// Error Codes
 	public static final int errorCode = -1;
@@ -34,8 +35,7 @@ public final class Constants {
 	public static final String dataNotSaved = "Failed to Save Data";
 	public static final String accountCreatedMessage = "Account Created";
 	public static final String dataDeleted = "Data is Deleted";
-	public static final String accountInfoPopulated = "Account Info is Populated";
-	public static final String userNamePasswordMismatch = "Username and Password doesn't match";
+	public static final String userIsValidated = "User is Validated.";
 
 	// Success Codes
 	public static final int successCode = 1;
@@ -60,4 +60,8 @@ public final class Constants {
 	public static final String executeSQLQueryExecuted = "ExcuteSQL method Executed.";
 	public static final String getQueryResultExecuted = "Get Query method Executed.";
 	public static final String saveMethodExecuted = "Save Method Executed.";
+	public static final String hibernateConfigLoaded = "Hibernate Configured and Loaded.";
+	public static final String hibernateSessionCreated = "Hibenate Session Created.";
+	public static final String hibernateTransactionStarted = "Hibenate Transaction Started.";
+	public static final String hibernateSessionCleanedUp = "Hibenate Session flushed, Transaction Committed, Session closed.";
 }

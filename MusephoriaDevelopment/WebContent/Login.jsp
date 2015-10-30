@@ -26,7 +26,7 @@
 </form>
 </div>
 <br><br><br>
-<div class="form-title" align="Center" >
+<div class="loginmessage" align="Center" >
 <p> ${Message}</p>
 </div>
 <c:remove var="Message" scope="session" /> 

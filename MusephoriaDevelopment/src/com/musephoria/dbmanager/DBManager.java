@@ -10,6 +10,7 @@ import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.FlushMode;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -18,6 +19,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.TransactionException;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.context.internal.ManagedSessionContext;
 
 import com.musephoria.entity.Result;
 import com.musephoria.helper.Helper;
@@ -34,6 +36,7 @@ public class DBManager {
 	private Configuration hConfig;
 	private Session hSession;
 	private Transaction hTransaction;
+	SessionFactory hSessionFactory;
 	private static final Log log = LogFactory.getLog(DBManager.class);
 
 	/**
@@ -53,7 +56,9 @@ public class DBManager {
 	 */
 	public Configuration loadConfiguration() {
 		hConfig = new Configuration();
-		return hConfig.configure(Constants.hibernatePropertyFile);
+		hConfig.configure(Constants.hibernatePropertyFile);
+		log.info(Constants.hibernateConfigLoaded);
+		return hConfig;
 	}
 
 	/**
@@ -63,10 +68,15 @@ public class DBManager {
 	 * @return Hibernate Session Object.
 	 */
 	public Session loadSession() {
+		// Reference :
+		// http://www.17od.com/2006/11/06/using-managed-sessions-in-hibernate-to-ease-unit-testing/
 		try {
 			if (!hConfig.equals(null)) {
-				SessionFactory hSessionFactory = hConfig.buildSessionFactory();
+				hSessionFactory = hConfig.buildSessionFactory();
 				hSession = hSessionFactory.openSession();
+				hSession.setFlushMode(FlushMode.MANUAL);
+				ManagedSessionContext.bind(hSession);
+				log.info(Constants.hibernateSessionCreated);
 			}
 		} catch (HibernateException e) {
 			log.error(e.getLocalizedMessage(), e);
@@ -84,6 +94,7 @@ public class DBManager {
 		try {
 			if (!hSession.equals(null)) {
 				hTransaction = hSession.beginTransaction();
+				log.info(Constants.hibernateTransactionStarted);
 			}
 		} catch (HibernateException e) {
 			log.error(e.getLocalizedMessage(), e);
@@ -101,9 +112,11 @@ public class DBManager {
 	public void cleanUpSession() {
 		if (!hTransaction.equals(null) && !hSession.equals(null)) {
 			try {
+				ManagedSessionContext.unbind(hSessionFactory);
 				hSession.flush();
 				hTransaction.commit();
 				hSession.close();
+				log.info(Constants.hibernateSessionCleanedUp);
 			} catch (TransactionException e) {
 				log.error(e.getLocalizedMessage(), e);
 			}

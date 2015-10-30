@@ -1055,7 +1055,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "getProductList",
-                "ns3");
+                "ns2");
 
             
 
@@ -1185,7 +1185,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns3";
+                return "ns2";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -1524,7 +1524,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "getProductListResponse",
-                "ns3");
+                "ns2");
 
             
 
@@ -1700,7 +1700,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns3";
+                return "ns2";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -2068,7 +2068,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "getCategoryList",
-                "ns3");
+                "ns2");
 
             
 
@@ -2138,7 +2138,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns3";
+                return "ns2";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -4067,7 +4067,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "getProductInfo",
-                "ns3");
+                "ns2");
 
             
 
@@ -4180,7 +4180,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns3";
+                return "ns2";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -4494,7 +4494,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "getCategoryListResponse",
-                "ns3");
+                "ns2");
 
             
 
@@ -4681,7 +4681,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns3";
+                return "ns2";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -5052,7 +5052,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "getProductInfoResponse",
-                "ns3");
+                "ns2");
 
             
 
@@ -5176,7 +5176,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns3";
+                return "ns2";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
