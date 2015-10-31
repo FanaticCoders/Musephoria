@@ -2,6 +2,9 @@ package com.musephoria.dao;
 // default package
 // Generated Oct 29, 2015 12:25:06 AM by Hibernate Tools 4.0.0.Final
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -9,7 +12,12 @@ import javax.persistence.PersistenceContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.musephoria.dbmanager.DBManager;
+import com.musephoria.entity.Purchaseorder;
+import com.musephoria.entity.Purchaseorderitem;
+import com.musephoria.entity.Result;
 import com.musephoria.entity.Shipping;
+import com.musephoria.shoppingcart.ShoppingCart;
 
 /**
  * Home object for domain model class Shipping.
@@ -19,6 +27,7 @@ import com.musephoria.entity.Shipping;
 @Stateless
 public class ShippingHome {
 
+	DBManager dbManager;
 	private static final Log log = LogFactory.getLog(ShippingHome.class);
 
 	@PersistenceContext
@@ -68,5 +77,25 @@ public class ShippingHome {
 			log.error("get failed", re);
 			throw re;
 		}
+	}
+	
+	public Result shippingInfo(int purchaseOrderId ,Shipping shippingInfo) {
+		List<Shipping> shipping= new ArrayList<Shipping>();
+		Result shipResObj = null;
+		try{
+		if(!shippingInfo.equals(null))
+		{
+			Purchaseorder tempPurchaseOrderObj = new Purchaseorder();
+			tempPurchaseOrderObj.setPurchaseOrderId(purchaseOrderId);			
+			shippingInfo.setPurchaseorder(tempPurchaseOrderObj);			
+			shipResObj = dbManager.saveNewData(shipping);
+		}
+	
+		}
+		catch (Exception e) {
+			log.error(e.getLocalizedMessage(), e);
+		}
+		
+	    return shipResObj;
 	}
 }
