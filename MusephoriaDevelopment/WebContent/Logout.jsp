@@ -13,7 +13,7 @@
 
 <div id="content">
 	<body background="Resources/Background.jpg">
-		<form class="form-container" method=post>
+		<form  method=post>
 
 			<div class="submit-container">
 				${message}

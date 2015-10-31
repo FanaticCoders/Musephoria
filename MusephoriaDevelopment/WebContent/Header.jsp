@@ -24,7 +24,7 @@
 			<h3 align="right">Welcome Guest</h3>
 			<a href="Login.jsp">Login</a>
 
-			<form method="post" action="mycart">
+			<form method="post" action="Cart">
 				<a href="Mycart">MyCart</a>
 			</form>
 		</div>
@@ -36,7 +36,7 @@
 		<form method="post" action="Logout">
 			<a href="Logout">Logout</a>
 		</form>
-		<form method="post" action="mycart">
+		<form method="post" action="Cart">
 			<a href="Mycart">MyCart</a>
 		</form>
 		<%
