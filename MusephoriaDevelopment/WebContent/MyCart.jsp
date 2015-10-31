@@ -28,7 +28,7 @@ window.onload = check;
 <title>MyCart</title>
 </head>
 <body background="Resources/Background.jpg">
-
+<div id="content">
 <br>
 <form action="RemoveFromCart" method = "post">
 <table border="1" align="center">
@@ -53,6 +53,7 @@ window.onload = check;
   <form action="OrderCheckOut" method="post">
   <input class="submit-button" id="Checkout" type="submit" value="Checkout" >
   </form>
+  </div>
   </div>
 </body>
 <%@ include file="Footer.jsp" %>

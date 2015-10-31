@@ -22,9 +22,7 @@
 					formaction="ProductCatalogue">Click here to Enter</button>
 			</div>
 		</form>
-
-
-	
 </div>
 </body>
+
 <%@ include file="Footer.jsp"%>

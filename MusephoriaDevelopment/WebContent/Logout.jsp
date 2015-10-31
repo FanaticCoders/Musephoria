@@ -11,8 +11,9 @@
 </head>
 
 
-<div id="content">
+
 	<body background="Resources/Background.jpg">
+	<div id="content">
 		<form  method=post>
 
 			<div class="submit-container">
@@ -20,7 +21,7 @@
 			</div>
 		</form>
 
-
-	</body>
 </div>
+	</body>
+
 <%@ include file="Footer.jsp"%>

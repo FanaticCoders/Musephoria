@@ -1,4 +1,3 @@
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="Header.jsp" %>
 <html>
@@ -37,7 +36,9 @@ $(document).ready(function(){
 </head>
 <Title>Order Check Out</Title>
 <h1 align="center"> Order Check Out </h1><br>
+
 <body background="Resources/Background.jpg">
+<div id="content">
 <br>
   <table border="1" align="center">
 <tr>
@@ -106,7 +107,7 @@ $(document).ready(function(){
                 </table>
                 
     </div>
-        
+       
 		<div class="fo" id="mydiv2" align="center">
 		Your Shipping Information:<br><br>
      <table id="table 1" style="height: 37px; width: 22px; "  border="0" cellpadding="2" cellspacing="0" >
@@ -156,6 +157,7 @@ $(document).ready(function(){
         
    <button class="submit-button" type="submit" formaction="ProceedToPayment">Proceed to Payment </button>
    
+        </div>
         </div>
         </div>
             </body>

@@ -40,8 +40,6 @@ $(document).ready(function(){
 <body background="Resources/Background.jpg">
 
 
-
-	<div id="content">
 		<div align="Right">
 			
 				<button class="submit-button" id="active" type="submit">View
@@ -70,6 +68,7 @@ $(document).ready(function(){
 		<table border="0" align="center">
 			<tr>
 				<!-- Reference : http://htmlasks.com/how_to_iterate_data_horizontally_in_jstl		 -->
+				
 				<c:forEach items="${Product}" var="Product" varStatus="loop">
 					<td  align="Center"><a
 						href=" ${pageContext.request.contextPath}/ProductDetail?cdId=${Product.cdId}">
@@ -85,7 +84,6 @@ $(document).ready(function(){
 		</table>
 
 
-	</div>
 </body>
 <%@ include file="Footer.jsp"%>
 </html>
