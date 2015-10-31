@@ -85,13 +85,17 @@ public class ShippingHome {
 		try{
 		if(!shippingInfo.equals(null))
 		{
-			Purchaseorder tempPurchaseOrderObj = new Purchaseorder();
-			tempPurchaseOrderObj.setPurchaseOrderId(purchaseOrderId);			
-			shippingInfo.setPurchaseorder(tempPurchaseOrderObj);			
+			// Setting the PO Object with PO ID.
+			Purchaseorder purchaseOrderObj = new Purchaseorder();
+			purchaseOrderObj.setPurchaseOrderId(purchaseOrderId);
+			// Setting PO Id in shippingInfo
+			shippingInfo.setPurchaseorder(purchaseOrderObj);			
 			shipResObj = dbManager.saveNewData(shipping);
 		}
 	
-		}
+		
+		dbManager.cleanUpSession();
+	}
 		catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);
 		}
