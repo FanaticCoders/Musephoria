@@ -3,6 +3,8 @@
  */
 package com.musephoria.webservice;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.musephoria.dao.CustomerHome;
@@ -12,7 +14,6 @@ import com.musephoria.entity.Paymentinfo;
 import com.musephoria.entity.Purchaseorder;
 import com.musephoria.entity.Result;
 import com.musephoria.entity.Shipping;
-import com.musephoria.shoppingcart.ShoppingCart;
 
 /**
  * @author FanaticCoders
@@ -24,11 +25,10 @@ public class OrderProcessService implements IOrderProcessService {
 	 * Creates an order based on shopping cart info & shipping info.
 	 */
 	@Override
-	public Result createOrder(ShoppingCart shoppingCartInfo, Shipping shippingInfo) {
+	public int createOrder(List<Integer> shoppingCartInfo, Purchaseorder purchaseOrder, Shipping shippingInfo) {
 		PurchaseorderHome poDao = new PurchaseorderHome();
-		Result resObj = poDao.createOrder(shoppingCartInfo, shippingInfo);
-		return resObj;
-
+		int result = poDao.createOrder(shoppingCartInfo, purchaseOrder, shippingInfo);
+		return result;
 	}
 
 	/**
@@ -50,7 +50,6 @@ public class OrderProcessService implements IOrderProcessService {
 	/**
 	 * Gets the account if the credentials match.
 	 */
-
 	@Override
 	public Result getAccount(String accountName, String accountPassword, Customer accountInfo) {
 		CustomerHome customerDao = new CustomerHome();
@@ -58,10 +57,14 @@ public class OrderProcessService implements IOrderProcessService {
 		return resObj;
 	}
 
+	/**
+	 * Confirms the order based on payment info.
+	 */
 	@Override
-	public Result confirmOrder(Purchaseorder orderInfo, Shipping shippingInfo, Paymentinfo paymentInfo) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean confirmOrder(Purchaseorder purchaseOrder, Shipping shippingInfo, Paymentinfo paymentInfo) {
+		PurchaseorderHome poDao = new PurchaseorderHome();
+		boolean result = poDao.confirmOrder(purchaseOrder, shippingInfo, paymentInfo);
+		return result;
 	}
 
 }

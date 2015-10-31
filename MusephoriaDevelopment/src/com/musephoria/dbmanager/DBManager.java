@@ -274,11 +274,6 @@ public class DBManager {
 					for (Object item : dataList) {
 						hSession.update(item);
 					}
-
-					hSession.flush();
-
-					// hSession.update(item.next());
-
 				}
 			}
 

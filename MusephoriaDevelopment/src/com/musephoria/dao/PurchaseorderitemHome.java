@@ -14,7 +14,6 @@ import org.apache.commons.logging.LogFactory;
 import com.musephoria.entity.Cd;
 import com.musephoria.entity.Purchaseorder;
 import com.musephoria.entity.Purchaseorderitem;
-import com.musephoria.shoppingcart.ShoppingCart;
 
 /**
  * Home object for domain model class Purchaseorderitem.
@@ -28,38 +27,40 @@ public class PurchaseorderitemHome {
 
 	private static final Log log = LogFactory.getLog(PurchaseorderitemHome.class);
 
-	public List<Purchaseorderitem> createPurchaseOrderItem(int purchaseOrderId, ShoppingCart shoppingCartInfo) {
+	/**
+	 * Creates a Purchase Order Item List based on the Purchase Order ID.
+	 * @param purchaseOrderId
+	 * @param shoppingCartInfo
+	 * @return
+	 */
+	public List<Purchaseorderitem> createPurchaseOrderItem(int purchaseOrderId, List<Integer> shoppingCartInfo) {
 		List<Purchaseorderitem> purchaseOrderItemList = new ArrayList<Purchaseorderitem>();
+
 		try {
 			if (purchaseOrderId > 0 && !shoppingCartInfo.equals(null)) {
-				if (!shoppingCartInfo.getCdList().isEmpty()) {
 
-					// Setting the PO Obeject with PO ID.
-					Purchaseorder tempPurchaseOrderObj = new Purchaseorder();
-					tempPurchaseOrderObj.setPurchaseOrderId(purchaseOrderId);
+					// Setting the PO Object with PO ID.
+					Purchaseorder purchaseOrderObj = new Purchaseorder();
+					purchaseOrderObj.setPurchaseOrderId(purchaseOrderId);
 
-					for (Cd item : shoppingCartInfo.getCdList()) {
+					for (int item : shoppingCartInfo) {
 						// Creating a POI Object.
 						Purchaseorderitem purchaseOrderItem = new Purchaseorderitem();
 
-						// Setting PO Id.
-						purchaseOrderItem.setPurchaseorder(tempPurchaseOrderObj);
+						// Setting PO Id in POI
+						purchaseOrderItem.setPurchaseorder(purchaseOrderObj);
 
 						// Setting the POI with Cd Id.
-						Cd tempCdObj = new Cd();
-						tempCdObj.setCdId(item.getCdId());
-						purchaseOrderItem.setCd(tempCdObj);
-
-						// Setting the POI with other Cd attributes.
-						purchaseOrderItem.setPurchaseOrderItemName(item.getName());
-						purchaseOrderItem.setBaseAmount(item.getPrice());
+						Cd cdObj = new Cd();
+						cdObj.setCdId(item);
+						purchaseOrderItem.setCd(cdObj);
 
 						// Adding every individual cd into POI List.
 						purchaseOrderItemList.add(purchaseOrderItem);
 
 					}
 				}
-			}
+
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);
 		}

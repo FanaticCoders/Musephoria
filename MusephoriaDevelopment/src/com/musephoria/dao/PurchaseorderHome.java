@@ -12,12 +12,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.musephoria.dbmanager.DBManager;
-import com.musephoria.entity.Customer;
+import com.musephoria.entity.Paymentinfo;
 import com.musephoria.entity.Purchaseorder;
 import com.musephoria.entity.Purchaseorderitem;
 import com.musephoria.entity.Result;
 import com.musephoria.entity.Shipping;
-import com.musephoria.shoppingcart.ShoppingCart;
 import com.musephoria.util.Constants;
 import com.musephoria.util.Types;
 
@@ -40,27 +39,19 @@ public class PurchaseorderHome {
 		dbManager = new DBManager();
 	}
 
-	public Result createOrder(ShoppingCart shoppingCartInfo, Shipping shippingInfo) {
-
-		Result poiResObj = null;
-
+	/**
+	 * Creates an order by saving Purchase order, Purchase Order Items &
+	 * Shipping Information.
+	 *
+	 * @param shoppingCartInfo
+	 * @param purchaseOrder
+	 * @param shippingInfo
+	 * @return
+	 */
+	public int createOrder(List<Integer> shoppingCartInfo, Purchaseorder purchaseOrder, Shipping shippingInfo) {
+		int purchaseOrderId = 0;
 		try {
-			if (!shoppingCartInfo.equals(null)) {
-
-				// Creating an object of Purchase Order(PO).
-				Purchaseorder purchaseOrder = new Purchaseorder();
-
-				// Setting the customer id in PO object.
-				Customer customer = new Customer();
-				customer.setCustomerId(shoppingCartInfo.getCustomerId());
-				purchaseOrder.setCustomer(customer);
-
-				// Setting other parameters of the PO object from shopping cart object.
-				purchaseOrder.setTotalQuantity(shoppingCartInfo.getCdList().size());
-				purchaseOrder.setTotalPrice(shoppingCartInfo.getTotalPrice());
-				purchaseOrder.setTaxes(shoppingCartInfo.getTax());
-				purchaseOrder.setPurchaseOrderStatus(Types.PurchaseOrder.Ordered.toString());
-
+			if (!purchaseOrder.equals(null)) {
 				List<Purchaseorder> purchaseOrderList = new ArrayList<Purchaseorder>();
 				purchaseOrderList.add(purchaseOrder);
 
@@ -71,7 +62,7 @@ public class PurchaseorderHome {
 					if (poResObj.getStatusMessage().equals(Constants.dataSaved)
 							&& poResObj.getPrimaryIdList().size() > 0) {
 						// Fetching the purchase order id.
-						int purchaseOrderId = poResObj.getPrimaryIdList().get(0);
+						purchaseOrderId = poResObj.getPrimaryIdList().get(0);
 
 						// Creating a POI List to be saved.
 						PurchaseorderitemHome poDao = new PurchaseorderitemHome();
@@ -79,11 +70,9 @@ public class PurchaseorderHome {
 								shoppingCartInfo);
 
 						// Saving the POI List.
-						poiResObj = dbManager.saveNewData(purchaseOrderItemList);
-
+						dbManager.saveNewData(purchaseOrderItemList);
 					}
 				}
-
 			}
 
 			dbManager.cleanUpSession();
@@ -91,7 +80,40 @@ public class PurchaseorderHome {
 			log.error(e.getLocalizedMessage(), e);
 		}
 
-		return poiResObj;
+		return purchaseOrderId;
 	}
 
+	/**
+	 * Confirms the order based on payment info status
+	 *
+	 * @param purchaseOrder
+	 * @param shippingInfo
+	 * @param paymentInfo
+	 * @return
+	 */
+	public boolean confirmOrder(Purchaseorder purchaseOrder, Shipping shippingInfo, Paymentinfo paymentInfo) {
+		boolean flag = false;
+		if (!purchaseOrder.equals(null) && !paymentInfo.getPaymentInfoStatus().isEmpty()) {
+			// Setting the status in the purchase order and hardcoding the flag
+			// value for approval/rejection.
+			switch (paymentInfo.getPaymentInfoStatus()) {
+			case "Approved":
+				purchaseOrder.setPurchaseOrderStatus(Types.PurchaseOrder.Approved.toString());
+				flag = true;
+				break;
+			case "Rejected":
+				purchaseOrder.setPurchaseOrderStatus(Types.PurchaseOrder.Rejected.toString());
+				flag = false;
+				break;
+			}
+
+			List<Purchaseorder> purchaseOrderList = new ArrayList<Purchaseorder>();
+			purchaseOrderList.add(purchaseOrder);
+
+			// Saving the purchase order.
+			dbManager.UpdateData(purchaseOrderList);
+		}
+
+		return flag;
+	}
 }
