@@ -19,7 +19,7 @@
 
 <table>
                 <tr>
-					<td class="fo">Select Genre  :&nbsp;</td>
+					<td class="form-title">Select Genre  :&nbsp;</td>
 					<td>
 						<select name="Genre" class="form-fi" >
   						<option value="Rock" class="form-fi" id="Rock" >Rock</option>
