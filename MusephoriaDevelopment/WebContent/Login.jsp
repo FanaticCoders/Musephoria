@@ -10,8 +10,9 @@
 <link rel="stylesheet" href="Resources/css/style.css" type="text/css" />
 <title>Login</title>
 </head>
-<div id="content">
 <body background="Resources/Background.jpg">
+<div id="content">
+
 <form class="form-container" method="post" action="Login" >
 <div class="form-title"><h2>Login</h2></div>
 <div class="form-title">Username</div>

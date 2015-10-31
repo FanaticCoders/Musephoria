@@ -10,9 +10,9 @@
 <title>Home</title>
 </head>
 
-
+<body background="Resources/Background.jpg">
 <div id="content">
-	<body background="Resources/Background.jpg">
+	
 		<form class="form-container" method=post>
 
 			<div class="submit-container">
@@ -24,6 +24,7 @@
 		</form>
 
 
-	</body>
+	
 </div>
+</body>
 <%@ include file="Footer.jsp"%>

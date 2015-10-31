@@ -8,9 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="Resources/css/style.css" type="text/css" />
 </head>
-<div class="submit-button" align="Right">
 
-	<body>
+<body>
+<div class="head-container" align="Right">
 
 		<%
 			String username = (String) request.getSession().getAttribute("username");
@@ -21,29 +21,29 @@
 			if ((username == null) || (username == "")) {
 		%>
 		<div class="header">
-			<h3 align="right">Welcome Guest</h3>
-			<a href="Login.jsp">Login</a>
+			<h3 align="right" class="form-title">Welcome Guest</h3>
+			<a href="Login.jsp" class="form-title">Login</a>
 
 			<form method="post" action="Cart">
-				<a href="Mycart">MyCart</a>
+				<a href="Mycart" class="form-title">MyCart</a>
 			</form>
 		</div>
 
 		<%
 			} else {
 		%>
-		<h3 align="right">Welcome ${username}</h3>
+		<h3 align="right" class="form-title">Welcome ${username}</h3>
 		<form method="post" action="Logout">
-			<a href="Logout">Logout</a>
+			<a href="Logout" class="form-title">Logout</a>
 		</form>
 		<form method="post" action="Cart">
-			<a href="Mycart">MyCart</a>
+			<a href="Mycart" class="form-title">MyCart</a>
 		</form>
 		<%
 			}
 		%>
 	
 </div>
-
 </body>
+
 </html>
