@@ -2,23 +2,16 @@
 <html>
 <head>
 <title>About Us</title>
+<link rel="stylesheet" href="Resources/css/style.css" type="text/css" />
 </head>
-
-<div id="background">
-<img src="Resources/Background.jpg" class="stretch">
+<body background="Resources/Background.jpg">
+<div class="form-container">
+<div class="form-title">About Us</div>
+<div class="form-title"><h2>We are Musephoria</h2></div>
+<div class="form-title">Team Fanatic Coders</div>
+<div class="form-title">University of Ottawa</div>
+<div class="form-title">fanaticcoders@gmail.com</div>
 </div>
 
-		<center><h3>About Us</h3></center>
-		<font size="3" color="red" face ="arial" >
-		<p>we are musephoria</p>
-		<br/>
-		<br/><b> Team Name : </b> Fanatic coders
-		<br/><br/><b> Address :</b> University Of Ottawa
-		
-		<br/><br/><b>E-mail ID :</b> xyz@gmail.com
-		
-		</font>
-		<br><br><br><br>
-		
 </body>
 </html>
