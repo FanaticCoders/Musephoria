@@ -16,7 +16,7 @@
 		<form class="form-container" method=post>
 
 			<div class="submit-container">
-				Welcome to MusePhoria!<br>
+				<p class="form-title">Welcome to MusePhoria!</p><br>
 				<br>
 				<button class="submit-button" type="submit"
 					formaction="ProductCatalogue">Click here to Enter</button>
