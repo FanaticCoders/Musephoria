@@ -4,6 +4,7 @@ LIMIT 0, 400
 
 -- Date: 2015-10-30 23:05
 */
+use Musephoria;
 INSERT INTO `cd` (`CdId`,`Name`,`Description`,`Price`,`Quantity`,`Genre`,`Artist`,`Year`,`Rating`,`Review`,`Language`,`NumberOfTrack`,`AlbumArt`,`IsCdActive`) VALUES (1001,'American Idiot','American Idiot is the seventh studio album by American rock band Green Day. Produced by Rob Cavallo, the album was released on September 20, 2004 by Reprise Records',12,25,'Rock','Green Day',2004,'Excellent','Excellent','Englisg',10,NULL,1);
 INSERT INTO `cd` (`CdId`,`Name`,`Description`,`Price`,`Quantity`,`Genre`,`Artist`,`Year`,`Rating`,`Review`,`Language`,`NumberOfTrack`,`AlbumArt`,`IsCdActive`) VALUES (1002,'Lost Highway','Lost Highway is the tenth studio album by American rock band Bon Jovi. Produced by John Shanks and Dann Huff the album was recorded at Black Bird Studios, Nashville and NGR Recording, Hollywood.',10,10,'Rock','Jon Bon Jovi',2007,'Very Good','Good Music','English',12,NULL,1);
 INSERT INTO `cd` (`CdId`,`Name`,`Description`,`Price`,`Quantity`,`Genre`,`Artist`,`Year`,`Rating`,`Review`,`Language`,`NumberOfTrack`,`AlbumArt`,`IsCdActive`) VALUES (1003,'Hotel California','Hotel California is the fifth studio album by the American rock band Eagles, released on Asylum in late 1976. It is the first Eagles album without the appearance of their founding member Bernie Leadon and their first album with guitarist Joe Walsh.',17,5,'Rock','The Eagles',1976,'Excellent','Excellent Music','English',9,NULL,1);

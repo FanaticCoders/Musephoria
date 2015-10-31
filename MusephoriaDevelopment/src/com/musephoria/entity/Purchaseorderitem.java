@@ -1,6 +1,7 @@
 package com.musephoria.entity;
 // default package
-// Generated Oct 29, 2015 12:25:05 AM by Hibernate Tools 4.0.0.Final
+
+// Generated Oct 31, 2015 7:42:28 PM by Hibernate Tools 4.0.0.Final
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -24,17 +25,13 @@ public class Purchaseorderitem implements java.io.Serializable {
 	private Integer purchaseOrderItemId;
 	private Purchaseorder purchaseorder;
 	private Cd cd;
-	private String purchaseOrderItemName;
-	private float baseAmount;
 
 	public Purchaseorderitem() {
 	}
 
-	public Purchaseorderitem(Purchaseorder purchaseorder, Cd cd, String purchaseOrderItemName, float baseAmount) {
+	public Purchaseorderitem(Purchaseorder purchaseorder, Cd cd) {
 		this.purchaseorder = purchaseorder;
 		this.cd = cd;
-		this.purchaseOrderItemName = purchaseOrderItemName;
-		this.baseAmount = baseAmount;
 	}
 
 	@Id
@@ -67,24 +64,6 @@ public class Purchaseorderitem implements java.io.Serializable {
 
 	public void setCd(Cd cd) {
 		this.cd = cd;
-	}
-
-	@Column(name = "PurchaseOrderItemName", nullable = false, length = 45)
-	public String getPurchaseOrderItemName() {
-		return this.purchaseOrderItemName;
-	}
-
-	public void setPurchaseOrderItemName(String purchaseOrderItemName) {
-		this.purchaseOrderItemName = purchaseOrderItemName;
-	}
-
-	@Column(name = "BaseAmount", nullable = false, precision = 12, scale = 0)
-	public float getBaseAmount() {
-		return this.baseAmount;
-	}
-
-	public void setBaseAmount(float baseAmount) {
-		this.baseAmount = baseAmount;
 	}
 
 }
