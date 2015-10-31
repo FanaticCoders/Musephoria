@@ -89,7 +89,10 @@ public class ShippingHome {
 			Purchaseorder purchaseOrderObj = new Purchaseorder();
 			purchaseOrderObj.setPurchaseOrderId(purchaseOrderId);
 			// Setting PO Id in shippingInfo
-			shippingInfo.setPurchaseorder(purchaseOrderObj);			
+			shippingInfo.setPurchaseorder(purchaseOrderObj);
+			//Adding shippingInfo containing purchaseOrderId into shipping List
+			shipping.add(shippingInfo);
+			//Saving the shipping List
 			shipResObj = dbManager.saveNewData(shipping);
 		}
 	
