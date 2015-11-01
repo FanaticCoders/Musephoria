@@ -64,6 +64,7 @@ public class PurchaseorderHome {
 						// Fetching the purchase order id.
 						purchaseOrderId = poResObj.getPrimaryIdList().get(0);
 
+
 						// Setting the purchase order id to be sent to shipping info & purchase order item.
 						Purchaseorder newPurchaseOrderObj = new Purchaseorder();
 						newPurchaseOrderObj.setPurchaseOrderId(purchaseOrderId);
