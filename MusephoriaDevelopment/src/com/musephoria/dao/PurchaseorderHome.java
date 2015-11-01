@@ -14,10 +14,8 @@ import org.apache.commons.logging.LogFactory;
 import com.musephoria.dbmanager.DBManager;
 import com.musephoria.entity.Paymentinfo;
 import com.musephoria.entity.Purchaseorder;
-import com.musephoria.entity.Purchaseorderitem;
 import com.musephoria.entity.Result;
 import com.musephoria.entity.Shipping;
-import com.musephoria.util.Constants;
 import com.musephoria.util.Types;
 
 /**
@@ -56,44 +54,14 @@ public class PurchaseorderHome {
 				purchaseOrderList.add(purchaseOrder);
 
 				// Saving the purchase order.
-				Result poResObj = dbManager.saveNewData(purchaseOrderList);
+				Result poResObj = dbManager.upDateEntity(purchaseOrderList);
+				dbManager.cleanUpSession();
 
-				if (!poResObj.equals(null)) {
-					if (poResObj.getStatusMessage().equals(Constants.dataSaved)
-							&& poResObj.getPrimaryIdList().size() > 0) {
-						// Fetching the purchase order id.
-						purchaseOrderId = poResObj.getPrimaryIdList().get(0);
-
-
-						// Setting the purchase order id to be sent to shipping info & purchase order item.
-						Purchaseorder newPurchaseOrderObj = new Purchaseorder();
-						newPurchaseOrderObj.setPurchaseOrderId(purchaseOrderId);
-
-						// Creating a POI List to be saved.
-						PurchaseorderitemHome poDao = new PurchaseorderitemHome();
-						List<Purchaseorderitem> purchaseOrderItemList = poDao.createPurchaseOrderItem(newPurchaseOrderObj,
-								shoppingCartInfo);
-
-						// Saving the POI List.
-						dbManager.saveNewData(purchaseOrderItemList);
-
-						if(!shippingInfo.equals(null))
-						{
-							shippingInfo.setPurchaseorder(newPurchaseOrderObj);
-
-							List<Shipping> shippingList = new ArrayList<Shipping>();
-							shippingList.add(shippingInfo);
-
-							// Saving the Shipping Info.
-							dbManager.saveNewData(shippingList);
-						}
-					}
-				}
-
+				PurchaseorderitemHome poiDao = new PurchaseorderitemHome();
+				purchaseOrderId = poiDao.createPurchaseOrderItem(poResObj, shoppingCartInfo, shippingInfo);
 
 			}
 
-			dbManager.cleanUpSession();
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);
 		}
@@ -134,4 +102,6 @@ public class PurchaseorderHome {
 
 		return flag;
 	}
+
+
 }
