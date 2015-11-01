@@ -72,21 +72,8 @@ public class NewCustomer extends HttpServlet {
 
 		// Checking if the re-typed password is same as the original password
 		if (!password.equals(rePassword)) {
-			request.setAttribute("fname", firstName);
-			request.setAttribute("lname", lastName);
-			request.setAttribute("sex", sex);
-			request.setAttribute("usr", userName);
-			request.setAttribute("dob", dateOfBirth);
-			request.setAttribute("addr", address);
-			request.setAttribute("city", city);
-			request.setAttribute("prov", province);
-			request.setAttribute("country", country);
-			request.setAttribute("zip", zipCode);
-			request.setAttribute("email", email);
-			request.setAttribute("phone", phone);
 
 			request.setAttribute("message", "Passwords do not match, please enter a valid password");
-			out.println("Passwords do not match, please enter a valid password");
 			request.getRequestDispatcher("Register.jsp").forward(request, response);
 		} else {
 			accountInfo.setUserName(userName);
@@ -109,12 +96,10 @@ public class NewCustomer extends HttpServlet {
 			result = opc.createAccount(userName, accountInfo);
 			if (result.equals(Constants.accountCreatedMessage)) {
 				request.setAttribute("message", "Account Creation Successful,please login with your credentials");
-				out.println("Account Creation Successful,please login with your credentials");
 				request.getRequestDispatcher("Login.jsp").forward(request, response);
 
 			} else {
 				request.setAttribute("message", "Username Exists, Please select another username");
-				out.println("Username Exists, Please select another username");
 				request.getRequestDispatcher("Register.jsp").forward(request, response);
 
 			}
