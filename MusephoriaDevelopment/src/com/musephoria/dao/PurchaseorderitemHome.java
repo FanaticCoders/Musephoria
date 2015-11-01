@@ -24,42 +24,36 @@ import com.musephoria.entity.Purchaseorderitem;
 @Stateless
 public class PurchaseorderitemHome {
 
-
 	private static final Log log = LogFactory.getLog(PurchaseorderitemHome.class);
 
 	/**
 	 * Creates a Purchase Order Item List based on the Purchase Order ID.
+	 *
 	 * @param purchaseOrderId
 	 * @param shoppingCartInfo
 	 * @return
 	 */
-	public List<Purchaseorderitem> createPurchaseOrderItem(int purchaseOrderId, List<Integer> shoppingCartInfo) {
+	public List<Purchaseorderitem> createPurchaseOrderItem(Purchaseorder purchaseOrder,
+			List<Integer> shoppingCartInfo) {
 		List<Purchaseorderitem> purchaseOrderItemList = new ArrayList<Purchaseorderitem>();
-
 		try {
-			if (purchaseOrderId > 0 && !shoppingCartInfo.equals(null)) {
+			if (purchaseOrder.getPurchaseOrderId() > 0 && !shoppingCartInfo.equals(null)) {
+				for (int item : shoppingCartInfo) {
+					// Creating a POI Object.
+					Purchaseorderitem purchaseOrderItem = new Purchaseorderitem();
 
-					// Setting the PO Object with PO ID.
-					Purchaseorder purchaseOrderObj = new Purchaseorder();
-					purchaseOrderObj.setPurchaseOrderId(purchaseOrderId);
+					// Setting PO Id in POI
+					purchaseOrderItem.setPurchaseorder(purchaseOrder);
 
-					for (int item : shoppingCartInfo) {
-						// Creating a POI Object.
-						Purchaseorderitem purchaseOrderItem = new Purchaseorderitem();
+					// Setting the POI with Cd Id.
+					Cd cdObj = new Cd();
+					cdObj.setCdId(item);
+					purchaseOrderItem.setCd(cdObj);
 
-						// Setting PO Id in POI
-						purchaseOrderItem.setPurchaseorder(purchaseOrderObj);
-
-						// Setting the POI with Cd Id.
-						Cd cdObj = new Cd();
-						cdObj.setCdId(item);
-						purchaseOrderItem.setCd(cdObj);
-
-						// Adding every individual cd into POI List.
-						purchaseOrderItemList.add(purchaseOrderItem);
-
-					}
+					// Adding every individual cd into POI List.
+					purchaseOrderItemList.add(purchaseOrderItem);
 				}
+			}
 
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);

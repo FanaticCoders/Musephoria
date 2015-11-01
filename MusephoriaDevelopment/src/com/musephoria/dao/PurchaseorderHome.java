@@ -64,15 +64,32 @@ public class PurchaseorderHome {
 						// Fetching the purchase order id.
 						purchaseOrderId = poResObj.getPrimaryIdList().get(0);
 
+						// Setting the purchase order id to be sent to shipping info & purchase order item.
+						Purchaseorder newPurchaseOrderObj = new Purchaseorder();
+						newPurchaseOrderObj.setPurchaseOrderId(purchaseOrderId);
+
 						// Creating a POI List to be saved.
 						PurchaseorderitemHome poDao = new PurchaseorderitemHome();
-						List<Purchaseorderitem> purchaseOrderItemList = poDao.createPurchaseOrderItem(purchaseOrderId,
+						List<Purchaseorderitem> purchaseOrderItemList = poDao.createPurchaseOrderItem(newPurchaseOrderObj,
 								shoppingCartInfo);
 
 						// Saving the POI List.
 						dbManager.saveNewData(purchaseOrderItemList);
+
+						if(!shippingInfo.equals(null))
+						{
+							shippingInfo.setPurchaseorder(newPurchaseOrderObj);
+
+							List<Shipping> shippingList = new ArrayList<Shipping>();
+							shippingList.add(shippingInfo);
+
+							// Saving the Shipping Info.
+							dbManager.saveNewData(shippingList);
+						}
 					}
 				}
+
+
 			}
 
 			dbManager.cleanUpSession();

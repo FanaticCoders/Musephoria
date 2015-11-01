@@ -31,11 +31,11 @@
 
 		<!-- Enity Class Mapping -->
 		<mapping class="com.musephoria.entity.Cd" />
-		<mapping class="com.musephoria.entity.Customer" />
-		<mapping class="com.musephoria.entity.Paymentinfo" />
+		<mapping class="com.musephoria.entity.Customer" />		
 		<mapping class="com.musephoria.entity.Purchaseorder" />
-		<mapping class="com.musephoria.entity.Shipping" />
 		<mapping class="com.musephoria.entity.Purchaseorderitem" />
+		<mapping class="com.musephoria.entity.Shipping" />
+		
 
 
 	</session-factory>
