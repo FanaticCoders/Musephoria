@@ -54,6 +54,7 @@ public final class Constants {
 	public static final String getProductInfo = "getProductInfo";
 	public static final String getCartItems = "getCartItems";
 	public static final String getCustomerIdbyUsername = "getCustomerIdbyUsername";
+	public static final String getLastId = "getLastId";
 
 	// Log Messages
 
