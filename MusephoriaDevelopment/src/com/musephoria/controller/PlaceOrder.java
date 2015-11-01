@@ -54,8 +54,9 @@ public class PlaceOrder extends HttpServlet {
 		Purchaseorder po = new Purchaseorder();
 		Customer cust = new Customer();
 		int resultPoId = 0;
+		int customerId = (int)request.getSession().getAttribute("custId");
 		
-		cust.setCustomerId(myCart.customerId);
+		cust.setCustomerId(customerId);
 		
 		List<Cd> temp = myCart.getCdList();
 		List<Integer> cdIdList = new ArrayList<Integer>();

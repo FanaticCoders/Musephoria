@@ -18,7 +18,6 @@ import com.musephoria.webserviceclient.*;
 public class ShoppingCart {
 
 	public List<Cd> cdList;
-	public int customerId;
 	public float totalPrice;
 	public float tax;
 	public int totalQuantity;
@@ -26,7 +25,6 @@ public class ShoppingCart {
 	
 	public ShoppingCart(){
 		cdList = new ArrayList<Cd>();
-		customerId = 0;
 		totalPrice = 0.00f;
 		tax = 0.00f;
 		totalQuantity = 0;
@@ -41,16 +39,6 @@ public class ShoppingCart {
 
 	public void setTax(float tax) {
 		this.tax = tax;
-	}
-
-
-	public int getCustomerId() {
-		return customerId;
-	}
-
-
-	public void setCustomerId(int customerId) {
-		customerId = customerId;
 	}
 
 	
