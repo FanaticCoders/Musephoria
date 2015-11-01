@@ -228,6 +228,33 @@ public class DBManager {
 		return resObj;
 	}
 
+	public Result upDateEntity(List<?> dataList) {
+		Result resObj = null;
+	//	List<Integer> primaryIdList = new ArrayList<Integer>();
+		try {
+			if (!dataList.equals(null)) {
+				{
+					// Iterating the items in the list.
+					Iterator<?> item = dataList.iterator();
+					while (item.hasNext()) {
+						hSession.saveOrUpdate(item.next());
+						log.info(Constants.saveMethodExecuted);
+					}
+				}
+			}
+
+			// Setting the result object with success information.
+			resObj = setResultObject(null, null, 0, Constants.successCode,
+					Constants.dataSaved);
+		} catch (Exception e) {
+			// Setting the result object with failure information.
+			resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.dataNotSaved);
+			log.error(e.getLocalizedMessage(), e);
+		}
+
+		return resObj;
+	}
+
 	/**
 	 * Deletes data from DB Table.
 	 *
