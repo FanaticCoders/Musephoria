@@ -2463,42 +2463,42 @@
             
 
                         /**
-                        * field for CustomerId
+                        * field for Customer
                         */
 
                         
-                                    protected int localCustomerId ;
+                                    protected Customer localCustomer ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
                            *   in the serialized XML
                            */
-                           protected boolean localCustomerIdTracker = false ;
+                           protected boolean localCustomerTracker = false ;
 
-                           public boolean isCustomerIdSpecified(){
-                               return localCustomerIdTracker;
+                           public boolean isCustomerSpecified(){
+                               return localCustomerTracker;
                            }
 
                            
 
                            /**
                            * Auto generated getter method
-                           * @return int
+                           * @return Customer
                            */
-                           public  int getCustomerId(){
-                               return localCustomerId;
+                           public  Customer getCustomer(){
+                               return localCustomer;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param CustomerId
+                               * @param param Customer
                                */
-                               public void setCustomerId(int param){
-                            localCustomerIdTracker = true;
+                               public void setCustomer(Customer param){
+                            localCustomerTracker = true;
                                    
-                                            this.localCustomerId=param;
+                                            this.localCustomer=param;
                                        
 
                                }
@@ -2856,20 +2856,19 @@
 
                
                    }
-                if (localCustomerIdTracker){
-                                    namespace = "http://entity.musephoria.com/xsd";
-                                    writeStartElement(null, namespace, "customerId", xmlWriter);
-                             
-                                               if (localCustomerId==java.lang.Integer.MIN_VALUE) {
-                                           
-                                                         writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
-                                                      
-                                               } else {
-                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCustomerId));
-                                               }
-                                    
-                                   xmlWriter.writeEndElement();
-                             } if (localPurchaseOrderIdTracker){
+                if (localCustomerTracker){
+                                    if (localCustomer==null){
+
+                                        writeStartElement(null, "http://entity.musephoria.com/xsd", "customer", xmlWriter);
+
+                                       // write the nil attribute
+                                      writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                      xmlWriter.writeEndElement();
+                                    }else{
+                                     localCustomer.serialize(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","customer"),
+                                        xmlWriter);
+                                    }
+                                } if (localPurchaseOrderIdTracker){
                                     namespace = "http://entity.musephoria.com/xsd";
                                     writeStartElement(null, namespace, "purchaseOrderId", xmlWriter);
                              
@@ -3148,13 +3147,14 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                 if (localCustomerIdTracker){
-                                      elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
-                                                                      "customerId"));
-                                 
-                                elementList.add(
-                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCustomerId));
-                            } if (localPurchaseOrderIdTracker){
+                 if (localCustomerTracker){
+                            elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
+                                                                      "customer"));
+                            
+                            
+                                    elementList.add(localCustomer==null?null:
+                                    localCustomer);
+                                } if (localPurchaseOrderIdTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
                                                                       "purchaseOrderId"));
                                  
@@ -3277,33 +3277,25 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","customerId").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","customer").equals(reader.getName())){
                                 
-                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
-                                    
-
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setCustomerId(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
+                                      nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                      if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                          object.setCustomer(null);
+                                          reader.next();
                                             
-                                       } else {
-                                           
-                                           
-                                                   object.setCustomerId(java.lang.Integer.MIN_VALUE);
-                                               
-                                           reader.getElementText(); // throw away text nodes if any.
-                                       }
-                                      
-                                        reader.next();
+                                            reader.next();
+                                          
+                                      }else{
                                     
+                                                object.setCustomer(Customer.Factory.parse(reader));
+                                              
+                                        reader.next();
+                                    }
                               }  // End of if for expected property start element
                                 
                                     else {
                                         
-                                               object.setCustomerId(java.lang.Integer.MIN_VALUE);
-                                           
                                     }
                                 
                                     
@@ -3540,7 +3532,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "getAccountResponse",
-                "ns2");
+                "ns3");
 
             
 
@@ -3664,7 +3656,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns2";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -4050,7 +4042,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "createOrderResponse",
-                "ns2");
+                "ns3");
 
             
 
@@ -4163,7 +4155,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns2";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -4477,7 +4469,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "confirmOrderResponse",
-                "ns2");
+                "ns3");
 
             
 
@@ -4590,7 +4582,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns2";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -5711,7 +5703,7 @@
         /* This type was generated from the piece of schema that had
                 name = Set
                 Namespace URI = http://util.java/xsd
-                Namespace Prefix = ns3
+                Namespace Prefix = ns2
                 */
             
 
@@ -5839,7 +5831,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://util.java/xsd")){
-                return "ns3";
+                return "ns2";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -6152,7 +6144,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "createAccountResponse",
-                "ns2");
+                "ns3");
 
             
 
@@ -6282,7 +6274,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns2";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -7489,7 +7481,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "confirmOrder",
-                "ns2");
+                "ns3");
 
             
 
@@ -7721,7 +7713,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns2";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -8097,7 +8089,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "getAccount",
-                "ns2");
+                "ns3");
 
             
 
@@ -8341,7 +8333,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns2";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -8723,7 +8715,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "createOrder",
-                "ns2");
+                "ns3");
 
             
 
@@ -8976,7 +8968,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns2";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -9388,7 +9380,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "createAccount",
-                "ns2");
+                "ns3");
 
             
 
@@ -9572,7 +9564,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns2";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -10428,6 +10420,48 @@
                             
 
                         /**
+                        * field for Purchaseorders
+                        */
+
+                        
+                                    protected Set localPurchaseorders ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localPurchaseordersTracker = false ;
+
+                           public boolean isPurchaseordersSpecified(){
+                               return localPurchaseordersTracker;
+                           }
+
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return Set
+                           */
+                           public  Set getPurchaseorders(){
+                               return localPurchaseorders;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Purchaseorders
+                               */
+                               public void setPurchaseorders(Set param){
+                            localPurchaseordersTracker = true;
+                                   
+                                            this.localPurchaseorders=param;
+                                       
+
+                               }
+                            
+
+                        /**
                         * field for Sex
                         */
 
@@ -10464,48 +10498,6 @@
                             localSexTracker = true;
                                    
                                             this.localSex=param;
-                                       
-
-                               }
-                            
-
-                        /**
-                        * field for TimeStamp
-                        */
-
-                        
-                                    protected java.util.Date localTimeStamp ;
-                                
-                           /*  This tracker boolean wil be used to detect whether the user called the set method
-                          *   for this attribute. It will be used to determine whether to include this field
-                           *   in the serialized XML
-                           */
-                           protected boolean localTimeStampTracker = false ;
-
-                           public boolean isTimeStampSpecified(){
-                               return localTimeStampTracker;
-                           }
-
-                           
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.util.Date
-                           */
-                           public  java.util.Date getTimeStamp(){
-                               return localTimeStamp;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param TimeStamp
-                               */
-                               public void setTimeStamp(java.util.Date param){
-                            localTimeStampTracker = true;
-                                   
-                                            this.localTimeStamp=param;
                                        
 
                                }
@@ -10859,7 +10851,19 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             } if (localSexTracker){
+                             } if (localPurchaseordersTracker){
+                                    if (localPurchaseorders==null){
+
+                                        writeStartElement(null, "http://entity.musephoria.com/xsd", "purchaseorders", xmlWriter);
+
+                                       // write the nil attribute
+                                      writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                      xmlWriter.writeEndElement();
+                                    }else{
+                                     localPurchaseorders.serialize(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","purchaseorders"),
+                                        xmlWriter);
+                                    }
+                                } if (localSexTracker){
                                     namespace = "http://entity.musephoria.com/xsd";
                                     writeStartElement(null, namespace, "sex", xmlWriter);
                              
@@ -10873,24 +10877,6 @@
 
                                         
                                                    xmlWriter.writeCharacters(localSex);
-                                            
-                                          }
-                                    
-                                   xmlWriter.writeEndElement();
-                             } if (localTimeStampTracker){
-                                    namespace = "http://entity.musephoria.com/xsd";
-                                    writeStartElement(null, namespace, "timeStamp", xmlWriter);
-                             
-
-                                          if (localTimeStamp==null){
-                                              // write the nil attribute
-                                              
-                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localTimeStamp));
                                             
                                           }
                                     
@@ -11188,18 +11174,19 @@
                                  
                                          elementList.add(localProvince==null?null:
                                          org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localProvince));
-                                    } if (localSexTracker){
+                                    } if (localPurchaseordersTracker){
+                            elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
+                                                                      "purchaseorders"));
+                            
+                            
+                                    elementList.add(localPurchaseorders==null?null:
+                                    localPurchaseorders);
+                                } if (localSexTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
                                                                       "sex"));
                                  
                                          elementList.add(localSex==null?null:
                                          org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localSex));
-                                    } if (localTimeStampTracker){
-                                      elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
-                                                                      "timeStamp"));
-                                 
-                                         elementList.add(localTimeStamp==null?null:
-                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localTimeStamp));
                                     } if (localUserNameTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
                                                                       "userName"));
@@ -11631,6 +11618,30 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","purchaseorders").equals(reader.getName())){
+                                
+                                      nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                      if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                          object.setPurchaseorders(null);
+                                          reader.next();
+                                            
+                                            reader.next();
+                                          
+                                      }else{
+                                    
+                                                object.setPurchaseorders(Set.Factory.parse(reader));
+                                              
+                                        reader.next();
+                                    }
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","sex").equals(reader.getName())){
                                 
                                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
@@ -11641,34 +11652,6 @@
                                     
                                               object.setSex(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                            
-                                       } else {
-                                           
-                                           
-                                           reader.getElementText(); // throw away text nodes if any.
-                                       }
-                                      
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                                
-                                    else {
-                                        
-                                    }
-                                
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","timeStamp").equals(reader.getName())){
-                                
-                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
-                                    
-
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setTimeStamp(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToDate(content));
                                             
                                        } else {
                                            

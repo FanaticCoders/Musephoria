@@ -1055,7 +1055,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "getProductList",
-                "ns2");
+                "ns3");
 
             
 
@@ -1185,7 +1185,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns2";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -1524,7 +1524,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "getProductListResponse",
-                "ns2");
+                "ns3");
 
             
 
@@ -1700,7 +1700,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns2";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -2068,7 +2068,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "getCategoryList",
-                "ns2");
+                "ns3");
 
             
 
@@ -2138,7 +2138,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns2";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -2668,10 +2668,7 @@
                                * @param param IsCdActive
                                */
                                public void setIsCdActive(boolean param){
-                            
-                                       // setting primitive attribute tracker to true
-                                       localIsCdActiveTracker =
-                                       true;
+                            localIsCdActiveTracker = true;
                                    
                                             this.localIsCdActive=param;
                                        
@@ -2797,10 +2794,7 @@
                                * @param param NumberOfTrack
                                */
                                public void setNumberOfTrack(int param){
-                            
-                                       // setting primitive attribute tracker to true
-                                       localNumberOfTrackTracker =
-                                       param != java.lang.Integer.MIN_VALUE;
+                            localNumberOfTrackTracker = true;
                                    
                                             this.localNumberOfTrack=param;
                                        
@@ -2842,10 +2836,7 @@
                                * @param param Price
                                */
                                public void setPrice(float param){
-                            
-                                       // setting primitive attribute tracker to true
-                                       localPriceTracker =
-                                       !java.lang.Float.isNaN(param);
+                            localPriceTracker = true;
                                    
                                             this.localPrice=param;
                                        
@@ -3170,7 +3161,7 @@
                              
                                                if (false) {
                                            
-                                                         throw new org.apache.axis2.databinding.ADBException("isCdActive cannot be null!!");
+                                                         writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
                                                       
                                                } else {
                                                     xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIsCdActive));
@@ -3219,7 +3210,7 @@
                              
                                                if (localNumberOfTrack==java.lang.Integer.MIN_VALUE) {
                                            
-                                                         throw new org.apache.axis2.databinding.ADBException("numberOfTrack cannot be null!!");
+                                                         writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
                                                       
                                                } else {
                                                     xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localNumberOfTrack));
@@ -3232,7 +3223,7 @@
                              
                                                if (java.lang.Float.isNaN(localPrice)) {
                                            
-                                                         throw new org.apache.axis2.databinding.ADBException("price cannot be null!!");
+                                                         writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
                                                       
                                                } else {
                                                     xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPrice));
@@ -3794,17 +3785,21 @@
                                 
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","isCdActive").equals(reader.getName())){
                                 
-                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"isCdActive" +"  cannot be null");
-                                    }
+                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
                                     
 
                                     java.lang.String content = reader.getElementText();
                                     
                                               object.setIsCdActive(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToBoolean(content));
-                                              
+                                            
+                                       } else {
+                                           
+                                           
+                                           reader.getElementText(); // throw away text nodes if any.
+                                       }
+                                      
                                         reader.next();
                                     
                               }  // End of if for expected property start element
@@ -3874,17 +3869,23 @@
                                 
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","numberOfTrack").equals(reader.getName())){
                                 
-                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"numberOfTrack" +"  cannot be null");
-                                    }
+                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
                                     
 
                                     java.lang.String content = reader.getElementText();
                                     
                                               object.setNumberOfTrack(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
-                                              
+                                            
+                                       } else {
+                                           
+                                           
+                                                   object.setNumberOfTrack(java.lang.Integer.MIN_VALUE);
+                                               
+                                           reader.getElementText(); // throw away text nodes if any.
+                                       }
+                                      
                                         reader.next();
                                     
                               }  // End of if for expected property start element
@@ -3900,17 +3901,23 @@
                                 
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","price").equals(reader.getName())){
                                 
-                                    nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                    if ("true".equals(nillableValue) || "1".equals(nillableValue)){
-                                        throw new org.apache.axis2.databinding.ADBException("The element: "+"price" +"  cannot be null");
-                                    }
+                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
                                     
 
                                     java.lang.String content = reader.getElementText();
                                     
                                               object.setPrice(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToFloat(content));
-                                              
+                                            
+                                       } else {
+                                           
+                                           
+                                                   object.setPrice(java.lang.Float.NaN);
+                                               
+                                           reader.getElementText(); // throw away text nodes if any.
+                                       }
+                                      
                                         reader.next();
                                     
                               }  // End of if for expected property start element
@@ -4067,7 +4074,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "getProductInfo",
-                "ns2");
+                "ns3");
 
             
 
@@ -4180,7 +4187,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns2";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -4494,7 +4501,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "getCategoryListResponse",
-                "ns2");
+                "ns3");
 
             
 
@@ -4681,7 +4688,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns2";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -5052,7 +5059,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://webservice.musephoria.com",
                 "getProductInfoResponse",
-                "ns2");
+                "ns3");
 
             
 
@@ -5176,7 +5183,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://webservice.musephoria.com")){
-                return "ns2";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
