@@ -45,6 +45,9 @@ public class PaymentAuthorization extends HttpServlet {
 		paymentAuthorizationResult = client.confirmOrder(purchaseOrder, shippingInfo, paymentInfo);
 
 		if (paymentAuthorizationResult) {
+			request.getSession().removeAttribute("ShoppingCart");
+			request.getSession().removeAttribute("cartItem");
+			request.getSession().removeAttribute("totalCartPrice");
 			request.getRequestDispatcher("PaymentSuccessful.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("PaymentFailure.jsp").forward(request, response);
@@ -78,7 +81,7 @@ public class PaymentAuthorization extends HttpServlet {
 		
 		int requestCounter = (int) request.getSession().getAttribute("counter");
 		if (requestCounter % 5 != 0){
-			paymentInfo.setPaymentInfoStatus("Accepted");
+			paymentInfo.setPaymentInfoStatus("Approved");
 			requestCounter++;
 			request.getSession().setAttribute("counter", requestCounter);
 			processPayment(request, response, paymentInfo);
