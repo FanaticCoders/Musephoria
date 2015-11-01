@@ -37,7 +37,11 @@ public class ProductCatalogue extends HttpServlet {
 		Cd[] resObj = null;
 		String genre = request.getParameter("Genre");
 		
-		request.getSession().setAttribute("flag", 0);
+		Object flag = request.getSession().getAttribute("flag");
+		if(flag == null){
+			request.getSession().setAttribute("flag", 0);
+		}
+		
 		/*int flag = (int) request.getSession().getAttribute("flag");
 PrintWriter out = response.getWriter();
 		

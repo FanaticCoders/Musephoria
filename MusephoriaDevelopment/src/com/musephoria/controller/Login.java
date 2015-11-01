@@ -67,16 +67,18 @@ public class Login extends HttpServlet {
 					}
 
 					else {
-						if (!resObj.getResultList().equals(null)) {
+							if (!resObj.getResultList().equals(null)) {
 							custObj = (Customer) resObj.getResultList();
 							custId = custObj.getCustomerId();
+							request.getSession().setAttribute("flag", 1);
 							request.getSession().setAttribute("custId", custId);
 							request.getSession().setAttribute("username", username);
 							request.getSession().setAttribute("password", password);
 							request.getRequestDispatcher("Home.jsp").forward(request, response);
 						}
 					}
-				} else {
+				}
+				else {
 
 					request.getRequestDispatcher("Home.jsp").forward(request, response);
 				}

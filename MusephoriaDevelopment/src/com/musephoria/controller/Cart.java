@@ -52,8 +52,6 @@ public class Cart extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		//out.println(check);
-		
-		//out.println(check);
 			// call Delete from cart function.
 			//ProductCatalogServiceClient client = new ProductCatalogServiceClient();
 			removeMyCart.removeFromCart(check);

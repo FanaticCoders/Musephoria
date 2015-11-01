@@ -109,4 +109,24 @@
     <servlet-name>Logout</servlet-name>
     <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PaymentAuthorization</display-name>
+    <servlet-name>PaymentAuthorization</servlet-name>
+    <servlet-class>com.musephoria.controller.PaymentAuthorization</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PaymentAuthorization</servlet-name>
+    <url-pattern>/PaymentAuthorization</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PlaceOrder</display-name>
+    <servlet-name>PlaceOrder</servlet-name>
+    <servlet-class>com.musephoria.controller.PlaceOrder</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PlaceOrder</servlet-name>
+    <url-pattern>/PlaceOrder</url-pattern>
+  </servlet-mapping>
 </web-app>
