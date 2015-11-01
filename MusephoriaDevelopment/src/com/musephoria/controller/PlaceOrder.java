@@ -1,7 +1,6 @@
 package com.musephoria.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -16,8 +15,7 @@ import com.musephoria.webserviceclient.OrderProcessServiceClient;
 import com.musephoria.webserviceclient.OrderProcessServiceStub.Customer;
 import com.musephoria.webserviceclient.OrderProcessServiceStub.Purchaseorder;
 import com.musephoria.webserviceclient.OrderProcessServiceStub.Shipping;
-import com.musephoria.webserviceclient.ProductCatalogServiceClient;
-import com.musephoria.webserviceclient.ProductCatalogServiceStub.*;
+import com.musephoria.webserviceclient.ProductCatalogServiceStub.Cd;
 
 /**
  * Servlet implementation class PlaceOrder
@@ -37,6 +35,7 @@ public class PlaceOrder extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -44,38 +43,39 @@ public class PlaceOrder extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		
+
 		ShoppingCart myCart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
 		Purchaseorder po = new Purchaseorder();
 		Customer cust = new Customer();
 		int resultPoId = 0;
-		int customerId = (int)request.getSession().getAttribute("custId");
-		
-		cust.setCustomerId(customerId);
-		
+		cust = (Customer) request.getSession().getAttribute("custObject");
+
 		List<Cd> temp = myCart.getCdList();
 		List<Integer> cdIdList = new ArrayList<Integer>();
-		
+
 		Iterator<Cd> looper = temp.iterator();
-		
-		while(looper.hasNext()){
+
+		while (looper.hasNext()) {
 			cdIdList.add(looper.next().getCdId());
 		}
-		
+
 		po.setCustomer(cust);
+		// po.setCustomerId(customerId);
 		po.setTotalQuantity(myCart.totalQuantity);
 		po.setTotalPrice(myCart.totalPrice);
 		po.setTaxes(myCart.tax);
 		po.setPurchaseOrderStatus("Ordered");
-		
-		
+
 		Shipping shippingInfo = new Shipping();
-		
+
 		shippingInfo.setAddress(request.getParameter("address"));
 		shippingInfo.setCity(request.getParameter("city"));
 		shippingInfo.setProvince(request.getParameter("province"));
@@ -84,20 +84,18 @@ public class PlaceOrder extends HttpServlet {
 		shippingInfo.setPurchaseorder(po);
 		shippingInfo.setPhone(request.getParameter("phone"));
 		shippingInfo.setIsShippingActive(true);
-		
-		
+
 		OrderProcessServiceClient client = new OrderProcessServiceClient();
 		resultPoId = client.createOrder(cdIdList, po, shippingInfo);
 		request.getSession().setAttribute("resultPoId", resultPoId);
-		
-		PrintWriter out = response.getWriter();
-		out.print(resultPoId);
-		
+
+		/*
+		 * PrintWriter out = response.getWriter(); out.print(resultPoId);
+		 */
 		request.setAttribute("purchaseOrderId", resultPoId);
-		
+
 		request.getRequestDispatcher("Payment.jsp").forward(request, response);
-		
-		
+
 	}
 
 }

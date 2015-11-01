@@ -2,8 +2,6 @@ package com.musephoria.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Timestamp;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -104,8 +102,6 @@ public class NewCustomer extends HttpServlet {
 			accountInfo.setEmail(email);
 			accountInfo.setPhone(phone);
 			accountInfo.setDefaultPaymentInfo(Types.PaymentInfo.Credit.toString());
-			Date today = new Date();
-			accountInfo.setTimeStamp(new Timestamp(today.getTime()));
 			accountInfo.setIsCustomerActive(true);
 
 			// Calling the client class for OrderProcess Web Service
