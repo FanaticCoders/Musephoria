@@ -1,7 +1,7 @@
 <!--  References
 http://stackoverflow.com/questions/42763/is-there-a-max-number-of-options-values-in-html-drop-down-control -->
 
-<%-- <script src="${pageContext.request.contextPath}/jquery-1.11.3.min.js"></script>
+<script src="${pageContext.request.contextPath}/jquery-1.11.3.min.js"></script>
 <script>
 	$(document).ready(function() {
 		for (var i = 1; i <= ${cddetail.quantity}; i++) {
@@ -10,7 +10,7 @@ http://stackoverflow.com/questions/42763/is-there-a-max-number-of-options-values
 			sel.options[sel.options.length] = new Option(name, i);
 		}
 	});
-</script> --%>
+</script>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -18,48 +18,48 @@ http://stackoverflow.com/questions/42763/is-there-a-max-number-of-options-values
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 
-<%-- <%@ include file="Header.jsp"%>
- --%>
+<%@ include file="Header.jsp"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<!-- <link rel="stylesheet" href="Resources/css/style.css" type="text/css" />
- --><title>Login</title>
+<link rel="stylesheet" href="Resources/css/style.css" type="text/css" />
+<title>Login</title>
 </head>
+
 <body background="Resources/Background.jpg">
 <div id="content">
 	<br>
 	
-	<form method="post" action="AddToCart">
-	<table  border="3" bordercolor="white" align="center">
+	<form class="form-container"  method="post" action="AddToCart">
+	<table  border="3" bordercolor="Black" align="center">
 		<tr>
 			<td> <img src="AlbumArt/${cddetail.cdId}.jpg"  width="150px" /></td>
 		</tr>
 		<tr>
-			<td>Name: ${cddetail.name}</td>
+			<td><font color="white">Name: ${cddetail.name}</font></td>
 		</tr>
 		<tr>
-			<td Width="370px">Description: ${cddetail.description}</td>
+			<td Width="370px"><font color="white">Description: ${cddetail.description}</font></td>
 		</tr>
 		<tr>
-			<td>Price $:${cddetail.price}</td>
+			<td><font color="white">Price $:${cddetail.price}</font></td>
 		<tr />
 		<tr>
-			<td>Genre: ${cddetail.genre}</td>
+			<td><font color="white">Genre: ${cddetail.genre}</font></td>
 		</tr>
 		<tr>
-			<td>Artist: ${cddetail.artist}</td>
+			<td><font color="white">Artist: ${cddetail.artist}</font></td>
 		</tr>
 		<tr>
-			<td>Year: ${cddetail.year}</td>
+			<td><font color="white">Year: ${cddetail.year}</font></td>
 		</tr>
 		<tr>
-			<td>Rating: ${cddetail.rating}</td>
+			<td><font color="white">Rating: ${cddetail.rating}</font></td>
 		</tr>
 		<tr>
-			<td>Review: ${cddetail.review}</td>
+			<td><font color="white">Review: ${cddetail.review}</font></td>
 		</tr>
 		<tr>
-			<td>Language: ${cddetail.language}</td>
+			<td><font color="white">Language: ${cddetail.language}</font></td>
 		</tr>
 		<!-- <tr>
 			<td>Quantity:<select id="list" class="form-fi">
@@ -68,13 +68,15 @@ http://stackoverflow.com/questions/42763/is-there-a-max-number-of-options-values
 
 		</tr> -->
 		<tr>
-			<td align="center"><input type="submit" value="Add to Cart"
+			<td align="center"><input type="submit" class ="submit-button" value="Add to Cart"
 				></td>
 		</tr>
 
 	</table>
 	</form>
+	
 	</div>
 	
-</body><%-- 
-<%@ include file="Footer.jsp"%> --%>
+</body>
+<%@ include file="Footer.jsp"%>
+</html>

@@ -34,7 +34,7 @@ $(document).ready(function(){
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="Resources/css/style.css" type="text/css" />
-<title>Product Catalogue</title>
+<title>Login</title>
 </head>
 
 <body background="Resources/Background.jpg">
