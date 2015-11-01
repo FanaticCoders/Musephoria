@@ -3,8 +3,6 @@
  */
 package com.musephoria.webservice;
 
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.musephoria.dao.CustomerHome;
@@ -25,7 +23,7 @@ public class OrderProcessService implements IOrderProcessService {
 	 * Creates an order based on shopping cart info & shipping info.
 	 */
 	@Override
-	public int createOrder(List<Integer> shoppingCartInfo, Purchaseorder purchaseOrder, Shipping shippingInfo) {
+	public int createOrder(int[] shoppingCartInfo, Purchaseorder purchaseOrder, Shipping shippingInfo) {
 		PurchaseorderHome poDao = new PurchaseorderHome();
 		int result = poDao.createOrder(shoppingCartInfo, purchaseOrder, shippingInfo);
 		return result;

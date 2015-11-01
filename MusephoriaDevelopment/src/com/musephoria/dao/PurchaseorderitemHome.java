@@ -34,7 +34,7 @@ public class PurchaseorderitemHome {
 	 * @return
 	 */
 	public List<Purchaseorderitem> createPurchaseOrderItem(Purchaseorder purchaseOrder,
-			List<Integer> shoppingCartInfo) {
+			int[] shoppingCartInfo) {
 		List<Purchaseorderitem> purchaseOrderItemList = new ArrayList<Purchaseorderitem>();
 		try {
 			if (purchaseOrder.getPurchaseOrderId() > 0 && !shoppingCartInfo.equals(null)) {

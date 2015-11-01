@@ -48,7 +48,7 @@ public class PurchaseorderHome {
 	 * @param shippingInfo
 	 * @return
 	 */
-	public int createOrder(List<Integer> shoppingCartInfo, Purchaseorder purchaseOrder, Shipping shippingInfo) {
+	public int createOrder(int[] shoppingCartInfo, Purchaseorder purchaseOrder, Shipping shippingInfo) {
 		int purchaseOrderId = 0;
 		try {
 			if (!purchaseOrder.equals(null)) {

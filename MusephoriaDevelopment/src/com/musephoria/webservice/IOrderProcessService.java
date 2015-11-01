@@ -3,8 +3,6 @@
  */
 package com.musephoria.webservice;
 
-import java.util.List;
-
 import com.musephoria.entity.Customer;
 import com.musephoria.entity.Paymentinfo;
 import com.musephoria.entity.Purchaseorder;
@@ -23,7 +21,7 @@ public interface IOrderProcessService {
 	 * @param shippingInfo
 	 * @return
 	 */
-	public int createOrder(List<Integer> shoppingCartInfo, Purchaseorder purchaseOrder, Shipping shippingInfo);
+	public int createOrder(int[] shoppingCartInfo, Purchaseorder purchaseOrder, Shipping shippingInfo);
 
 	/**
 	 * Interface method to create an account.

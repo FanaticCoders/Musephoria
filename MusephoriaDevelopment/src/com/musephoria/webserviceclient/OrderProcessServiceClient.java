@@ -47,11 +47,12 @@ public class OrderProcessServiceClient {
 
 			// Reference :
 			// http://stackoverflow.com/questions/960431/how-to-convert-listinteger-to-int-in-java
-			int[] tempArray = shoppingCartInfo.stream().mapToInt(i -> i).toArray();
+			int[] cdIdArray = shoppingCartInfo.stream().mapToInt(i -> i).toArray();
 
 			// Setting the parameters in the create order parameter object.
 			CreateOrder parameter = new CreateOrder();
-			parameter.setShoppingCartInfo(tempArray);
+			parameter.setShoppingCartInfo(cdIdArray);
+			parameter.setPurchaseOrder(purchaseOrder);
 			parameter.setShippingInfo(shippingInfo);
 
 			// Calling the WebService to capture the response.
