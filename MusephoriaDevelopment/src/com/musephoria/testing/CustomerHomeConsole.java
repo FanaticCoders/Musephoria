@@ -3,9 +3,6 @@
  */
 package com.musephoria.testing;
 
-import java.sql.Timestamp;
-import java.util.Date;
-
 import com.musephoria.helper.Helper;
 import com.musephoria.util.Types;
 import com.musephoria.webserviceclient.OrderProcessServiceClient;
@@ -21,7 +18,7 @@ public class CustomerHomeConsole {
 	/**
 	 * @param args
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+
 	public static void main(String[] args) {
 		try {
 
@@ -43,18 +40,15 @@ public class CustomerHomeConsole {
 			accountInfo.setEmail("email");
 			accountInfo.setPhone("phone");
 			accountInfo.setDefaultPaymentInfo(Types.PaymentInfo.Credit.toString());
-			Date today = new Date();
-			accountInfo.setTimeStamp(new Timestamp(today.getTime()));
 			accountInfo.setIsCustomerActive(true);
 
-
-			/*String res = client.createAccount(accountInfo.getUserName(), accountInfo);
-			System.out.println(res);*/
+			/*
+			 * String res = client.createAccount(accountInfo.getUserName(),
+			 * accountInfo); System.out.println(res);
+			 */
 
 			Result res1 = client.getAccount("monis256", "12334", accountInfo);
 			System.out.println(res1.getStatusMessage());
-
-
 
 			// Do Not Delete this. For Testing
 			/*
