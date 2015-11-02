@@ -14,22 +14,19 @@ import com.musephoria.webserviceclient.OrderProcessServiceStub.Purchaseorder;
 import com.musephoria.webserviceclient.OrderProcessServiceStub.Shipping;
 
 /**
- * Servlet implementation class PaymentAuthorization
+ * Servlet implementing Payment Authorization functionality for the site.
  */
 public class PaymentAuthorization extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public PaymentAuthorization() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Method that is used to finalize a purchase order and category specified
+	 * otherwise displays the list of products based on the specified category.
+	 * @param request
+	 * @param response
+	 * @param paymentInfo
+	 * @throws ServletException
+	 * @throws IOException
 	 */
 
 	private void processPayment(HttpServletRequest request, HttpServletResponse response, Paymentinfo paymentInfo)
@@ -43,6 +40,13 @@ public class PaymentAuthorization extends HttpServlet {
 		int purchaseOrderId = (int) request.getSession().getAttribute("resultPoId");
 		purchaseOrder.setPurchaseOrderId(purchaseOrderId);
 
+		/*
+		 * Invoking Purchase Order DAO through Web Service(Order Process
+		 * Service) to get the confirmation of the payment based on the payment
+		 * info given by the user and returning result object containing the
+		 * authentication status message.
+		 */
+
 		paymentAuthorizationResult = client.confirmOrder(purchaseOrder, shippingInfo, paymentInfo);
 
 		if (paymentAuthorizationResult) {
@@ -51,53 +55,52 @@ public class PaymentAuthorization extends HttpServlet {
 			request.getSession().removeAttribute("totalCartPrice");
 			request.getSession().setAttribute("status", Constants.successMessage);
 			response.sendRedirect("PaymentStatus.jsp");
-			/*request.getRequestDispatcher("PaymentStatus.jsp").forward(request, response);*/
+
 		} else {
 			request.getSession().setAttribute("status", Constants.errorMessage);
 			response.sendRedirect("PaymentStatus.jsp");
-			/*request.getRequestDispatcher("PaymentStatus.jsp").forward(request, response);*/
 		}
 
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Method that gets invoked when user enters his payment details and returns
+	 * the success or failure of a payment based on the authentication message
+	 * received from the Purchase Order DAO
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
 	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		
-		
+
 		Paymentinfo paymentInfo = new Paymentinfo();
-		
+
 		Object counter = request.getSession().getAttribute("counter");
 
 		if (counter == null) {
 			request.getSession().setAttribute("counter", 1);
 		}
-		
+		/**
+		 * Handling of hard coding the 5th request to be rufused on the website
+		 */
+
 		int requestCounter = (int) request.getSession().getAttribute("counter");
-		if (requestCounter % 5 != 0){
+		if (requestCounter % 5 != 0) {
 			paymentInfo.setPaymentInfoStatus("Approved");
 			requestCounter++;
 			request.getSession().setAttribute("counter", requestCounter);
 			processPayment(request, response, paymentInfo);
-		}
-		else{
+		} else {
 			paymentInfo.setPaymentInfoStatus("Rejected");
 			requestCounter++;
 			request.getSession().setAttribute("counter", requestCounter);
 			processPayment(request, response, paymentInfo);
 		}
-		
+
 	}
-		
+
 }
