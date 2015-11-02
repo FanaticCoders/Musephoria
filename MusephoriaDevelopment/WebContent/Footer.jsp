@@ -12,9 +12,9 @@
 
 <body bgcolor="#F0F0F0">
 
-         <div id="footer">
+         <div class="head-container">
           <div align="center">
-               <p>&copy; <a href="Home.jsp" class="form-title">Musephoria</a> Design by Fanatic coders</p>
+               <p class="hyper"><a href="Home.jsp" class="form-title">Musephoria</a> Design by Fanatic coders</p>
           <a href="Home.jsp" class="form-title">Home</a> | <a href="Aboutus.jsp" class="form-title">About</a> | <a href="Aboutus.jsp" class="form-title">Contact</a>
          </div>
         </div>

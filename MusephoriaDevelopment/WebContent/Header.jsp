@@ -15,7 +15,7 @@
 		<%
 			String username = (String) request.getSession().getAttribute("username");
 		%>
-		<a href="Home.jsp"><img src="Resources/Header.png" align="left"
+		<a  href="${pageContext.request.contextPath}/ProductCatalogue" ><img src="Resources/Header.png" align="left"
 			alt="" /></a>
 		<%
 			if ((username == null) || (username == "")) {
@@ -25,7 +25,7 @@
 			<a href="Login.jsp" class="form-title">Login</a>
 
 			<form method="post" action="Cart">
-				<a href="Mycart" class="form-title">MyCart</a>
+				<a href="MyCart.jsp" class="form-title">MyCart</a>
 			</form>
 		</div>
 
@@ -37,7 +37,7 @@
 			<a href="Logout" class="form-title">Logout</a>
 		</form>
 		<form method="post" action="Cart">
-			<a href="Mycart" class="form-title">MyCart</a>
+			<a href="MyCart.jsp" class="form-title">MyCart</a>
 		</form>
 		<%
 			}

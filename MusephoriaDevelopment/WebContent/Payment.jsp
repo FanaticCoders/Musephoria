@@ -12,6 +12,7 @@
 
 <body background="Resources/Background.jpg">
 	<div id="content">
+	<form action="PaymentAuthorization" method="post">
 					<table class="form-container" border="0" align="center">
 									<td colspan="3"> 
 									<div class="abc" align="center">
@@ -20,7 +21,7 @@
 									</div>
 									</td>
 										
-								<form>	
+									
 	
 					<tr>
 					
@@ -28,7 +29,7 @@
 						<td width="25%"><br><b><font size="2" class="form-title" face="arial">Payment Type :</font></b><br></td>
 						<td width="25%"><br>
 							    <select class="form-fi" name="paymentType" style="height: 25px; width: 200px; font-size: 14px;">
-                                                            <option   value="">--SELECT--</option>
+                                                          
                                                             <option   value="Debit Card">Debit Card</option>
                                                             <option    value="Credit Card">Credit Card </option>
                                                             <option   value="INTERNET_BANKING">Internet Banking </option>
@@ -41,13 +42,13 @@
 					  <tr>
 						    <td ></td>
 						    <td><br><b><font size="2" class="form-title" color="black" face="arial">Card Number :</font></b><br></br></td>
-					            <td width="15%"><br><input class="form-fi" type="number"  style="height: 20px; width: 200px; font-size: 14px;"/><br></br></td>
+					            <td width="15%"><br><input required class="form-fi" type="text"  style="height: 20px; width: 200px; font-size: 14px;" pattern="^\d{4}-\d{4}-\d{4}-\d{4}$" placeholder="eg: 1234-1234-1234-1234"><br></br></td>
 					  </tr>
 								
                                           <tr>
 						        <td width="5%"></td>
 							<td><b><font size="2" class="form-title" color="black" face="arial">Name on Card:</font></b><br></br></td>
-						        <td><input class="form-fi" type="text" style="height: 20px; width: 200px; font-size: 14px;"/><br></br></td>
+						        <td><input required class="form-fi" type="text" style="height: 20px; width: 200px; font-size: 14px;"/><br></br></td>
 					  </tr>
 								
 					   <tr>				
@@ -56,8 +57,9 @@
                  <input class="submit-button" type="submit" value="Submit"  style="height: 30px; width: 90px; font-size: 10pt;" /> <br /> <br /></td>
 					   </tr>
 
-								   </form>
-					 </table>	
+								   
+					 </table>
+			</form>		 	
 					 <br>
 					 <br>
 					 <br>

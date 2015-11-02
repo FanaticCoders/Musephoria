@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.musephoria.util.Constants;
 import com.musephoria.webserviceclient.*;
 import com.musephoria.webserviceclient.OrderProcessServiceStub.Paymentinfo;
 import com.musephoria.webserviceclient.OrderProcessServiceStub.Purchaseorder;
@@ -48,9 +49,13 @@ public class PaymentAuthorization extends HttpServlet {
 			request.getSession().removeAttribute("ShoppingCart");
 			request.getSession().removeAttribute("cartItem");
 			request.getSession().removeAttribute("totalCartPrice");
-			request.getRequestDispatcher("PaymentSuccessful.jsp").forward(request, response);
+			request.getSession().setAttribute("status", Constants.successMessage);
+			response.sendRedirect("PaymentStatus.jsp");
+			/*request.getRequestDispatcher("PaymentStatus.jsp").forward(request, response);*/
 		} else {
-			request.getRequestDispatcher("PaymentFailure.jsp").forward(request, response);
+			request.getSession().setAttribute("status", Constants.errorMessage);
+			response.sendRedirect("PaymentStatus.jsp");
+			/*request.getRequestDispatcher("PaymentStatus.jsp").forward(request, response);*/
 		}
 
 	}

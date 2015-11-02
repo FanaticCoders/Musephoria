@@ -2,6 +2,7 @@ package com.musephoria.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -37,10 +38,12 @@ public class Cart extends HttpServlet {
 		
 		// Acquiring the list of Cd's as well as their total Cost and binding it to the current session of the user\visitor
 		List<Cd> cartItem = myCart.getCdList();
-		Float totalCartPrice = myCart.getTotalPrice();
+		double totalCartPrice = myCart.getTotalPrice();
+		totalCartPrice = Double.parseDouble(new DecimalFormat(".##").format(totalCartPrice));
 		request.getSession().setAttribute("cartItem", cartItem);
 		request.getSession().setAttribute("totalCartPrice", totalCartPrice);
-		request.getRequestDispatcher("MyCart.jsp").forward(request, response);
+		/*request.getRequestDispatcher("MyCart.jsp").forward(request, response);*/
+		response.sendRedirect("MyCart.jsp");
 		
 	}
 	
@@ -49,9 +52,7 @@ public class Cart extends HttpServlet {
 		
 		int check = Integer.parseInt(request.getParameter("cdId"));
 		
-		PrintWriter out = response.getWriter();
 		
-		//out.println(check);
 			// call Delete from cart function.
 			//ProductCatalogServiceClient client = new ProductCatalogServiceClient();
 			removeMyCart.removeFromCart(check);
@@ -68,7 +69,6 @@ public class Cart extends HttpServlet {
 	
 		int flag = (int) request.getSession().getAttribute("flag");
 		
-		PrintWriter out = response.getWriter();
 
 		ShoppingCart myCart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
 
@@ -76,7 +76,6 @@ public class Cart extends HttpServlet {
 		Cd cd = (Cd) request.getSession().getAttribute("cddetail");
 		
 		
-		out.println(flag);
 
 		// Checking if cart exists for both visitor as well as registered user
 		// If the cart doesn't exit, we create a new cart and add bind it to the
@@ -145,7 +144,6 @@ public class Cart extends HttpServlet {
 		
 		String path = request.getServletPath();
 		
-		PrintWriter out = response.getWriter();
 		
 		//out.println(path);
 		

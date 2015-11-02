@@ -46,7 +46,7 @@
 
 
 	<div id="content">
-		<form class="form-container" action="NewCustomer" method="post"
+		<form id="form" class="form-container" action="NewCustomer" method="post"
 			onsubmit="return checkPass()">
 			<fieldset>
 				<legend> Customer Information Form </legend>

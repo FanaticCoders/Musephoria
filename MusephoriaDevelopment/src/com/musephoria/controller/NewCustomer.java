@@ -74,7 +74,8 @@ public class NewCustomer extends HttpServlet {
 		if (!password.equals(rePassword)) {
 
 			request.setAttribute("message", "Passwords do not match, please enter a valid password");
-			request.getRequestDispatcher("Register.jsp").forward(request, response);
+			/*request.getRequestDispatcher("Register.jsp").forward(request, response);*/
+			response.sendRedirect("Register.jsp");
 		} else {
 			accountInfo.setUserName(userName);
 			accountInfo.setPassword(password);
@@ -97,10 +98,12 @@ public class NewCustomer extends HttpServlet {
 			if (result.equals(Constants.accountCreatedMessage)) {
 				request.setAttribute("message", "Account Creation Successful,please login with your credentials");
 				request.getRequestDispatcher("Login.jsp").forward(request, response);
+				/*response.sendRedirect("Login.jsp");*/
 
 			} else {
 				request.setAttribute("message", "Username Exists, Please select another username");
 				request.getRequestDispatcher("Register.jsp").forward(request, response);
+				/*response.sendRedirect("Register.jsp");*/
 
 			}
 

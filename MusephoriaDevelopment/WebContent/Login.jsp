@@ -9,18 +9,62 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="Resources/css/style.css" type="text/css" />
 <title>Login</title>
+
+<script language="javascript">
+function checkMessage() {
+
+		 if ("${message}" == "Account Creation Successful,please login with your credentials") {
+
+			alert("Account Creation Successful,please login with your credentials");
+			document.form.username.focus();
+		}
+		 
+ 		/*   if ("${message}" == "Username and Password doesn't match") {
+
+				alert("Username and Password doesn't match");
+				document.form.username.focus();
+		}
+		 if ("${message}" == "User Dosent Exist") {
+
+				alert("User Doesn't Exist");
+				document.form.username.focus();
+		}   */
+		 
+		 
+}
+window.onload = checkMessage();
+
+ function reCheckMessage() {
+
+	 
+	 if ("${message}" == "Username and Password doesn't match") {
+
+			alert("Username and Password doesn't match");
+			document.form.username.focus();
+	}
+	 if ("${message}" == "User Dosent Exist") {
+
+			alert("User Doesn't Exist");
+			document.form.username.focus();
+	}
+	 
+	 
+} 
+
+
+</script>
 </head>
 
 
 <body background="Resources/Background.jpg" >
 <div id="content">
 
-<form class="form-container" method=post action="Login">
+<form id ="form" class="form-container" method=post action="Login" onsubmit="return reCheckMessage()" >
 <div class="form-title"><h2>Login</h2></div>
 <div class="form-title">Username</div>
-<input class="form-field" type="text" name="username" required /><br>
+<input class="form-field" type="text" name="username" ><br>
 <div class="form-title">Password</div>
-<input class="form-field" type="password" name="password" required/><br>
+<input class="form-field" type="password" name="password" ><br>
 
 <div class="submit-container">
 <button class="submit-button" type="submit" >Submit</button>
@@ -28,12 +72,7 @@
 </div>
 <br><br><br>
 </form>
-
-<div class="loginmessage" align="Center" >
-<p> ${Message}</p>
-
-<c:remove var="Message" scope="session" /> 
-</div>
+<!-- <c:remove var="Message" scope="session" />  -->
 </div>
 </body>
 </html>

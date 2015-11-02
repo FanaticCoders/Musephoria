@@ -59,10 +59,10 @@ public class Login extends HttpServlet {
 
 				if (!resObj.equals(null)) {
 					if (resObj.getStatusMessage().equals(Constants.userNamePasswordMismatch)) {
-						request.getSession().setAttribute("Message", Constants.userNamePasswordMismatch);
+						request.setAttribute("message", Constants.userNamePasswordMismatch);
 						request.getRequestDispatcher("Login.jsp").forward(request, response);
 					} else if (resObj.getStatusMessage().equals(Constants.userNameDoesntExist)) {
-						request.getSession().setAttribute("Message", Constants.userNameDoesntExist);
+						request.setAttribute("message", Constants.userNameDoesntExist);
 						request.getRequestDispatcher("Login.jsp").forward(request, response);
 					}
 

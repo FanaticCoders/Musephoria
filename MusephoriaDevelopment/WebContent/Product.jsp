@@ -65,6 +65,7 @@ $(document).ready(function(){
 				</tr>
 			</table>
 		</form>
+		<form class="prod-container">
 		<table border="0" align="center">
 			<tr>
 				<!-- Reference : http://htmlasks.com/how_to_iterate_data_horizontally_in_jstl		 -->
@@ -73,7 +74,7 @@ $(document).ready(function(){
 					<td  align="Center"><a
 						href=" ${pageContext.request.contextPath}/ProductDetail?cdId=${Product.cdId}">
 							<img src="AlbumArt/${Product.cdId}.jpg" />
-					</a> <br /> Name : ${Product.name} <br /> Price $:${Product.price} <br />
+					</a><br /> <p class= "cart-header"> Name : ${Product.name} <br /> Price $:${Product.price} <br /></p>
 					</td>
 					<c:if test="${(loop.index + 1)  % 3  == 0}">
 			</tr>
@@ -82,7 +83,7 @@ $(document).ready(function(){
 				</c:forEach>
 			</tr>
 		</table>
-
+		</form>
 
 </body>
 <%@ include file="Footer.jsp"%>

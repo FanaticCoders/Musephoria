@@ -24,6 +24,7 @@ public final class Constants {
 	public static final String userNameDoesntExist = "User Dosent Exist";
 	public static final String passwordsMismatch = "Passwords do not match, please enter a valid password";
 	public static final String userNamePasswordMismatch = "Username and Password doesn't match";
+	public static final String errorMessage = "Payment Authorization Rejected";
 
 	// Error Codes
 	public static final int errorCode = -1;
