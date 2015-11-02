@@ -1,7 +1,6 @@
 package com.musephoria.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,38 +13,31 @@ import com.musephoria.webserviceclient.ProductCatalogServiceClient;
 import com.musephoria.webserviceclient.ProductCatalogServiceStub.Cd;
 
 /**
- * Servlet implementation class ProductCatalogue
+ * Product Catalogue servlet for fetching the list of all products if no
+ * category specified otherwise displays the list of products based on the
+ * specified category.
  */
 public class ProductCatalogue extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public ProductCatalogue() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Method to fetch the list of products.
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Cd[] resObj = null;
 		String genre = request.getParameter("Genre");
-		
+
 		Object flag = request.getSession().getAttribute("flag");
-		if(flag == null){
+		if (flag == null) {
 			request.getSession().setAttribute("flag", 0);
 		}
-		
-		/*int flag = (int) request.getSession().getAttribute("flag");
-PrintWriter out = response.getWriter();
-		
-		out.println(flag);*/
 
 		ProductCatalogServiceClient client = new ProductCatalogServiceClient();
 
@@ -60,17 +52,6 @@ PrintWriter out = response.getWriter();
 			request.getRequestDispatcher("Product.jsp").forward(request, response);
 		}
 
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

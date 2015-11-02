@@ -13,46 +13,41 @@ import com.musephoria.webserviceclient.OrderProcessServiceStub.Customer;
 import com.musephoria.webserviceclient.OrderProcessServiceStub.Result;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementing Login functionality for the site
  */
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public Login() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Method implementing the login functionality by accepting username and
+	 * password from the user, and giving status messages based on the
+	 * authentication
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		Customer custObj = null;
 		int custId;
 
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String checkusr = (String) request.getSession().getAttribute("username");
+
 		try {
 			if (checkusr == "" || checkusr == null) {
+				/*
+				 * Invoking Customer DAO through Web Service(Order Process
+				 * Service) to get account information based on the username and
+				 * password given by the user and returning result object
+				 * containing the account information and authentication status
+				 * message.
+				 */
 
 				OrderProcessServiceClient client = new OrderProcessServiceClient();
 				Result resObj = client.getAccount(username, password, null);

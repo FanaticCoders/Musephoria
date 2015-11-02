@@ -18,39 +18,23 @@ import com.musephoria.webserviceclient.OrderProcessServiceStub.Shipping;
 import com.musephoria.webserviceclient.ProductCatalogServiceStub.Cd;
 
 /**
- * Servlet implementation class PlaceOrder
+ * Servlet implementing the functionality of creating a purchase order.
  */
 public class PlaceOrder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public PlaceOrder() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Method that is used to create a purchase order after the user has viewed
+	 * the order summary as well as provided\confirmed his shipping details
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 
 		ShoppingCart myCart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
 		Purchaseorder po = new Purchaseorder();
@@ -67,14 +51,18 @@ public class PlaceOrder extends HttpServlet {
 			cdIdList.add(looper.next().getCdId());
 		}
 
+		// populating purchase order object -po with the collected cart details.
+
 		po.setCustomer(cust);
-		// po.setCustomerId(customerId);
 		po.setTotalQuantity(myCart.totalQuantity);
 		po.setTotalPrice(myCart.totalPrice);
 		po.setTaxes(myCart.tax);
 		po.setPurchaseOrderStatus("Ordered");
 
 		Shipping shippingInfo = new Shipping();
+
+		// populating the shipping information object with the collected
+		// shipping details.
 
 		shippingInfo.setAddress(request.getParameter("address"));
 		shippingInfo.setCity(request.getParameter("city"));
@@ -86,12 +74,16 @@ public class PlaceOrder extends HttpServlet {
 		shippingInfo.setIsShippingActive(true);
 
 		OrderProcessServiceClient client = new OrderProcessServiceClient();
-		resultPoId = client.createOrder(cdIdList, po, shippingInfo);
-		request.getSession().setAttribute("resultPoId", resultPoId);
 
 		/*
-		 * PrintWriter out = response.getWriter(); out.print(resultPoId);
+		 * Invoking Order Creation DAO through web service (Order Process
+		 * Service). This returns a resultant unique Purchase Order ID which
+		 * sets up association with Customer and Purchase Order Item details.
 		 */
+		
+		resultPoId = client.createOrder(cdIdList, po, shippingInfo);
+
+		request.getSession().setAttribute("resultPoId", resultPoId);
 		request.setAttribute("purchaseOrderId", resultPoId);
 
 		request.getRequestDispatcher("Payment.jsp").forward(request, response);
