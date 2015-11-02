@@ -14,20 +14,21 @@
 
 <body background="Resources/Background.jpg" >
 <div id="content">
+
 <form class="form-container" method=post action="Login">
 <div class="form-title"><h2>Login</h2></div>
 <div class="form-title">Username</div>
 <input class="form-field" type="text" name="username" required /><br>
 <div class="form-title">Password</div>
 <input class="form-field" type="password" name="password" required/><br>
+
 <div class="submit-container">
 <button class="submit-button" type="submit" >Submit</button>
-</form>
-<form  method="post" action="Register.jsp" >
-<button class="submit-button" type="submit" >New User</button>
-</form>
+<button class="submit-button" formaction="Register.jsp" type="submit" > New User  </button>
 </div>
 <br><br><br>
+</form>
+
 <div class="loginmessage" align="Center" >
 <p> ${Message}</p>
 
