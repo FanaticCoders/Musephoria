@@ -33,7 +33,7 @@
 			} else {
 		%>
 		<h3 align="right" class="form-title">Welcome ${username}</h3>
-		<form method="post" action="Logout">
+		<form  action="Logout">
 			<a href="Logout" class="form-title">Logout</a>
 		</form>
 		<form method="post" action="Cart">

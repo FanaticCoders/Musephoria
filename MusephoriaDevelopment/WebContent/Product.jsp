@@ -28,13 +28,9 @@ $(document).ready(function(){
 
 </script>
 
-
-<script language="javascript">
-	
-</script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="Resources/css/style.css" type="text/css" />
-<title>Login</title>
+<title>Products</title>
 </head>
 
 <body background="Resources/Background.jpg">
@@ -47,15 +43,15 @@ $(document).ready(function(){
 		
 		</div>
 
-		<form method="post" action="ProductCatalogue">
+		<form action="ProductCatalogue">
 			<table id="table1" align="Center">
 				<tr>
 					<td class="fo">Select Genre :&nbsp;</td>
 					<td><select name="Genre" id="dd" class="form-fi">
 					        <option value="" class="form-fi" id="All">All</option>
-							<option value="Rock" class="form-fi" id="Rock">Rock</option>
-							<option value="Pop" class="form-fi" id="Pop">Pop</option>
-							<option value="Blues" class="form-fi" id="Blues">Blues</option>
+							<c:forEach items="${CategoryList}" var="category">
+							<option value="${category}" class="form-fi" id="${category}">${category}</option>
+						</c:forEach>
 							
 					</select></td>
 				</tr>

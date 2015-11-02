@@ -47,8 +47,11 @@ public class ProductCatalogue extends HttpServlet {
 			resObj = client.getProductList(genre);
 		}
 
-		if (!resObj.equals(null)) {
+		String[] categoryList = client.getCategoryList();
+		
+		if (!resObj.equals(null) && !categoryList.equals(null)) {
 			request.setAttribute("Product", resObj);
+			request.setAttribute("CategoryList", categoryList);
 			request.getRequestDispatcher("Product.jsp").forward(request, response);
 		}
 

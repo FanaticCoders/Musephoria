@@ -13,7 +13,7 @@
 <body background="Resources/Background.jpg">
 <div id="content">
 	
-		<form class="form-container" method=post>
+		<form class="form-container">
 
 			<div class="submit-container">
 				<p class="form-title">Welcome to MusePhoria!</p><br>

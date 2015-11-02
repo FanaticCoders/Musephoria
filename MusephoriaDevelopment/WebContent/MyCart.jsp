@@ -38,7 +38,7 @@
 				method="post">
 
 					<legend> Cart Details </legend>
-					<table table border="3" bordercolor="Black" align="center">
+					<table  border="3" bordercolor="Black" align="center">
 
 						<tr>
 							<th class="cart-header">CD Name</th>
@@ -61,7 +61,7 @@
 						<td class="cart-header">Total Price</td>
 							<td class="fo">${totalCartPrice}</td>
 							<td>
-					 <button  id="Checkout"
+					 <button method="post" id="Checkout"
 					formaction="OrderCheckOut" class="checkout-button">Checkout</button>
 					</td>
 					</tr>

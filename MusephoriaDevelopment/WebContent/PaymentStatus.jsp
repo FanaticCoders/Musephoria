@@ -17,14 +17,14 @@
 		<br>
 		<c:if test="${status !='Success'}">
 		<form class="form-container" class="h2">
-		<p class="cart-header">Payment Authorization Failed</p>
+		<p class="cart-header">Credit Card Authorization Failed</p>
 		<a  href="${pageContext.request.contextPath}/ProductCatalogue" class="hyper">Back to Product List</a>
 		</form>
 		</c:if>
 		
 		<c:if test="${status =='Success'}">
 		<form class="form-container" class="h2">
-		<p class="cart-header">Payment Authorization Successful,Thank you for Shopping with us!</p>
+		<p class="cart-header">Payment Authorization Successful,Order Successfully Completed<br>Thank you for Shopping with us!</p>
 		<a  href="${pageContext.request.contextPath}/ProductCatalogue" class="hyper">Back to Product List</a>
 		</form>
 		</c:if>

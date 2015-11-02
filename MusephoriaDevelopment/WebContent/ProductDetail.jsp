@@ -1,17 +1,6 @@
 <!--  References
 http://stackoverflow.com/questions/42763/is-there-a-max-number-of-options-values-in-html-drop-down-control -->
 
-<script src="${pageContext.request.contextPath}/jquery-1.11.3.min.js"></script>
-<script>
-	$(document).ready(function() {
-		for (var i = 1; i <= ${cddetail.quantity}; i++) {
-			var name = i;
-			var sel = document.getElementById("list");
-			sel.options[sel.options.length] = new Option(name, i);
-		}
-	});
-</script>
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -61,12 +50,7 @@ http://stackoverflow.com/questions/42763/is-there-a-max-number-of-options-values
 		<tr>
 			<td><font color="white">Language: ${cddetail.language}</font></td>
 		</tr>
-		<!-- <tr>
-			<td>Quantity:<select id="list" class="form-fi">
-					<option class="form-fi">--Select--</option>
-			</select></td>
-
-		</tr> -->
+		
 		<tr>
 			<td align="center"><input type="submit" class ="submit-button" value="Add to Cart"
 				></td>
