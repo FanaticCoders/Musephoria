@@ -28,29 +28,24 @@ window.onload = check;
 <title>MyCart</title>
 </head>
 <body background="Resources/Background.jpg">
-
+<div id="content">
 <br>
-
-<table border="1" align="center">
+<form class = "form-container" action="RemoveFromCart" method = "post">
+<table border="3" align="center">
 
     <c:forEach items="${cartItem}" var="Pro">
-    <form method="POST" action="${pageContext.request.contextPath}/RemoveFromCart">
-	<input type="hidden" name="cdId" value="${Pro.cdId}" />
+    <input name="cdId" value="${Pro.cdId}" />
         <tr>
             <td> ${Pro.name}</td>
             <td>${Pro.cdId}</td>
           
             <td>${Pro.price}</td>
-            <td><input type="submit" value="Remove"	name="action" style="height:30px; width: 70px;font-size:10pt;"></td>
+            <td> <input type="submit" class="submit-button" value="${Pro.cdId}" class="submit-button"></td>
             
         </tr>
-    </form>    
     </c:forEach>
-    
     <tr>
     <td>${totalCartPrice}</td>
-    <tr>
-    <td>${flag}</td></tr>
     
   </table>
   </form>
@@ -58,6 +53,7 @@ window.onload = check;
   <form action="OrderCheckOut" method="post">
   <input class="submit-button" id="Checkout" type="submit" value="Checkout" >
   </form>
+  </div>
   </div>
 </body>
 <%@ include file="Footer.jsp" %>
