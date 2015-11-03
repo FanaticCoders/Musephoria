@@ -22,10 +22,10 @@ import com.musephoria.util.Types;
  * Home object for domain model class Purchaseorder.
  *
  * @see .Purchaseorder
- * @author Hibernate Tools
+ * @author FanaticCoders
  */
 @Stateless
-public class PurchaseorderHome {
+public class PurchaseorderHome implements IPurchaseorderHome {
 
 	DBManager dbManager;
 	private static final Log log = LogFactory.getLog(PurchaseorderHome.class);
@@ -46,6 +46,7 @@ public class PurchaseorderHome {
 	 * @param shippingInfo
 	 * @return
 	 */
+	@Override
 	public int createOrder(int[] shoppingCartInfo, Purchaseorder purchaseOrder, Shipping shippingInfo) {
 		int purchaseOrderId = 0;
 		try {
@@ -77,6 +78,7 @@ public class PurchaseorderHome {
 	 * @param paymentInfo
 	 * @return
 	 */
+	@Override
 	public boolean confirmOrder(Purchaseorder purchaseOrder, Shipping shippingInfo, Paymentinfo paymentInfo) {
 		boolean flag = false;
 		if (!purchaseOrder.equals(null) && !paymentInfo.getPaymentInfoStatus().isEmpty()) {
@@ -102,6 +104,5 @@ public class PurchaseorderHome {
 
 		return flag;
 	}
-
 
 }

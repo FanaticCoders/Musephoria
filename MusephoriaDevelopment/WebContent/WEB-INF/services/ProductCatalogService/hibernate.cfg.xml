@@ -11,7 +11,7 @@
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.search.autoregister_listeners">false</property>
-		<property name="hibernate.validator.apply_to_ddl">false</property>
+		<property name="hibernate.validator.apply_to_ddl">false</property>		
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
 		<property name="use_sql_comments">true</property>
@@ -22,8 +22,9 @@
 		<!-- Disable the second-level cache -->
 		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
 
-		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+		
 		<!-- Hibernate Pooling Configuration -->
+		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
 		<property name="hibernate.c3p0.min_size">5</property>
 		<property name="hibernate.c3p0.max_size">50</property>
 		<property name="hibernate.c3p0.timeout">300</property>
@@ -36,8 +37,6 @@
 		<mapping class="com.musephoria.entity.Purchaseorder" />
 		<mapping class="com.musephoria.entity.Purchaseorderitem" />
 		<mapping class="com.musephoria.entity.Shipping" />
-
-
 
 	</session-factory>
 </hibernate-configuration>

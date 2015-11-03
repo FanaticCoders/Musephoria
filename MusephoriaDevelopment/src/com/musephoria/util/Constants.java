@@ -4,7 +4,7 @@
 package com.musephoria.util;
 
 /**
- * @author FanaticCoder
+ * @author FanaticCoders
  *
  */
 public final class Constants {

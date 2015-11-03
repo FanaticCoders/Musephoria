@@ -1,4 +1,4 @@
-	package com.musephoria.dao;
+package com.musephoria.dao;
 // Generated Oct 19, 2015 11:46:20 PM by Hibernate Tools 4.3.1.Final
 
 import java.util.ArrayList;
@@ -19,10 +19,10 @@ import com.musephoria.util.Constants;
  * Home object for domain model class Cd.
  *
  * @see com.musephoria.entity.Cd
- * @author Hibernate Tools
+ * @author FanacticCoders
  */
 @Stateless
-public class CdHome {
+public class CdHome implements ICdHome {
 
 	DBManager dbManager;
 	private static final Log log = LogFactory.getLog(CdHome.class);
@@ -39,7 +39,7 @@ public class CdHome {
 	 *
 	 * @return
 	 */
-
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<String> getCategoryList() {
 		Result resObj = null;
@@ -65,14 +65,13 @@ public class CdHome {
 	 * @param categoryId
 	 * @return
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Cd> getProductList(String categoryId) {
 		Result resObj = null;
 		List<Cd> productlist = null;
 
-
-
-		if(categoryId == null) {
+		if (categoryId == null) {
 			categoryId = StringUtils.EMPTY;
 		}
 
@@ -105,9 +104,11 @@ public class CdHome {
 
 	/**
 	 * Get Product Info based on the product id.
+	 *
 	 * @param productId
 	 * @return
 	 */
+	@Override
 	public Cd getProductInfo(int productId) {
 		Result resObj = null;
 		Cd productInfo = new Cd();
@@ -119,7 +120,7 @@ public class CdHome {
 			try {
 				resObj = dbManager.getQueryResult(Constants.getProductInfo, parameterList);
 			} catch (Exception e) {
-				//log.error(e.getLocalizedMessage(), e);
+				// log.error(e.getLocalizedMessage(), e);
 			}
 
 			if (!resObj.equals(null) && !resObj.getResultList().isEmpty()) {

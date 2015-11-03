@@ -6,6 +6,9 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.musephoria.dbmanager.DBManager;
 import com.musephoria.entity.Customer;
 import com.musephoria.entity.Result;
@@ -15,12 +18,13 @@ import com.musephoria.util.Constants;
  * Home object for domain model class Customer.
  *
  * @see com.musephoria.entity.Customer
- * @author Hibernate Tools
+ * @author FanatiicCoders
  */
 @Stateless
-public class CustomerHome {
+public class CustomerHome implements ICustomerHome {
 
 	DBManager dbManager;
+	private static final Log log = LogFactory.getLog(CustomerHome.class);
 
 	/**
 	 * Initialises the DBManager.
@@ -29,11 +33,10 @@ public class CustomerHome {
 		dbManager = new DBManager();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.musephoria.dao.ICustomerHome#CheckIfUserExists(java.lang.String)
+	/**
+	 * Checks if the user already exists.
 	 */
+	@Override
 	public boolean checkIfAccountExists(String userName) {
 		boolean flag = false;
 		Result resObj = null;
@@ -58,19 +61,17 @@ public class CustomerHome {
 		return flag;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * com.musephoria.dao.ICustomerHome#CreateNewAccount(com.musephoria.entity.
-	 * Customer, com.musephoria.entity.Customerdetail)
+	/**
+	 * Creates an account after checking if the user exists.
 	 */
+	@Override
 	public Result createAccount(String accountName, Customer accountInfo) {
 		Result resObj = new Result();
 
 		// Checks if the userName exists in the database.
 		boolean flag = checkIfAccountExists(accountName);
 		if (flag) {
+			// Setting the error codes & messages.
 			resObj.setStatusCode(Constants.errorCode);
 			resObj.setStatusMessage(Constants.userNameExist);
 		} else {
@@ -90,8 +91,7 @@ public class CustomerHome {
 					}
 
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					log.error(e.getLocalizedMessage(), e);
 				}
 
 			}
@@ -102,13 +102,10 @@ public class CustomerHome {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * com.musephoria.dao.ICustomerHome#GetAccountInfo(com.musephoria.entity.
-	 * Customer)
+	/**
+	 * Retrives the account after doing basic validations. Returns error if validation fails.
 	 */
+	@Override
 	public Result getAccount(String accountName, String accountPassword, Customer accountInfo) {
 		Result resObj = new Result();
 

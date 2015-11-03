@@ -9,13 +9,13 @@ import com.musephoria.dao.CdHome;
 import com.musephoria.entity.Cd;
 
 /**
- * @author Admin
+ * @author FanaticCoders
  *
  */
 public class ProductCatalogService implements IProductCatalogService {
 
-	/* (non-Javadoc)
-	 * @see com.musephoria.webservice.IProductCatalogService#getCategoryList()
+	/**
+	 * Gets all the list of catagories.
 	 */
 	@Override
 	public List<String> getCategoryList() {
@@ -24,8 +24,9 @@ public class ProductCatalogService implements IProductCatalogService {
 		return categoryList;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.musephoria.webservice.IProductCatalogService#getProductList(java.lang.String)
+	/**
+	 * Gets the list of products based on the category id. If category id is
+	 * empty then all products are returned.
 	 */
 	@Override
 	public List<Cd> getProductList(String categoryId) {
@@ -34,8 +35,8 @@ public class ProductCatalogService implements IProductCatalogService {
 		return productList;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.musephoria.webservice.IProductCatalogService#getProductInfo(int)
+	/**
+	 * Gets the information of a product based on the product id.
 	 */
 	@Override
 	public Cd getProductInfo(int productId) {

@@ -17,7 +17,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * @author Fanatic Coders
+ * @author FanaticCoders
  *
  */
 public class Helper {

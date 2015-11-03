@@ -137,6 +137,14 @@ public class OrderProcessServiceClient {
 		return resObj;
 	}
 
+	/**
+	 * Processes the order based on the payment info.
+	 *
+	 * @param purchaseOrder
+	 * @param shippingInfo
+	 * @param paymentInfo
+	 * @return
+	 */
 	public boolean confirmOrder(Purchaseorder purchaseOrder, Shipping shippingInfo, Paymentinfo paymentInfo) {
 		boolean flag = false;
 		// Creating an object of stub.
@@ -159,8 +167,7 @@ public class OrderProcessServiceClient {
 			}
 
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.getLocalizedMessage(), e);
 		}
 		return flag;
 	}

@@ -23,10 +23,10 @@ import com.musephoria.util.Constants;
  * Home object for domain model class Purchaseorderitem.
  *
  * @see .Purchaseorderitem
- * @author Hibernate Tools
+ * @author FanaticCoders
  */
 @Stateless
-public class PurchaseorderitemHome {
+public class PurchaseorderitemHome implements IPurchaseorderitemHome {
 
 	DBManager dbManager;
 	private static final Log log = LogFactory.getLog(PurchaseorderHome.class);
@@ -39,13 +39,14 @@ public class PurchaseorderitemHome {
 	}
 
 	/**
-	 * Creates a Purchase Order Item List based on the Purchase Order ID.
+	 * Prepares a Purchase Order Item List based on the Purchase Order ID.
 	 *
 	 * @param purchaseOrderId
 	 * @param shoppingCartInfo
 	 * @return
 	 */
-	public List<Purchaseorderitem> createPurchaseOrderItem(Purchaseorder purchaseOrder, int[] shoppingCartInfo) {
+	@Override
+	public List<Purchaseorderitem> preparePurchaseOrderItem(Purchaseorder purchaseOrder, int[] shoppingCartInfo) {
 
 		List<Purchaseorderitem> purchaseOrderItemList = new ArrayList<Purchaseorderitem>();
 		try {
@@ -74,6 +75,11 @@ public class PurchaseorderitemHome {
 		return purchaseOrderItemList;
 	}
 
+	/**
+	 * Creates a Purchase Order Item object based on the input from the method
+	 * preparePurchaseOrderItem
+	 */
+	@Override
 	public int createPurchaseOrderItem(Result poResObj, int[] shoppingCartInfo, Shipping shippingInfo) {
 		int purchaseOrderId = 0;
 		if (!poResObj.equals(null)) {
@@ -85,7 +91,7 @@ public class PurchaseorderitemHome {
 			Purchaseorder newPurchaseOrderObj = new Purchaseorder();
 			newPurchaseOrderObj.setPurchaseOrderId(purchaseOrderId);
 
-			List<Purchaseorderitem> purchaseOrderItemList = createPurchaseOrderItem(newPurchaseOrderObj,
+			List<Purchaseorderitem> purchaseOrderItemList = preparePurchaseOrderItem(newPurchaseOrderObj,
 					shoppingCartInfo);
 
 			// Saving the POI List.
@@ -105,6 +111,10 @@ public class PurchaseorderitemHome {
 		return purchaseOrderId;
 	}
 
+	/**
+	 * Gets the last inserted purchase order id.
+	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public int getLastId(String queryId) {
 		int id = 0;
@@ -112,11 +122,8 @@ public class PurchaseorderitemHome {
 		if (!resObj.equals(null)) {
 			if (!resObj.getResultList().isEmpty()) {
 				List<Purchaseorder> temp = (List<Purchaseorder>) resObj.getResultList();
-
 				id = temp.get(0).getPurchaseOrderId();
-
 			}
-
 		}
 		return id;
 	}

@@ -230,7 +230,7 @@ public class DBManager {
 
 	public Result upDateEntity(List<?> dataList) {
 		Result resObj = null;
-	//	List<Integer> primaryIdList = new ArrayList<Integer>();
+		// List<Integer> primaryIdList = new ArrayList<Integer>();
 		try {
 			if (!dataList.equals(null)) {
 				{
@@ -244,8 +244,7 @@ public class DBManager {
 			}
 
 			// Setting the result object with success information.
-			resObj = setResultObject(null, null, 0, Constants.successCode,
-					Constants.dataSaved);
+			resObj = setResultObject(null, null, 0, Constants.successCode, Constants.dataSaved);
 		} catch (Exception e) {
 			// Setting the result object with failure information.
 			resObj = setResultObject(null, null, 0, Constants.errorCode, Constants.dataNotSaved);

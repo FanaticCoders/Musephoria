@@ -2631,6 +2631,48 @@
                             
 
                         /**
+                        * field for Shippings
+                        */
+
+                        
+                                    protected Set localShippings ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localShippingsTracker = false ;
+
+                           public boolean isShippingsSpecified(){
+                               return localShippingsTracker;
+                           }
+
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return Set
+                           */
+                           public  Set getShippings(){
+                               return localShippings;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Shippings
+                               */
+                               public void setShippings(Set param){
+                            localShippingsTracker = true;
+                                   
+                                            this.localShippings=param;
+                                       
+
+                               }
+                            
+
+                        /**
                         * field for Taxes
                         */
 
@@ -2867,6 +2909,18 @@
                                       xmlWriter.writeEndElement();
                                     }else{
                                      localPurchaseorderitems.serialize(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","purchaseorderitems"),
+                                        xmlWriter);
+                                    }
+                                } if (localShippingsTracker){
+                                    if (localShippings==null){
+
+                                        writeStartElement(null, "http://entity.musephoria.com/xsd", "shippings", xmlWriter);
+
+                                       // write the nil attribute
+                                      writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                      xmlWriter.writeEndElement();
+                                    }else{
+                                     localShippings.serialize(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","shippings"),
                                         xmlWriter);
                                     }
                                 } if (localTaxesTracker){
@@ -3119,6 +3173,13 @@
                             
                                     elementList.add(localPurchaseorderitems==null?null:
                                     localPurchaseorderitems);
+                                } if (localShippingsTracker){
+                            elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
+                                                                      "shippings"));
+                            
+                            
+                                    elementList.add(localShippings==null?null:
+                                    localShippings);
                                 } if (localTaxesTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
                                                                       "taxes"));
@@ -3312,6 +3373,30 @@
                                       }else{
                                     
                                                 object.setPurchaseorderitems(Set.Factory.parse(reader));
+                                              
+                                        reader.next();
+                                    }
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","shippings").equals(reader.getName())){
+                                
+                                      nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                      if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                          object.setShippings(null);
+                                          reader.next();
+                                            
+                                            reader.next();
+                                          
+                                      }else{
+                                    
+                                                object.setShippings(Set.Factory.parse(reader));
                                               
                                         reader.next();
                                     }
@@ -10335,6 +10420,48 @@
                             
 
                         /**
+                        * field for Purchaseorders
+                        */
+
+                        
+                                    protected Set localPurchaseorders ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localPurchaseordersTracker = false ;
+
+                           public boolean isPurchaseordersSpecified(){
+                               return localPurchaseordersTracker;
+                           }
+
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return Set
+                           */
+                           public  Set getPurchaseorders(){
+                               return localPurchaseorders;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Purchaseorders
+                               */
+                               public void setPurchaseorders(Set param){
+                            localPurchaseordersTracker = true;
+                                   
+                                            this.localPurchaseorders=param;
+                                       
+
+                               }
+                            
+
+                        /**
                         * field for Sex
                         */
 
@@ -10724,7 +10851,19 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             } if (localSexTracker){
+                             } if (localPurchaseordersTracker){
+                                    if (localPurchaseorders==null){
+
+                                        writeStartElement(null, "http://entity.musephoria.com/xsd", "purchaseorders", xmlWriter);
+
+                                       // write the nil attribute
+                                      writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                      xmlWriter.writeEndElement();
+                                    }else{
+                                     localPurchaseorders.serialize(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","purchaseorders"),
+                                        xmlWriter);
+                                    }
+                                } if (localSexTracker){
                                     namespace = "http://entity.musephoria.com/xsd";
                                     writeStartElement(null, namespace, "sex", xmlWriter);
                              
@@ -11035,7 +11174,14 @@
                                  
                                          elementList.add(localProvince==null?null:
                                          org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localProvince));
-                                    } if (localSexTracker){
+                                    } if (localPurchaseordersTracker){
+                            elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
+                                                                      "purchaseorders"));
+                            
+                            
+                                    elementList.add(localPurchaseorders==null?null:
+                                    localPurchaseorders);
+                                } if (localSexTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://entity.musephoria.com/xsd",
                                                                       "sex"));
                                  
@@ -11463,6 +11609,30 @@
                                       
                                         reader.next();
                                     
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://entity.musephoria.com/xsd","purchaseorders").equals(reader.getName())){
+                                
+                                      nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                      if ("true".equals(nillableValue) || "1".equals(nillableValue)){
+                                          object.setPurchaseorders(null);
+                                          reader.next();
+                                            
+                                            reader.next();
+                                          
+                                      }else{
+                                    
+                                                object.setPurchaseorders(Set.Factory.parse(reader));
+                                              
+                                        reader.next();
+                                    }
                               }  // End of if for expected property start element
                                 
                                     else {
