@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.musephoria.webserviceclient.ProductCatalogServiceStub.Cd;
 import com.musephoria.shoppingcart.ShoppingCart;
+import com.musephoria.util.Constants;
 
 /**
  * Servlet implementing Cart functionality for the site.
@@ -35,8 +36,8 @@ public class Cart extends HttpServlet {
 		List<Cd> cartItem = myCart.getCdList();
 		double totalCartPrice = myCart.getTotalPrice();
 		totalCartPrice = Double.parseDouble(new DecimalFormat(".##").format(totalCartPrice));
-		request.getSession().setAttribute("cartItem", cartItem);
-		request.getSession().setAttribute("totalCartPrice", totalCartPrice);
+		request.getSession().setAttribute(Constants.cartItem, cartItem);
+		request.getSession().setAttribute(Constants.totalCartPrice, totalCartPrice);
 		response.sendRedirect("MyCart.jsp");
 
 	}
@@ -54,7 +55,7 @@ public class Cart extends HttpServlet {
 	public void removeCart(HttpServletRequest request, HttpServletResponse response, ShoppingCart removeMyCart)
 			throws ServletException, IOException {
 
-		int check = Integer.parseInt(request.getParameter("cdId"));
+		int check = Integer.parseInt(request.getParameter(Constants.cdId));
 
 		// call Delete from cart function.
 		// ProductCatalogServiceClient client = new
@@ -76,12 +77,12 @@ public class Cart extends HttpServlet {
 
 	public void addCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int flag = (int) request.getSession().getAttribute("flag");
+		int flag = (int) request.getSession().getAttribute(Constants.userOrVisitorFlag);
 
-		ShoppingCart myCart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
+		ShoppingCart myCart = (ShoppingCart) request.getSession().getAttribute(Constants.shoppingCart);
 
 		// Acquiring Cd object from the current session set in ProductDetail
-		Cd cd = (Cd) request.getSession().getAttribute("cddetail");
+		Cd cd = (Cd) request.getSession().getAttribute(Constants.cddetail);
 
 		// Checking if cart exists for both visitor as well as registered user
 		// If the cart doesn't exit, we create a new cart and add bind it to the
@@ -90,7 +91,7 @@ public class Cart extends HttpServlet {
 
 			myCart = new ShoppingCart();
 			myCart.addToCart(cd);
-			request.getSession().setAttribute("ShoppingCart", myCart);
+			request.getSession().setAttribute(Constants.shoppingCart, myCart);
 		}
 
 		// Handling visitor's cart
@@ -133,7 +134,7 @@ public class Cart extends HttpServlet {
 		if (path.equals("/AddToCart")) {
 			addCart(request, response);
 		} else {
-			ShoppingCart myCart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
+			ShoppingCart myCart = (ShoppingCart) request.getSession().getAttribute(Constants.shoppingCart);
 			removeCart(request, response, myCart);
 		}
 

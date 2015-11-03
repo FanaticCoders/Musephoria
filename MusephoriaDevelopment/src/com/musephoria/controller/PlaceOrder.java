@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.musephoria.shoppingcart.ShoppingCart;
+import com.musephoria.util.Constants;
 import com.musephoria.webserviceclient.OrderProcessServiceClient;
 import com.musephoria.webserviceclient.OrderProcessServiceStub.Customer;
 import com.musephoria.webserviceclient.OrderProcessServiceStub.Purchaseorder;
@@ -36,11 +37,11 @@ public class PlaceOrder extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		ShoppingCart myCart = (ShoppingCart) request.getSession().getAttribute("ShoppingCart");
+		ShoppingCart myCart = (ShoppingCart) request.getSession().getAttribute(Constants.shoppingCart);
 		Purchaseorder po = new Purchaseorder();
 		Customer cust = new Customer();
 		int resultPoId = 0;
-		cust = (Customer) request.getSession().getAttribute("custObject");
+		cust = (Customer) request.getSession().getAttribute(Constants.customerObject);
 
 		List<Cd> temp = myCart.getCdList();
 		List<Integer> cdIdList = new ArrayList<Integer>();
@@ -83,8 +84,7 @@ public class PlaceOrder extends HttpServlet {
 		
 		resultPoId = client.createOrder(cdIdList, po, shippingInfo);
 
-		request.getSession().setAttribute("resultPoId", resultPoId);
-		request.setAttribute("purchaseOrderId", resultPoId);
+		request.getSession().setAttribute(Constants.purchaseOrderId, resultPoId);
 
 		request.getRequestDispatcher("Payment.jsp").forward(request, response);
 

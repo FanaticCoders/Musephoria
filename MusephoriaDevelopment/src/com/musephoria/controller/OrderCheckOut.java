@@ -1,5 +1,6 @@
 package com.musephoria.controller;
 
+import com.musephoria.util.Constants;
 import com.musephoria.webserviceclient.OrderProcessServiceClient;
 import com.musephoria.webserviceclient.OrderProcessServiceStub.Customer;
 import com.musephoria.webserviceclient.OrderProcessServiceStub.Result;
@@ -29,15 +30,15 @@ public class OrderCheckOut extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			int flag = (Integer) request.getSession().getAttribute("flag");
+			int flag = (Integer) request.getSession().getAttribute(Constants.userOrVisitorFlag);
 			Result resObj = null;
 			if (flag == 0) {
 				String message = "Please login first to Order";
-				request.getSession().setAttribute("Message", message);
+				request.getSession().setAttribute(Constants.message, message);
 				request.getRequestDispatcher("Login.jsp").forward(request, response);
 			} else {
-				String username = (String) request.getSession().getAttribute("username");
-				String password = (String) request.getSession().getAttribute("password");
+				String username = (String) request.getSession().getAttribute(Constants.username);
+				String password = (String) request.getSession().getAttribute(Constants.password);
 
 				/*
 				 * Invoking Customer DAO through Web Service(Order Process

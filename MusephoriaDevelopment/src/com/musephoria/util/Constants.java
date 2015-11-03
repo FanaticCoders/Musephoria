@@ -66,4 +66,36 @@ public final class Constants {
 	public static final String hibernateSessionCreated = "Hibenate Session Created.";
 	public static final String hibernateTransactionStarted = "Hibenate Transaction Started.";
 	public static final String hibernateSessionCleanedUp = "Hibenate Session flushed, Transaction Committed, Session closed.";
+
+	//Servlet variables
+	public static final String shoppingCart = "ShoppingCart";
+	public static final String userOrVisitorFlag = "flag";
+	public static final String cartItem = "cartItem";
+	public static final String totalCartPrice = "totalCartPrice";
+	public static final String cdId = "cdId";
+	public static final String cddetail = "cddetail";
+	public static final String message = "message";
+	public static final String customerId = "custId";
+	public static final String customerObject = "custObject";
+	public static final String genre = "Genre";
+	public static final String productWithSelectedCategory = "Product";
+	public static final String categoryList = "CategoryList";
+	public static final String purchaseOrderId = "resultPoId";
+	public static final String paymentStatus = "status";
+	public static final String paymentCounter = "counter";
+	public static final String firstname = "fname";
+	public static final String lastname = "lname";
+	public static final String sex = "sex";
+	public static final String user = "usr";
+	public static final String pass = "pwd";
+	public static final String repassword = "repwd";
+	public static final String dateOfBirth = "dob";
+	public static final String address = "addr";
+	public static final String city = "city";
+	public static final String province = "prov";
+	public static final String country = "country";
+	public static final String zipcode = "zip";
+	public static final String email = "email";
+	public static final String phone = "phone";
+	
 }

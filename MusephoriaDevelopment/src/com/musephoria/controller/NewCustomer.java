@@ -38,20 +38,20 @@ public class NewCustomer extends HttpServlet {
 
 		// Acquiring parameteres from the Register.jsp form
 
-			String firstName = request.getParameter("fname");
-			String lastName = request.getParameter("lname");
-			String sex = request.getParameter("sex");
-			String userName = request.getParameter("usr");
-			String password = request.getParameter("pwd");
-			String rePassword = request.getParameter("repwd");
-			String dateOfBirth = request.getParameter("dob");
-			String address = request.getParameter("addr");
-			String city = request.getParameter("city");
-			String province = request.getParameter("prov");
-			String country = request.getParameter("country");
-			String zipCode = request.getParameter("zip");
-			String email = request.getParameter("email");
-			String phone = request.getParameter("phone");
+			String firstName = request.getParameter(Constants.firstname);
+			String lastName = request.getParameter(Constants.lastname);
+			String sex = request.getParameter(Constants.sex);
+			String userName = request.getParameter(Constants.user);
+			String password = request.getParameter(Constants.pass);
+			String rePassword = request.getParameter(Constants.repassword);
+			String dateOfBirth = request.getParameter(Constants.dateOfBirth);
+			String address = request.getParameter(Constants.address);
+			String city = request.getParameter(Constants.city);
+			String province = request.getParameter(Constants.province);
+			String country = request.getParameter(Constants.country);
+			String zipCode = request.getParameter(Constants.zipcode);
+			String email = request.getParameter(Constants.email);
+			String phone = request.getParameter(Constants.phone);
 	
 		// Checking if the re-typed password is same as the original password
 

@@ -35,9 +35,9 @@ public class Login extends HttpServlet {
 		Customer custObj = null;
 		int custId;
 
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		String checkusr = (String) request.getSession().getAttribute("username");
+		String username = request.getParameter(Constants.username);
+		String password = request.getParameter(Constants.password);
+		String checkusr = (String) request.getSession().getAttribute(Constants.username);
 
 		try {
 			if (checkusr == "" || checkusr == null) {
@@ -54,10 +54,10 @@ public class Login extends HttpServlet {
 
 				if (!resObj.equals(null)) {
 					if (resObj.getStatusMessage().equals(Constants.userNamePasswordMismatch)) {
-						request.setAttribute("message", Constants.userNamePasswordMismatch);
+						request.setAttribute(Constants.message, Constants.userNamePasswordMismatch);
 						request.getRequestDispatcher("Login.jsp").forward(request, response);
 					} else if (resObj.getStatusMessage().equals(Constants.userNameDoesntExist)) {
-						request.setAttribute("message", Constants.userNameDoesntExist);
+						request.setAttribute(Constants.message, Constants.userNameDoesntExist);
 						request.getRequestDispatcher("Login.jsp").forward(request, response);
 					}
 
@@ -65,11 +65,11 @@ public class Login extends HttpServlet {
 						if (!resObj.getResultList().equals(null)) {
 							custObj = (Customer) resObj.getResultList();
 							custId = custObj.getCustomerId();
-							request.getSession().setAttribute("flag", 1);
-							request.getSession().setAttribute("custId", custId);
-							request.getSession().setAttribute("custObject", custObj);
-							request.getSession().setAttribute("username", username);
-							request.getSession().setAttribute("password", password);
+							request.getSession().setAttribute(Constants.userOrVisitorFlag, 1);
+							request.getSession().setAttribute(Constants.customerId, custId);
+							request.getSession().setAttribute(Constants.customerObject, custObj);
+							request.getSession().setAttribute(Constants.username, username);
+							request.getSession().setAttribute(Constants.password, password);
 							request.getRequestDispatcher("Home.jsp").forward(request, response);
 						}
 					}

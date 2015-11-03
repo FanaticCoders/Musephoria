@@ -37,7 +37,7 @@ public class PaymentAuthorization extends HttpServlet {
 		OrderProcessServiceClient client = new OrderProcessServiceClient();
 		Shipping shippingInfo = null;
 
-		int purchaseOrderId = (int) request.getSession().getAttribute("resultPoId");
+		int purchaseOrderId = (int) request.getSession().getAttribute(Constants.purchaseOrderId);
 		purchaseOrder.setPurchaseOrderId(purchaseOrderId);
 
 		/*
@@ -50,14 +50,14 @@ public class PaymentAuthorization extends HttpServlet {
 		paymentAuthorizationResult = client.confirmOrder(purchaseOrder, shippingInfo, paymentInfo);
 
 		if (paymentAuthorizationResult) {
-			request.getSession().removeAttribute("ShoppingCart");
-			request.getSession().removeAttribute("cartItem");
-			request.getSession().removeAttribute("totalCartPrice");
-			request.getSession().setAttribute("status", Constants.successMessage);
+			request.getSession().removeAttribute(Constants.shoppingCart);
+			request.getSession().removeAttribute(Constants.cartItem);
+			request.getSession().removeAttribute(Constants.totalCartPrice);
+			request.getSession().setAttribute(Constants.paymentStatus, Constants.successMessage);
 			response.sendRedirect("PaymentStatus.jsp");
 
 		} else {
-			request.getSession().setAttribute("status", Constants.errorMessage);
+			request.getSession().setAttribute(Constants.paymentStatus, Constants.errorMessage);
 			response.sendRedirect("PaymentStatus.jsp");
 		}
 
@@ -79,25 +79,25 @@ public class PaymentAuthorization extends HttpServlet {
 
 		Paymentinfo paymentInfo = new Paymentinfo();
 
-		Object counter = request.getSession().getAttribute("counter");
+		Object counter = request.getSession().getAttribute(Constants.paymentCounter);
 
 		if (counter == null) {
-			request.getSession().setAttribute("counter", 1);
+			request.getSession().setAttribute(Constants.paymentCounter, 1);
 		}
 		/**
 		 * Handling of hard coding the 5th request to be rufused on the website
 		 */
 
-		int requestCounter = (int) request.getSession().getAttribute("counter");
+		int requestCounter = (int) request.getSession().getAttribute(Constants.paymentCounter);
 		if (requestCounter % 5 != 0) {
 			paymentInfo.setPaymentInfoStatus("Approved");
 			requestCounter++;
-			request.getSession().setAttribute("counter", requestCounter);
+			request.getSession().setAttribute(Constants.paymentCounter, requestCounter);
 			processPayment(request, response, paymentInfo);
 		} else {
 			paymentInfo.setPaymentInfoStatus("Rejected");
 			requestCounter++;
-			request.getSession().setAttribute("counter", requestCounter);
+			request.getSession().setAttribute(Constants.paymentCounter, requestCounter);
 			processPayment(request, response, paymentInfo);
 		}
 
