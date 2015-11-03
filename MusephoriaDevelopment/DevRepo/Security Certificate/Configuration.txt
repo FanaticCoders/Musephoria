@@ -1,0 +1,12 @@
+http://www.mkyong.com/webservices/jax-ws/suncertpathbuilderexception-unable-to-find-valid-certification-path-to-requested-target/
+
+1. Get a InstallCert.java
+2. Add Trusted Keystore
+Run InstallCert.java, with your hostname and https port, and press “1” when ask for input.
+It will add your “localhost” as a trusted keystore, and generate a file named “jssecacerts“.
+3. Verify Trusted Keystore
+Try run the InstallCert command again, the connection should be ok now.
+4.Copy jssecacerts
+Copy the generated “jssecacerts” file to your “$JAVA_HOME\jre\lib\security” folder.
+5. Restart Tomcat
+Run your web service client again, it should be working now.
